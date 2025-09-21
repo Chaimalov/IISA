@@ -1,4 +1,9 @@
-import { Component, computed, inject } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+} from "@angular/core";
 import {
   BarController,
   BarElement,
@@ -13,6 +18,8 @@ import { ApplicantsStore } from "../../applicants.store";
   selector: "iisa-age-chart",
   templateUrl: "./age-chart.component.html",
   imports: [BaseChartDirective],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+
   providers: [
     provideCharts({
       registerables: [BarController, CategoryScale, LinearScale, BarElement],

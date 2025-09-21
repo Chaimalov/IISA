@@ -4,15 +4,13 @@
       <ng-template matStepLabel>Fill out your name</ng-template>
       <mat-form-field>
         <mat-label>Full Name</mat-label>
-        <input matInput formControlName="fullName" />
+        <input matInput type="text" formControlName="fullName" />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Email</mat-label>
-        <input matInput formControlName="email" />
+        <input matInput type="email" formControlName="email" class="bg-text" />
       </mat-form-field>
-      <div>
-        <button matButton matStepperNext>Next</button>
-      </div>
+      <button matButton matStepperNext>Next</button>
     </form>
   </mat-step>
 
@@ -57,9 +55,7 @@
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     <p>You are now done.</p>
-    <div>
-      <button matButton matStepperPrevious>Back</button>
-      <button matButton (click)="stepper.reset()">Reset</button>
-    </div>
+    <button matButton matStepperPrevious>Back</button>
+    <button matButton (click)="stepper.reset()">Reset</button>
   </mat-step>
 </mat-stepper>

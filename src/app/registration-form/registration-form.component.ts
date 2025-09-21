@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import {
   FormControl,
   FormGroup,
@@ -18,6 +18,7 @@ import { MatStepperModule } from "@angular/material/stepper";
     MatInputModule,
     MatStepperModule,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationFormComponent {
   protected form = new FormGroup({

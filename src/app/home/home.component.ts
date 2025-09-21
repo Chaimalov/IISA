@@ -1,4 +1,8 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+} from "@angular/core";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { RegistrationFormComponent } from "../registration-form/registration-form.component";
@@ -8,5 +12,6 @@ import { RegistrationFormComponent } from "../registration-form/registration-for
   templateUrl: "./home.component.html",
   imports: [RegistrationFormComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {}
