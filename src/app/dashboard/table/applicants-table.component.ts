@@ -3,13 +3,12 @@ import {
   Component,
   effect,
   inject,
-  input,
   viewChild,
 } from "@angular/core";
-import { Applicant } from "../../applicant";
-import { MatSort, Sort, MatSortModule } from "@angular/material/sort";
+import { MatSort, MatSortModule } from "@angular/material/sort";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { RouterLink } from "@angular/router";
+import { Applicant } from "../../applicant";
 import { ApplicantsStore } from "../../applicants.store";
 
 @Component({
@@ -19,7 +18,7 @@ import { ApplicantsStore } from "../../applicants.store";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApplicantsTableComponent {
-  public applicants = inject(ApplicantsStore).entities;
+  public applicants = inject(ApplicantsStore).applicants;
   protected dataSource = new MatTableDataSource();
 
   protected displayedColumns: (keyof Applicant | "link")[] = [

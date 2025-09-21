@@ -30,7 +30,7 @@ export class AgeChartComponent {
   private store = inject(ApplicantsStore);
 
   protected chart = computed(() => {
-    const entries = this.store.entities().reduce((acc, applicant) => {
+    const entries = this.store.applicants().reduce((acc, applicant) => {
       acc[applicant.age] = (acc[applicant.age] || 0) + 1;
       return acc;
     }, {} as Record<number, number>);
@@ -40,7 +40,7 @@ export class AgeChartComponent {
 
       data: {
         yLabels: Object.values(entries),
-        xLabels: this.store.entities().map((applicant) => applicant.age),
+        xLabels: this.store.applicants().map((applicant) => applicant.age),
         datasets: [
           {
             label: "Applicants",

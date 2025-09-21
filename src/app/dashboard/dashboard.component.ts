@@ -15,6 +15,4 @@ import { ApplicantsTableComponent } from "./table/applicants-table.component";
 })
 export class DashboardComponent {
   private store = inject(ApplicantsStore);
-
-  protected list = this.store.entities;
 }
