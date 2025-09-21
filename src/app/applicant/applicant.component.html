@@ -1,0 +1,11 @@
+@if (applicant(); as applicant) {
+<h4>
+  {{ applicant.fullName }}
+</h4>
+
+<span> {{ applicant.age }} years old, from {{ applicant.city }} </span>
+
+<q>
+  {{ applicant.reason }}
+</q>
+}

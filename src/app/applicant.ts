@@ -1,0 +1,124 @@
+export interface Applicant {
+  id: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  age: number;
+  city: string;
+  registeredAt: string;
+  hobbies?: string;
+  reason?: string;
+}
+
+export const applicants: Applicant[] = [
+  {
+    id: "1",
+    fullName: "Noam Levi",
+    email: "noam.levi@spaceisrael.org",
+    phone: "+972-50-123-4567",
+    age: 29,
+    city: "Tel Aviv",
+    registeredAt: "2025-01-12T14:15:00Z",
+    hobbies: "astrophotography, free diving, hiking in the Negev",
+    reason: "Dreams of representing Israel in human spaceflight.",
+  },
+  {
+    id: "2",
+    fullName: "Yael Cohen",
+    email: "yael.cohen@cosmosil.com",
+    phone: "+972-52-234-5678",
+    age: 33,
+    city: "Haifa",
+    registeredAt: "2025-02-01T09:45:00Z",
+    hobbies: "yoga, astronomy clubs, running",
+    reason: "Believes Israel should contribute to space exploration.",
+  },
+  {
+    id: "3",
+    fullName: "Eitan Mizrahi",
+    email: "eitan.mizrahi@orbitil.com",
+    phone: "+972-54-345-6789",
+    age: 27,
+    city: "Jerusalem",
+    registeredAt: "2025-03-18T18:30:00Z",
+    hobbies: "robotics, mountain biking",
+    reason: "Wants to advance Israeli innovation in space tech.",
+  },
+  {
+    id: "4",
+    fullName: "Shira Goldstein",
+    email: "shira.goldstein@starboundil.org",
+    phone: "+972-53-456-7890",
+    age: 24,
+    city: "Be’er Sheva",
+    registeredAt: "2025-04-22T11:00:00Z",
+    hobbies: "dance, physics research, desert hiking",
+    reason: "Sees space exploration as the next step for humanity.",
+  },
+  {
+    id: "5",
+    fullName: "Omer Kaplan",
+    email: "omer.kaplan@galaxyquest.il",
+    phone: "+972-58-567-8901",
+    age: 31,
+    city: "Rishon LeZion",
+    registeredAt: "2025-05-10T20:20:00Z",
+    hobbies: "aviation, coding, astronomy",
+    reason: "Inspired by Ilan Ramon to pursue space dreams.",
+  },
+  {
+    id: "6",
+    fullName: "Tamar Ben-David",
+    email: "tamar.bendavid@lunarbase.il",
+    phone: "+972-55-678-9012",
+    age: 26,
+    city: "Netanya",
+    registeredAt: "2025-06-15T07:15:00Z",
+    hobbies: "scuba diving, astrophysics, running marathons",
+    reason: "Hopes to encourage more women in Israeli space science.",
+  },
+  {
+    id: "7",
+    fullName: "Yonatan Azulay",
+    email: "yonatan.azulay@cosmosil.org",
+    phone: "+972-57-789-0123",
+    age: 32,
+    city: "Ashdod",
+    registeredAt: "2025-07-08T22:00:00Z",
+    hobbies: "paragliding, electronics, chess",
+    reason: "Wants to push the limits of human endurance in orbit.",
+  },
+  {
+    id: "8",
+    fullName: "Adi Bar",
+    email: "adi.bar@stellarmail.il",
+    phone: "+972-56-890-1234",
+    age: 28,
+    city: "Eilat",
+    registeredAt: "2025-08-02T16:40:00Z",
+    hobbies: "marine biology, astronomy, desert camping",
+    reason: "Passionate about sustainable life-support research.",
+  },
+  {
+    id: "9",
+    fullName: "Itai Rosen",
+    email: "itai.rosen@interstellar.il",
+    phone: "+972-59-901-2345",
+    age: 32,
+    city: "Holon",
+    registeredAt: "2025-09-14T12:05:00Z",
+    hobbies: "skydiving, programming, astrophysics",
+    reason: "Wants to be among the first Israelis to reach the Moon.",
+  },
+  {
+    id: "10",
+    fullName: "Leah Weiss",
+    email: "leah.weiss@marsmission.il",
+    phone: "+972-51-012-3456",
+    age: 40,
+    city: "Petah Tikva",
+    registeredAt: "2025-09-20T08:55:00Z",
+    hobbies: "mentoring students, hiking, physics experiments",
+    reason: "Dreams of joining the first Mars settlement mission.",
+  },
+];

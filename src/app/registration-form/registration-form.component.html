@@ -1,0 +1,65 @@
+<mat-stepper orientation="vertical" #stepper>
+  <mat-step [stepControl]="form">
+    <form [formGroup]="form">
+      <ng-template matStepLabel>Fill out your name</ng-template>
+      <mat-form-field>
+        <mat-label>Full Name</mat-label>
+        <input matInput formControlName="fullName" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
+      </mat-form-field>
+      <div>
+        <button matButton matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <form [formGroup]="form">
+      <mat-form-field>
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Age</mat-label>
+        <input matInput formControlName="age" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>City</mat-label>
+        <input matInput formControlName="city" />
+      </mat-form-field>
+    </form>
+    <button matButton matStepperPrevious>Back</button>
+    <button matButton matStepperNext>Next</button>
+  </mat-step>
+
+  <mat-step>
+    <form [formGroup]="form">
+      <mat-form-field>
+        <mat-label>Hobbies</mat-label>
+        <input matInput formControlName="hobbies" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Reason</mat-label>
+        <input matInput formControlName="reason" />
+      </mat-form-field>
+      <label>
+        <span>Image</span>
+        <input type="file" accept="image/png" formControlName="image" />
+      </label>
+    </form>
+    <button matButton matStepperPrevious>Back</button>
+    <button matButton matStepperNext>Next</button>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button matButton matStepperPrevious>Back</button>
+      <button matButton (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-stepper>
