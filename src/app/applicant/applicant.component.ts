@@ -1,22 +1,17 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
-} from "@angular/core";
-import { ApplicantsStore } from "../applicants.store";
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { ApplicantsStore } from '../applicants.store';
+import { Applicant } from '../applicant';
 
 @Component({
-  selector: "iisa-applicant",
-  templateUrl: "./applicant.component.html",
+  selector: 'iisa-applicant',
+  templateUrl: './applicant.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApplicantComponent {
   private applicants = inject(ApplicantsStore);
-  public id = input.required<string>();
+  public readonly id = input.required<Applicant['id']>();
 
-  protected applicant = computed(() => {
+  protected readonly applicant = computed(() => {
     return this.applicants.get(this.id());
   });
 }

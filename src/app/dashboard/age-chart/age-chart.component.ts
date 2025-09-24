@@ -1,22 +1,12 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-} from "@angular/core";
-import {
-  BarController,
-  BarElement,
-  CategoryScale,
-  ChartConfiguration,
-  LinearScale,
-} from "chart.js";
-import { BaseChartDirective, provideCharts } from "ng2-charts";
-import { ApplicantsStore } from "../../applicants.store";
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { BarController, BarElement, CategoryScale, ChartConfiguration, LinearScale } from 'chart.js';
+import { BaseChartDirective, provideCharts } from 'ng2-charts';
+import { ApplicantsStore } from '../../applicants.store';
+import { calculateAge } from '../../utils';
 
 @Component({
-  selector: "iisa-age-chart",
-  templateUrl: "./age-chart.component.html",
+  selector: 'iisa-age-chart',
+  templateUrl: './age-chart.component.html',
   imports: [BaseChartDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
 
@@ -30,23 +20,27 @@ export class AgeChartComponent {
   private store = inject(ApplicantsStore);
 
   protected chart = computed(() => {
-    const entries = this.store.applicants().reduce((acc, applicant) => {
-      acc[applicant.age] = (acc[applicant.age] || 0) + 1;
-      return acc;
-    }, {} as Record<number, number>);
+    const entries = this.store.applicants().reduce(
+      (acc, applicant) => {
+        const age = calculateAge(new Date(applicant.date_of_birth));
+        acc[age] = (acc[age] || 0) + 1;
+        return acc;
+      },
+      {} as Record<number, number>,
+    );
 
     return {
-      type: "bar",
+      type: 'bar',
 
       data: {
         yLabels: Object.values(entries),
-        xLabels: this.store.applicants().map((applicant) => applicant.age),
+        xLabels: this.store.applicants().map((applicant) => calculateAge(new Date(applicant.date_of_birth))),
         datasets: [
           {
-            label: "Applicants",
+            label: 'Applicants',
             data: Object.values(entries),
-            backgroundColor: "rgba(54, 162, 235, 0.6)",
-            borderColor: "rgba(54, 162, 235, 1)",
+            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+            borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
           },
         ],

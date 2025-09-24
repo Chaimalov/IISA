@@ -1,5 +1,23 @@
-<h1 class="place-self-center text-6xl">Register</h1>
+<header
+  class="h-screen snap-start place-content-center gap-12 text-center max-w-[calc(min(100%,640px)+2rem)] grid"
+>
+  <h1 class="place-self-center text-6xl">
+    Join Israel’s First All-Israeli Space Flight
+  </h1>
+  <p class="text-xl opacity-70">
+    Be part of history with the IISA. We’re opening public registration for
+    pioneers ready to carry the Israeli spirit beyond Earth. 🌍✨
+  </p>
+
+  <a
+    class="place-self-center cursor-pointer text-xl bg-primary px-4 py-2 rounded-xl"
+    [routerLink]="[]"
+    fragment="registration-form"
+    >Register</a
+  >
+</header>
 
 <iisa-registration-form
-  class="max-w-md block place-self-center"
+  id="registration-form"
+  class="max-w-md block snap-start place-self-center h-screen place-content-center"
 ></iisa-registration-form>

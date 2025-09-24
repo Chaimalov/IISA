@@ -1,11 +1,11 @@
 @if (applicant(); as applicant) {
-<h4>
-  {{ applicant.fullName }}
-</h4>
+  <h4>
+    {{ applicant.full_name }}
+  </h4>
 
-<span> {{ applicant.age }} years old, from {{ applicant.city }} </span>
+  <span> {{ applicant.date_of_birth }} years old, from {{ applicant.city_region }} </span>
 
-<q>
-  {{ applicant.reason }}
-</q>
+  <q>
+    {{ applicant.personal_statement }}
+  </q>
 }

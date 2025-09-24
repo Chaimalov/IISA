@@ -1,68 +1,31 @@
-<table
-  mat-table
-  [dataSource]="dataSource"
-  matSort
-  class="mat-elevation-z8 **:[th,td]:text-white"
->
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 **:[th,td]:dark:text-white">
   <ng-container matColumnDef="link">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
-      <a [routerLink]="['/dashboard', element.id]">{{ element.fullName }}</a>
+      <a [routerLink]="['/dashboard', element.id]">{{ element.full_name }}</a>
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="fullName">
-    <th
-      mat-header-cell
-      *matHeaderCellDef
-      mat-sort-header
-      sortActionDescription="Sort by full name"
-    >
-      Full Name
-    </th>
-    <td mat-cell *matCellDef="let element">{{ element.fullName }}</td>
+  <ng-container matColumnDef="full_name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by full name">Full Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.full_name }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="age">
-    <th
-      mat-header-cell
-      *matHeaderCellDef
-      mat-sort-header
-      sortActionDescription="Sort by age"
-    >
-      Age
-    </th>
-    <td mat-cell *matCellDef="let element">{{ element.age }}</td>
+  <ng-container matColumnDef="date_of_birth">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by age">Age</th>
+    <td mat-cell *matCellDef="let element">{{ element.date_of_birth }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="city">
-    <th
-      mat-header-cell
-      *matHeaderCellDef
-      mat-sort-header
-      sortActionDescription="Sort by city"
-    >
-      City
-    </th>
-    <td mat-cell *matCellDef="let element">{{ element.city }}</td>
+  <ng-container matColumnDef="city_region">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by city">City</th>
+    <td mat-cell *matCellDef="let element">{{ element.city_region }}</td>
   </ng-container>
 
   <ng-container matColumnDef="email">
-    <th
-      mat-header-cell
-      *matHeaderCellDef
-      mat-sort-header
-      sortActionDescription="Sort by email"
-    >
-      Email
-    </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by email">Email</th>
     <td mat-cell *matCellDef="let element">{{ element.email }}</td>
   </ng-container>
 
-  <tr
-    mat-header-row
-    *matHeaderRowDef="displayedColumns"
-    class="sticky top-0 !bg-text"
-  ></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns" class="sticky top-0 !bg-text text-inherit"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>

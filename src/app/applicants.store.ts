@@ -1,30 +1,32 @@
-import {
-  patchState,
-  signalStore,
-  type,
-  withHooks,
-  withMethods,
-  withProps,
-} from "@ngrx/signals";
-import { addEntities, withEntities } from "@ngrx/signals/entities";
-import { Applicant, applicants } from "./applicant";
+import { withCallState, withDataService } from '@angular-architects/ngrx-toolkit';
+import { signalStore, type, withHooks, withMethods, withProps } from '@ngrx/signals';
+import { withEntities } from '@ngrx/signals/entities';
+import { Applicant } from './applicant';
+import { DalService } from './dal.service';
 
 export const ApplicantsStore = signalStore(
-  { providedIn: "root" },
+  { providedIn: 'root' },
+  withCallState(),
   withEntities({
     entity: type<Applicant>(),
-    collection: "_applicants",
   }),
-  withProps(({ _applicantsEntities }) => ({
-    applicants: _applicantsEntities,
+  withDataService({
+    dataServiceType: DalService,
+    filter: {
+      email: '',
+      full_name: '',
+      phone_number: '',
+    },
+  }),
+  withProps(({ entities }) => ({
+    applicants: entities,
   })),
   withMethods((store) => ({
-    get: (id: string): Applicant | undefined =>
-      store._applicantsEntityMap()[id],
+    get: (id: Applicant['id']): Applicant | undefined => store.entities()[id],
   })),
   withHooks({
     onInit: (store) => {
-      patchState(store, addEntities(applicants, { collection: "_applicants" }));
+      store.load();
     },
-  })
+  }),
 );
