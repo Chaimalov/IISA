@@ -1,46 +1,56 @@
-<form>
-  <fieldset class="grid gap-2">
-    <legend class="text-2xl">Every great journey starts with a name among the stars.</legend>
+<form class="contents">
+  <fieldset
+    class="grid gap-2 h-screen place-content-center snap-center timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
+    <legend class="text-2xl contents">Every great journey starts with a name among the stars.</legend>
     <label
       ><span>Full Name</span>
       <input type="text" name="fullName" required class="input" />
     </label>
     <label>
-      <span>Age</span>
-      <input type="number" name="age" required class="input" />
+      <span>Date Of Birth</span>
+      <input type="date" name="date-of-birth" required class="input" />
     </label>
+
+    <a [routerLink]="[]" fragment="info">next</a>
   </fieldset>
 
-  <fieldset>
-    <legend class="text-2xl">Tell us where you’re from—every explorer brings a unique world with them.</legend>
+  <fieldset
+    id="info"
+    class="grid gap-2 h-screen place-content-center snap-center timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
+    <legend class="text-2xl contents">Tell us where you’re from—every explorer brings a unique world with them.</legend>
     <label
       ><span>Email</span>
       <input type="email" name="email" required class="input" />
     </label>
     <label
       >Phone
-      <input type="text" name="phone" required />
+      <input type="text" name="phone" required class="input" />
     </label>
 
     <label
       >City
-      <input type="text" name="city" required />
+      <input type="text" name="city" required class="input" />
     </label>
+
+    <a [routerLink]="[]" fragment="personal">next</a>
   </fieldset>
 
-  <fieldset>
-    <legend>What lights you up? Share the passion that makes you mission-ready.</legend>
+  <fieldset
+    id="personal"
+    class="grid gap-2 h-screen place-content-center snap-center timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
+    <legend class="contents text-2xl">What lights you up? Share the passion that makes you mission-ready.</legend>
     <label
       >Hobbies
-      <input type="text" name="hobbies" required />
+      <input type="text" name="hobbies" required class="input" />
     </label>
     <label
       >Reason
-      <input type="text" name="reason" required />
+      <textarea name="reason" required class="input"></textarea>
     </label>
     <label
       >Image
       <input type="file" accept="image/png" name="image" required />
     </label>
+    <button type="submit">send</button>
   </fieldset>
 </form>

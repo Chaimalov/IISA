@@ -1,0 +1,31 @@
+@utility timeline-view {
+  animation-timeline: view();
+}
+
+@utility animation-range-start-* {
+  animation-range-start: --spacing(--value(integer));
+  animation-range-start: --value('contain', 'cover');
+}
+
+@utility animation-range-end-* {
+  animation-range-end: --spacing(--value(integer));
+  animation-range-end: --value('contain', 'cover');
+}
+
+@utility animation-range-entry-exit {
+  animation-range: entry 20% exit;
+}
+
+@theme {
+  --animate-fade-in-scale: fade-in-scale linear;
+  @keyframes fade-in-scale {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}

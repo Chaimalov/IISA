@@ -3,11 +3,12 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'iisa-registration-form',
   templateUrl: './registration-form.component.html',
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatStepperModule],
+  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatStepperModule, RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationFormComponent {
