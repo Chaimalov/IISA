@@ -29,7 +29,6 @@ export class AgeChartComponent {
 
     return {
       type: 'bar',
-
       data: {
         yLabels: Object.values(entries) as unknown as string[],
         xLabels: Object.keys(entries),
@@ -46,8 +45,20 @@ export class AgeChartComponent {
       options: {
         responsive: true,
         scales: {
+          x: {
+            title: {
+              text: 'age',
+              align: 'center',
+              display: true,
+            },
+            type: 'linear',
+          },
           y: {
-            beginAtZero: true,
+            title: {
+              text: 'amount',
+              align: 'center',
+              display: true,
+            },
             ticks: {
               stepSize: 1,
             },
