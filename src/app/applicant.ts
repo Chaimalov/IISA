@@ -1,6 +1,7 @@
 import { Database } from '../lib/database.types';
 
-export type Applicant = Database['public']['Tables']['applicants']['Row'];
+export type Applicant = Database['public']['Views']['applicants_with_age']['Row'];
+export type ApplicantData = Database['public']['Tables']['applicants']['Row'];
 
 // export const applicants: Applicant[] = [
 //   {

@@ -1,14 +1,20 @@
-<form class="contents">
+<form class="contents" [formGroup]="form">
   <fieldset
-    class="grid gap-2 h-screen place-content-center snap-center timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
+    class="grid gap-6 h-screen place-content-center snap-center timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
     <legend class="text-2xl contents">Every great journey starts with a name among the stars.</legend>
     <label
-      ><span>Full Name</span>
-      <input type="text" name="fullName" required class="input" />
+      >Image
+      <input type="file" accept="image/png" [formControl]="form.controls.image" />
     </label>
+
+    <label
+      ><span>Full Name</span>
+      <input type="text" [formControl]="form.controls.full_name" class="input" />
+    </label>
+
     <label>
       <span>Date Of Birth</span>
-      <input type="date" name="date-of-birth" required class="input" />
+      <input type="date" [formControl]="form.controls.date_of_birth" class="input" />
     </label>
 
     <a [routerLink]="[]" fragment="info">next</a>
@@ -16,20 +22,20 @@
 
   <fieldset
     id="info"
-    class="grid gap-2 h-screen place-content-center snap-center timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
+    class="grid gap-6 h-screen place-content-center snap-center timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
     <legend class="text-2xl contents">Tell us where you’re from—every explorer brings a unique world with them.</legend>
     <label
       ><span>Email</span>
-      <input type="email" name="email" required class="input" />
+      <input type="email" [formControl]="form.controls.email" class="input" />
     </label>
     <label
       >Phone
-      <input type="text" name="phone" required class="input" />
+      <input type="text" [formControl]="form.controls.phone_number" class="input" />
     </label>
 
     <label
-      >City
-      <input type="text" name="city" required class="input" />
+      >City or Region
+      <input type="text" [formControl]="form.controls.city_region" class="input" />
     </label>
 
     <a [routerLink]="[]" fragment="personal">next</a>
@@ -37,19 +43,15 @@
 
   <fieldset
     id="personal"
-    class="grid gap-2 h-screen place-content-center snap-center timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
+    class="grid gap-6 h-screen place-content-center snap-center timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
     <legend class="contents text-2xl">What lights you up? Share the passion that makes you mission-ready.</legend>
     <label
       >Hobbies
-      <input type="text" name="hobbies" required class="input" />
+      <input type="text" [formControl]="form.controls.hobbies" class="input" />
     </label>
     <label
       >Reason
-      <textarea name="reason" required class="input"></textarea>
-    </label>
-    <label
-      >Image
-      <input type="file" accept="image/png" name="image" required />
+      <textarea [formControl]="form.controls.personal_statement" class="input"></textarea>
     </label>
     <button type="submit">send</button>
   </fieldset>

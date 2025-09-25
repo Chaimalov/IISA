@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { BarController, BarElement, CategoryScale, ChartConfiguration, LinearScale } from 'chart.js';
 import { BaseChartDirective, provideCharts } from 'ng2-charts';
 import { ApplicantsStore } from '../../applicants.store';
-import { calculateAge } from '../../utils';
 
 @Component({
   selector: 'iisa-age-chart',
@@ -19,11 +18,10 @@ import { calculateAge } from '../../utils';
 export class AgeChartComponent {
   private store = inject(ApplicantsStore);
 
-  protected chart = computed(() => {
+  protected readonly chart = computed(() => {
     const entries = this.store.applicants().reduce(
       (acc, applicant) => {
-        const age = calculateAge(new Date(applicant.date_of_birth));
-        acc[age] = (acc[age] || 0) + 1;
+        acc[applicant.age] = (acc[applicant.age] || 0) + 1;
         return acc;
       },
       {} as Record<number, number>,
@@ -33,8 +31,8 @@ export class AgeChartComponent {
       type: 'bar',
 
       data: {
-        yLabels: Object.values(entries),
-        xLabels: this.store.applicants().map((applicant) => calculateAge(new Date(applicant.date_of_birth))),
+        yLabels: Object.values(entries) as unknown as string[],
+        xLabels: Object.keys(entries),
         datasets: [
           {
             label: 'Applicants',

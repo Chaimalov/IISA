@@ -3,6 +3,8 @@ import { signalStore, type, withHooks, withMethods, withProps } from '@ngrx/sign
 import { withEntities } from '@ngrx/signals/entities';
 import { Applicant } from './applicant';
 import { DalService } from './dal.service';
+import { inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export const ApplicantsStore = signalStore(
   { providedIn: 'root' },
@@ -27,6 +29,15 @@ export const ApplicantsStore = signalStore(
   withHooks({
     onInit: (store) => {
       store.load();
+
+      const dal = inject(DalService);
+
+      dal
+        .listen()
+        .pipe(takeUntilDestroyed())
+        .subscribe(() => {
+          store.load();
+        });
     },
   }),
 );

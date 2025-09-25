@@ -1,9 +1,17 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
 import { RouterLink } from '@angular/router';
+import { Applicant } from '../applicant';
+
+type ApplicantForm = { image: AbstractControl<string> } & {
+  [K in keyof Pick<
+    Applicant,
+    'city_region' | 'date_of_birth' | 'full_name' | 'email' | 'hobbies' | 'personal_statement' | 'phone_number'
+  >]: AbstractControl<Applicant[K]>;
+};
 
 @Component({
   selector: 'iisa-registration-form',
@@ -13,15 +21,15 @@ import { RouterLink } from '@angular/router';
 })
 export class RegistrationFormComponent {
   protected form = new FormGroup({
-    fullName: new FormControl('', { validators: [Validators.required] }),
+    full_name: new FormControl('', { validators: [Validators.required] }),
     email: new FormControl('', {
       validators: [Validators.required, Validators.email],
     }),
-    phone: new FormControl('', { validators: [Validators.required] }),
-    age: new FormControl('', { validators: [Validators.required] }),
-    city: new FormControl('', { validators: [Validators.required] }),
+    phone_number: new FormControl('', { validators: [Validators.required] }),
+    date_of_birth: new FormControl('', { validators: [Validators.required] }),
+    city_region: new FormControl('', { validators: [Validators.required] }),
     hobbies: new FormControl(''),
-    reason: new FormControl(''),
+    personal_statement: new FormControl(''),
     image: new FormControl(null),
-  });
+  } satisfies ApplicantForm);
 }

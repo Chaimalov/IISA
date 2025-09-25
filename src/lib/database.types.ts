@@ -55,7 +55,48 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      applicants_with_age: {
+        Row: {
+          age: number | null
+          city_region: string | null
+          created_at: string | null
+          date_of_birth: string | null
+          email: string | null
+          full_name: string | null
+          hobbies: string | null
+          id: number | null
+          personal_statement: string | null
+          phone_number: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          age?: never
+          city_region?: string | null
+          created_at?: string | null
+          date_of_birth?: string | null
+          email?: string | null
+          full_name?: string | null
+          hobbies?: string | null
+          id?: number | null
+          personal_statement?: string | null
+          phone_number?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          age?: never
+          city_region?: string | null
+          created_at?: string | null
+          date_of_birth?: string | null
+          email?: string | null
+          full_name?: string | null
+          hobbies?: string | null
+          id?: number | null
+          personal_statement?: string | null
+          phone_number?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never

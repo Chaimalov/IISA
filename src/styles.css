@@ -1,4 +1,4 @@
-/* @import "~maplibre-gl/dist/maplibre-gl.css"; */
+@import 'maplibre-gl/dist/maplibre-gl.css';
 @import 'tailwindcss';
 @import './styles/fonts.css';
 @import './styles/theme.css';
@@ -8,9 +8,11 @@
 
 :root {
   color-scheme: dark light;
+  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
-  scroll-snap-type: mandatory y;
+  scroll-snap-stop: always;
 }
+
 body {
   min-height: 100dvh;
 }

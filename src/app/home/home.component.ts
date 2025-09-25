@@ -2,8 +2,7 @@ import { ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA } from '@ang
 import { RouterLink } from '@angular/router';
 import { RegistrationFormComponent } from '../registration-form/registration-form.component';
 
-const className =
-  'grid gap-4 place-items-center p-8 snap-y w-screen *:max-w-md place-self-center snap-mandatory h-screen overflow-auto';
+const className = 'grid gap-4 place-items-center p-8 w-screen *:max-w-md place-self-center';
 
 @Component({
   selector: 'iisa-home',
