@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
-import { ApplicantsStore } from '../applicants.store';
 import { Applicant } from '../applicant';
+import { ApplicantsStore } from '../applicants.store';
 
 @Component({
   selector: 'iisa-applicant',

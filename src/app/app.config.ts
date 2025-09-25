@@ -18,12 +18,9 @@ export const appConfig: ApplicationConfig = {
       const iconRegistry = inject(MatIconRegistry);
       const sanitizer = inject(DomSanitizer);
       iconRegistry.addSvgIcon('IISA', sanitizer.bypassSecurityTrustResourceUrl('IISA.svg'));
+      iconRegistry.addSvgIcon('Astronaut', sanitizer.bypassSecurityTrustResourceUrl('astronaut.svg'));
     }),
     provideExperimentalZonelessChangeDetection(),
-    provideRouter(
-      routes,
-      withComponentInputBinding(),
-      withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }),
-    ),
+    provideRouter(routes, withComponentInputBinding(), withInMemoryScrolling({ anchorScrolling: 'enabled' })),
   ],
 };

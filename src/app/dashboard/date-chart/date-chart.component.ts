@@ -1,53 +1,53 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { BarController, BarElement, CategoryScale, ChartConfiguration, LinearScale } from 'chart.js';
-import { BaseChartDirective, provideCharts } from 'ng2-charts';
+import { ChartConfiguration } from 'chart.js';
+import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { ApplicantsStore } from '../../applicants.store';
 
 const style = getComputedStyle(document.documentElement);
-const color_2 = style.getPropertyValue('--color-surface-2');
-const color_3 = style.getPropertyValue('--color-surface-3');
+const COLOR_2 = style.getPropertyValue('--color-surface-2');
+const COLOR_3 = style.getPropertyValue('--color-surface-3');
 
 @Component({
-  selector: 'iisa-age-chart',
-  templateUrl: './age-chart.component.html',
+  selector: 'iisa-date-chart',
+  templateUrl: './date-chart.component.html',
   imports: [BaseChartDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
 
-  providers: [
-    provideCharts({
-      registerables: [BarController, CategoryScale, LinearScale, BarElement],
-    }),
-  ],
+  providers: [provideCharts(withDefaultRegisterables())],
 })
-export class AgeChartComponent {
+export class DateChartComponent {
   private store = inject(ApplicantsStore);
 
   protected readonly chart = computed(() => {
     const entries = this.store.applicants().reduce(
       (acc, applicant) => {
-        acc[applicant.age] = (acc[applicant.age] || 0) + 1;
+        const date = new Date(applicant.created_at).toLocaleString('default', {
+          month: 'long',
+          year: 'numeric',
+        });
+        acc[date] = (acc[date] || 0) + 1;
         return acc;
       },
-      {} as Record<number, number>,
+      {} as Record<string, number>,
     );
 
     return {
-      type: 'bar',
+      type: 'line',
       data: {
         yLabels: Object.values(entries) as unknown as string[],
         xLabels: Object.keys(entries),
         datasets: [
           {
-            label: 'Applicants',
+            label: 'Registration Date Breakdown',
             data: Object.values(entries),
-            backgroundColor: color_2,
-            borderColor: color_3,
+            backgroundColor: COLOR_2,
+            borderColor: COLOR_3,
+            showLine: true,
             borderWidth: 1,
           },
         ],
       },
       options: {
-        font: {},
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -56,12 +56,11 @@ export class AgeChartComponent {
               color: 'white',
             },
             title: {
-              text: 'Age breakdown',
+              text: 'Registration Date breakdown',
               align: 'center',
               display: true,
               color: 'white',
             },
-            type: 'linear',
           },
           y: {
             ticks: {

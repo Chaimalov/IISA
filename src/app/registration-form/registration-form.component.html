@@ -2,14 +2,17 @@
   <fieldset
     class="grid gap-6 h-screen place-content-center snap-center timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
     <legend class="text-2xl contents">Every great journey starts with a name among the stars.</legend>
-    <label
-      >Image
-      <input type="file" accept="image/png" [formControl]="form.controls.image" />
+    <label class="place-self-center leading-0 w-min focus-within:outline-2 input rounded-full outline-surface-4">
+      <mat-icon
+        class="!size-32 !text-surface-4 rounded-full cursor-pointer opacity-80 hover:opacity-100 transition-opacity"
+        svgIcon="Astronaut"></mat-icon>
+
+      <input type="file" class="sr-only" accept="image/png" [formControl]="form.controls.image" />
     </label>
 
     <label
       ><span>Full Name</span>
-      <input type="text" [formControl]="form.controls.full_name" class="input" />
+      <input type="text" [formControl]="form.controls.full_name" placeholder="Israel Israeli" class="input" />
     </label>
 
     <label>
@@ -17,7 +20,7 @@
       <input type="date" [formControl]="form.controls.date_of_birth" class="input" />
     </label>
 
-    <a [routerLink]="[]" fragment="info">next</a>
+    <a [routerLink]="[]" fragment="info" class="button button__light justify-self-end">Continue</a>
   </fieldset>
 
   <fieldset
@@ -38,13 +41,15 @@
       <input type="text" [formControl]="form.controls.city_region" class="input" />
     </label>
 
-    <a [routerLink]="[]" fragment="personal">next</a>
+    <a [routerLink]="[]" fragment="personal" class="button button__light justify-self-end">Continue</a>
   </fieldset>
 
   <fieldset
     id="personal"
     class="grid gap-6 h-screen place-content-center snap-center timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
-    <legend class="contents text-2xl">What lights you up? Share the passion that makes you mission-ready.</legend>
+    <legend class="contents text-2xl italic">
+      <span class="block">What lights you up? </span><span>Share the passion that makes you mission-ready.</span>
+    </legend>
     <label
       >Hobbies
       <input type="text" [formControl]="form.controls.hobbies" class="input" />
@@ -53,6 +58,6 @@
       >Reason
       <textarea [formControl]="form.controls.personal_statement" class="input"></textarea>
     </label>
-    <button type="submit">send</button>
+    <button type="submit" class="button button__bold place-self-center capitalize">Send</button>
   </fieldset>
 </form>

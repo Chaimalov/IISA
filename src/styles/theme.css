@@ -1,9 +1,8 @@
 @theme {
   --default-font-family: 'Exo';
 
-  --color-primary: #4f46e5;
-  --color-secondary: #ec4899;
-  --color-background: #f3f4f6;
-  --color-text: #111827;
-  --font-family: 'Roboto', sans-serif;
+  --color-surface-1: #06283d;
+  --color-surface-2: #1363df;
+  --color-surface-3: #47b5ff;
+  --color-surface-4: #dff6ff;
 }

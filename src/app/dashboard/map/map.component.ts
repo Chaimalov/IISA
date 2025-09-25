@@ -11,7 +11,7 @@ import { ApplicantsStore } from '../../applicants.store';
     [style]="'https://tiles.openfreemap.org/styles/fiord'"
     [center]="[34.80092882883532, 32.08485247343606]"
     [zoom]="[6]"
-    class="block h-100">
+    class="block h-full">
     @for (marker of markers.value(); track marker) {
       <mgl-marker [lngLat]="[marker.lng, marker.lat]"> </mgl-marker>
     }

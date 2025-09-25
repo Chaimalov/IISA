@@ -25,7 +25,7 @@ export const ApplicantsStore = signalStore(
     applicants: entities,
   })),
   withMethods((store) => ({
-    get: (id: Applicant['id']): Applicant | undefined => store.entities()[id],
+    get: (id: Applicant['id']): Applicant | undefined => store.entityMap()[id],
   })),
   withHooks({
     onInit: (store) => {

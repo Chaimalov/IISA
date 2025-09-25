@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["supabase"]
+  "cSpell.words": ["supabase"],
+  "tailwindCSS.experimental.classRegex": ["host:[\\s\\S]+class:\\s+['\"`](.*)['\"`]"]
 }

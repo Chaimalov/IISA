@@ -5,9 +5,16 @@
     beyond Earth. 🌍✨
   </p>
 
-  <a class="place-self-center cursor-pointer text-xl bg-primary px-4 py-2 rounded-xl" [routerLink]="[]" fragment="form"
-    >Register</a
-  >
+  <a class="place-self-center text-xl button button__bold" [routerLink]="[]" fragment="form">Register</a>
 </header>
 
 <iisa-registration-form id="form" class="block"></iisa-registration-form>
+
+<picture>
+  <source srcset="earth.avif" />
+  <source srcset="earth.webp" />
+  <img
+    src="earth.jpg"
+    alt=""
+    class="fixed inset-0 size-full object-cover dark:invert-0 invert-100 !max-w-none -z-10 scale-150 mask-b-from-50% mask-radial-[50%_90%] mask-radial-from-80% timeline-scroll animate-scale-in opacity-70 animation-reverse" />
+</picture>

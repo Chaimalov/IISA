@@ -2,6 +2,10 @@
   animation-timeline: view();
 }
 
+@utility timeline-scroll {
+  animation-timeline: scroll();
+}
+
 @utility animation-range-start-* {
   animation-range-start: --spacing(--value(integer));
   animation-range-start: --value('contain', 'cover');
@@ -16,6 +20,10 @@
   animation-range: entry 20% exit;
 }
 
+@utility animation-reverse {
+  animation-direction: reverse;
+}
+
 @theme {
   --animate-fade-in-scale: fade-in-scale linear;
   @keyframes fade-in-scale {
@@ -25,6 +33,16 @@
     }
     100% {
       opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  --animate-scale-in: scale-in linear;
+  @keyframes scale-in {
+    0% {
+      transform: scale(0.8);
+    }
+    100% {
       transform: scale(1);
     }
   }
