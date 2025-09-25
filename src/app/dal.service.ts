@@ -23,7 +23,6 @@ export class DalService implements DataService<Applicant, Filter> {
         })
         .subscribe();
 
-      // Cleanup on unsubscribe
       return () => {
         this.#supabase.removeChannel(this.#supabase.channel('public'));
       };

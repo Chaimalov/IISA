@@ -5,6 +5,7 @@ import { Applicant } from './applicant';
 import { DalService } from './dal.service';
 import { inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { startWith } from 'rxjs';
 
 export const ApplicantsStore = signalStore(
   { providedIn: 'root' },
@@ -28,16 +29,9 @@ export const ApplicantsStore = signalStore(
   })),
   withHooks({
     onInit: (store) => {
-      store.load();
-
       const dal = inject(DalService);
 
-      dal
-        .listen()
-        .pipe(takeUntilDestroyed())
-        .subscribe(() => {
-          store.load();
-        });
+      dal.listen().pipe(startWith({}), takeUntilDestroyed()).subscribe(store.load);
     },
   }),
 );
