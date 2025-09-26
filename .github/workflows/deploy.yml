@@ -41,10 +41,10 @@ jobs:
       - name: Build Angular app
         run: pnpm ng build --base-href="/IISA/"
 
-      # - name: Add 404.html for Angular routing
-      #   run: |
-      #     cp dist/app/browser/index.html dist/app/404.html
-      #     echo "Added 404.html for Angular routing fallback"
+      - name: Add 404.html for Angular routing
+        run: |
+          cp dist/app/browser/index.html dist/app/browser/404.html
+          echo "Added 404.html for Angular routing fallback"
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
