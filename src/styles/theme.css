@@ -1,8 +1,8 @@
 @theme {
   --default-font-family: 'Exo';
 
-  --color-surface-1: #06283d;
-  --color-surface-2: #1363df;
-  --color-surface-3: #47b5ff;
-  --color-surface-4: #dff6ff;
+  --color-surface-1: light-dark(#dff6ff, #06283d);
+  --color-surface-2: light-dark(#47b5ff, #1363df);
+  --color-surface-3: light-dark(#1363df, #47b5ff);
+  --color-surface-4: light-dark(#06283d, #dff6ff);
 }

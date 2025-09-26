@@ -6,6 +6,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { RouterLink } from '@angular/router';
 import { Applicant } from '../applicant';
 import { MatIcon } from '@angular/material/icon';
+import { RequiredInputDirective } from './required.directive';
 
 type ApplicantForm = { image: AbstractControl<string> } & {
   [K in keyof Pick<
@@ -17,7 +18,15 @@ type ApplicantForm = { image: AbstractControl<string> } & {
 @Component({
   selector: 'iisa-registration-form',
   templateUrl: './registration-form.component.html',
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatIcon, MatInputModule, MatStepperModule, RouterLink],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    RequiredInputDirective,
+    MatIcon,
+    MatInputModule,
+    MatStepperModule,
+    RouterLink,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationFormComponent {
