@@ -11,13 +11,13 @@
       <input type="file" class="sr-only" accept="image/png" [formControl]="form.controls.image" />
     </label>
 
-    <label>
-      <span class="has-[~[required=true]]:after:content-['_*'] after:text-red-500">Full Name</span>
+    <label class="group/field">
+      <span class="group-has-required/field:after:content-['_*'] after:text-red-500">Full Name</span>
       <input type="text" [formControl]="form.controls.full_name" placeholder="Israel Israeli" class="input" />
     </label>
 
-    <label>
-      <span class="has-[~[required=true]]:after:content-['_*'] after:text-red-500">Date Of Birth</span>
+    <label class="group/field">
+      <span class="group-has-required/field:after:content-['_*'] after:text-red-500">Date Of Birth</span>
       <input type="date" [formControl]="form.controls.date_of_birth" class="input" />
     </label>
 
@@ -28,17 +28,17 @@
     id="info"
     class="grid gap-6 h-screen place-content-center snap-center timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
     <legend class="text-2xl contents">Tell us where you’re from—every explorer brings a unique world with them.</legend>
-    <label
-      ><span class="has-[~[required=true]]:after:content-['_*'] after:text-red-500">Email</span>
+    <label class="group/field"
+      ><span class="group-has-required/field:after:content-['_*'] after:text-red-500">Email</span>
       <input type="email" [formControl]="form.controls.email" class="input" />
     </label>
-    <label
-      ><span class="has-[~[required=true]]:after:content-['_*'] after:text-red-500">Phone</span>
+    <label class="group/field"
+      ><span class="group-has-required/field:after:content-['_*'] after:text-red-500">Phone</span>
       <input type="text" [formControl]="form.controls.phone_number" class="input" />
     </label>
 
-    <label
-      ><span class="has-[~[required=true]]:after:content-['_*'] after:text-red-500">City or Region</span>
+    <label class="group/field"
+      ><span class="group-has-required/field:after:content-['_*'] after:text-red-500">City or Region</span>
       <input type="text" [formControl]="form.controls.city_region" class="input" />
     </label>
 
@@ -51,12 +51,12 @@
     <legend class="contents text-2xl italic">
       <span class="block">What lights you up? </span><span>Share the passion that makes you mission-ready.</span>
     </legend>
-    <label
-      ><span class="has-[~[required=true]]:after:content-['_*'] after:text-red-500">Hobbies</span>
+    <label class="group/field"
+      ><span class="group-has-required/field:after:content-['_*'] after:text-red-500">Hobbies</span>
       <input type="text" [formControl]="form.controls.hobbies" class="input" />
     </label>
-    <label
-      ><span class="has-[~[required=true]]:after:content-['_*'] after:text-red-500">Reason</span>
+    <label class="group/field">
+      <span class="group-has-required/field:after:content-['_*'] after:text-red-500">Reason</span>
       <textarea [formControl]="form.controls.personal_statement" class="input"></textarea>
     </label>
     <button type="submit" class="button button__bold place-self-center capitalize">Send</button>

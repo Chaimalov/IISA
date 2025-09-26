@@ -5,7 +5,7 @@ import { NgControl, Validators } from '@angular/forms';
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '[formControl]',
   host: {
-    '[attr.required]': 'isRequired',
+    '[attr.required]': 'isRequired ? `` : null',
   },
 })
 export class RequiredInputDirective {
