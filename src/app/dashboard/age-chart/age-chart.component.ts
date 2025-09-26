@@ -2,10 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { BarController, BarElement, CategoryScale, ChartConfiguration, LinearScale } from 'chart.js';
 import { BaseChartDirective, provideCharts } from 'ng2-charts';
 import { ApplicantsStore } from '../../applicants.store';
-
-const style = getComputedStyle(document.documentElement);
-const color_2 = style.getPropertyValue('--color-surface-2');
-const color_3 = style.getPropertyValue('--color-surface-3');
+import { COLOR_2, COLOR_3 } from '../chart';
 
 @Component({
   selector: 'iisa-age-chart',
@@ -40,8 +37,8 @@ export class AgeChartComponent {
           {
             label: 'Applicants',
             data: Object.values(entries),
-            backgroundColor: color_2,
-            borderColor: color_3,
+            backgroundColor: COLOR_2,
+            borderColor: COLOR_3,
             borderWidth: 1,
           },
         ],

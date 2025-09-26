@@ -2,10 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { ApplicantsStore } from '../../applicants.store';
-
-const style = getComputedStyle(document.documentElement);
-const COLOR_2 = style.getPropertyValue('--color-surface-2');
-const COLOR_3 = style.getPropertyValue('--color-surface-3');
+import { COLOR_2, COLOR_3 } from '../chart';
 
 @Component({
   selector: 'iisa-date-chart',
