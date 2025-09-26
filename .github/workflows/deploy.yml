@@ -43,7 +43,7 @@ jobs:
 
       - name: Add 404.html for Angular routing
         run: |
-          cp dist/<your-project-name>/index.html dist/<your-project-name>/404.html
+          cp dist/app/index.html dist/app/404.html
           echo "Added 404.html for Angular routing fallback"
 
       - name: Deploy to GitHub Pages
