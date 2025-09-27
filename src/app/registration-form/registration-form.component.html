@@ -1,4 +1,4 @@
-<form class="contents" [formGroup]="form">
+<form class="contents" [formGroup]="form" (submit)="submit()">
   <fieldset
     class="grid gap-6 h-dvh place-content-center snap-center timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
     <legend class="text-2xl contents">Every great journey starts with a name among the stars.</legend>
@@ -8,7 +8,7 @@
         class="!size-32 rounded-full cursor-pointer opacity-80 hover:opacity-100 transition-opacity"
         svgIcon="Astronaut"></mat-icon>
 
-      <input type="file" class="sr-only" accept="image/png" [formControl]="form.controls.image" />
+      <input type="file" hidden accept="image/*" [formControl]="form.controls.avatar" />
     </label>
 
     <label class="group/field">

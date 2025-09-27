@@ -12,6 +12,6 @@ export class RequiredInputDirective {
   private control = inject(NgControl, { self: true });
 
   protected get isRequired(): boolean {
-    return this.control.control.hasValidator(Validators.required);
+    return Boolean(this.control.control?.hasValidator(Validators.required));
   }
 }

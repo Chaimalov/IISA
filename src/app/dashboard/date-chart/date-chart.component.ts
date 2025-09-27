@@ -18,7 +18,7 @@ export class DateChartComponent {
   protected readonly chart = computed(() => {
     const entries = this.store.applicants().reduce(
       (acc, applicant) => {
-        const date = new Date(applicant.created_at).toLocaleString('default', {
+        const date = new Date(applicant.created_at!).toLocaleString('default', {
           month: 'long',
           year: 'numeric',
         });

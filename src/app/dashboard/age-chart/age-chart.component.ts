@@ -22,7 +22,7 @@ export class AgeChartComponent {
   protected readonly chart = computed(() => {
     const entries = this.store.applicants().reduce(
       (acc, applicant) => {
-        acc[applicant.age] = (acc[applicant.age] || 0) + 1;
+        acc[applicant.age!] = (acc[applicant.age!] || 0) + 1;
         return acc;
       },
       {} as Record<number, number>,

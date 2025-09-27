@@ -11,7 +11,7 @@ type Filter = Pick<Applicant, 'full_name' | 'email' | 'phone_number'>;
 @Injectable({
   providedIn: 'root',
 })
-export class DalService implements DataService<Applicant, Filter> {
+export class DalService implements DataService<Applicant | ApplicantData, Filter> {
   #supabase = createClient<Database>(environment.supabaseUrl, environment.supabaseKey);
 
   public listen(): Observable<Applicant> {
@@ -33,38 +33,48 @@ export class DalService implements DataService<Applicant, Filter> {
     return this.#supabase
       .from('applicants_with_age')
       .select('*')
-      .then((response) => response.data);
+      .then((response) => response.data!);
   }
 
-  public async loadById(id: number): Promise<Applicant> {
+  public async loadById(id: string): Promise<Applicant> {
     return this.#supabase
       .from('applicants_with_age')
       .select('*')
       .eq('id', id)
       .single()
-      .then((response) => response.data);
+      .then((response) => response.data!);
   }
 
   public async create(entity: ApplicantData): Promise<Applicant> {
+    const path = await this.#supabase.storage
+      .from('Avatars')
+      .upload(entity.email, entity.avatar)
+      .then(({ data }) => data?.fullPath);
+
     return this.#supabase
-      .from('applicants_with_age')
-      .insert(entity)
-      .then((response) => response.data);
+      .from('applicants')
+      .insert({ ...entity, avatar: path })
+      .then((response) => response.data!);
   }
 
   public async update(entity: ApplicantData): Promise<Applicant> {
+    const path = await this.#supabase.storage
+      .from('Avatars')
+      .upload(entity.email, entity.avatar)
+      .then(({ data }) => data?.fullPath);
+
     return this.#supabase
-      .from('applicants_with_age')
-      .update(entity)
+      .from('applicants')
+      .update({ ...entity, avatar: path })
       .eq('id', entity.id)
-      .then((response) => response.data);
+      .then((response) => response.data!);
   }
 
-  public async updateAll(entity: ApplicantData[]): Promise<Applicant[]> {
+  public async updateAll(entity: any[]): Promise<Applicant[]> {
     return this.#supabase
-      .from('applicants_with_age')
+      .from('applicants')
       .upsert(entity)
-      .then((response) => response.data);
+      .then((response) => response.data!);
   }
 
   public async delete(entity: Applicant): Promise<void> {

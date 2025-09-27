@@ -28,13 +28,9 @@ export class MapComponent {
     loader: ({ request }) => {
       return forkJoin(
         request.map((applicant) => {
-          if (applicant.city_region) {
-            return this.geocoder.getLocation(applicant.city_region).then((res) => {
-              return res.results.at(0).geometry.location as unknown as google.maps.LatLngLiteral;
-            });
-          }
-
-          return undefined;
+          return this.geocoder.getLocation(applicant.city_region!).then((res) => {
+            return res.results[0].geometry.location as unknown as google.maps.LatLngLiteral;
+          });
         }),
       );
     },
