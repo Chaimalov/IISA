@@ -1,1 +1,0 @@
-import{Nb as o,cb as s,xb as n,yb as c}from"./chunk-A3ZRH5RC.js";import"./chunk-VOSPIT4N.js";var i=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=s({type:t,selectors:[["iisa-success"]],decls:2,vars:0,template:function(e,p){e&1&&(n(0,"p"),o(1,"success works!"),c())},encapsulation:2,changeDetection:0})};export{i as SuccessComponent};
