@@ -1,10 +1,18 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { AgGridAngular } from 'ag-grid-angular';
-import { AllCommunityModule, GridOptions, ModuleRegistry, colorSchemeDarkBlue, themeQuartz } from 'ag-grid-community';
+import {
+  AllCommunityModule,
+  GridOptions,
+  ModuleRegistry,
+  colorSchemeDarkBlue,
+  colorSchemeLight,
+  themeQuartz,
+} from 'ag-grid-community';
 import { Applicant } from '../../applicant';
 import { ApplicantsStore } from '../../applicants.store';
+import { ColorSchemeService } from '../../color-scheme.service';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -16,10 +24,14 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 })
 export class ApplicantsTableComponent {
   public applicants = inject(ApplicantsStore).applicants;
+  public colorScheme = inject(ColorSchemeService);
   protected dataSource = new MatTableDataSource();
 
-  protected theme = themeQuartz.withPart(colorSchemeDarkBlue);
+  protected readonly theme = computed(() =>
+    themeQuartz.withPart(this.colorScheme.theme() === 'dark' ? colorSchemeDarkBlue : colorSchemeLight),
+  );
   protected options = {
+    suppressDragLeaveHidesColumns: true,
     defaultColDef: {
       filter: true,
     },

@@ -6,14 +6,22 @@
   </p>
 
   <a class="place-self-center text-xl button button__bold" [routerLink]="[]" fragment="form">Register</a>
+  <a class="place-self-center text-xl button button__bold" [routerLink]="['/edit']">Edit</a>
 </header>
 
 <iisa-registration-form id="form" class="block"></iisa-registration-form>
 
 <picture>
-  <source srcset="earth.avif" />
+  @if (colorScheme.theme() === 'dark') {
+    <source srcset="earth.avif" type="image/avif" />
+    <source srcset="earth.webp" type="image/webp" />
+  } @else {
+    <source srcset="earth-light.avif" type="image/avif" />
+    <source srcset="earth-light.webp" type="image/webp" />
+  }
+
   <img
     src="earth.webp"
     alt=""
-    class="fixed inset-0 size-full object-cover dark:invert-0 invert-100 !max-w-none -z-10 scale-150 mask-b-from-50% mask-radial-[50%_90%] mask-radial-from-80% timeline-scroll animate-scale-in opacity-70 animation-reverse" />
+    class="fixed inset-0 size-full object-cover mask-b-from-0 mask-b-to-50% !max-w-none -z-10 scale-150 origin-top timeline-scroll animate-scale-in opacity-70 animation-reverse" />
 </picture>

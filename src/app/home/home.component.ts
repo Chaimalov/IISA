@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RegistrationFormComponent } from '../registration-form/registration-form.component';
+import { ColorSchemeService } from '../color-scheme.service';
 
-const className = 'grid gap-4 place-items-center p-8 w-screen *:max-w-md place-self-center';
+const className = 'grid gap-4 place-items-center p-8 *:max-w-md place-self-center';
 
 @Component({
   selector: 'iisa-home',
@@ -14,4 +15,6 @@ const className = 'grid gap-4 place-items-center p-8 w-screen *:max-w-md place-s
     class: className,
   },
 })
-export class HomeComponent {}
+export class HomeComponent {
+  protected colorScheme = inject(ColorSchemeService);
+}

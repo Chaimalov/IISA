@@ -13,12 +13,17 @@
 
     <label class="group/field">
       <span class="group-has-required/field:after:content-['_*'] after:text-red-500">Full Name</span>
-      <input type="text" [formControl]="form.controls.full_name" placeholder="Israel Israeli" class="input" />
+      <input
+        type="text"
+        inputmode="latin-name"
+        [formControl]="form.controls.full_name"
+        placeholder="Israel Israeli"
+        class="input" />
     </label>
 
     <label class="group/field">
       <span class="group-has-required/field:after:content-['_*'] after:text-red-500">Date Of Birth</span>
-      <input type="date" [formControl]="form.controls.date_of_birth" class="input" />
+      <input type="date" inputmode="date" [formControl]="form.controls.date_of_birth" class="input" />
     </label>
 
     <a [routerLink]="[]" fragment="info" class="button button__light justify-self-end">Continue</a>
@@ -30,16 +35,26 @@
     <legend class="text-2xl contents">Tell us where you’re from—every explorer brings a unique world with them.</legend>
     <label class="group/field"
       ><span class="group-has-required/field:after:content-['_*'] after:text-red-500">Email</span>
-      <input type="email" [formControl]="form.controls.email" class="input" />
+      <input
+        type="email"
+        inputmode="email"
+        [formControl]="form.controls.email"
+        placeholder="israel.israeli@gmail.com"
+        class="input" />
     </label>
     <label class="group/field"
       ><span class="group-has-required/field:after:content-['_*'] after:text-red-500">Phone</span>
-      <input type="text" [formControl]="form.controls.phone_number" class="input" />
+      <input
+        type="text"
+        inputmode="tel"
+        [formControl]="form.controls.phone_number"
+        placeholder="012-345-6789"
+        class="input" />
     </label>
 
     <label class="group/field"
       ><span class="group-has-required/field:after:content-['_*'] after:text-red-500">City or Region</span>
-      <input type="text" [formControl]="form.controls.city_region" class="input" />
+      <input type="text" [formControl]="form.controls.city_region" placeholder="Jerusalem" class="input" />
     </label>
 
     <a [routerLink]="[]" fragment="personal" class="button button__light justify-self-end">Continue</a>
@@ -56,8 +71,10 @@
       <input type="text" [formControl]="form.controls.hobbies" class="input" />
     </label>
     <label class="group/field">
-      <span class="group-has-required/field:after:content-['_*'] after:text-red-500">Reason</span>
-      <textarea [formControl]="form.controls.personal_statement" class="input"></textarea>
+      <span class="group-has-required/field:after:content-['_*'] after:text-red-500"
+        >Why I am the perfect candidate</span
+      >
+      <textarea [formControl]="form.controls.personal_statement" placeholder="I love space..." class="input"></textarea>
     </label>
     <button type="submit" class="button button__bold place-self-center capitalize">Send</button>
   </fieldset>

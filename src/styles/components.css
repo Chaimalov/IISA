@@ -12,7 +12,7 @@
     }
 
     &.button__bold {
-      @apply bg-surface-3 px-4 py-2;
+      @apply bg-surface-2 px-4 py-2;
     }
   }
 }

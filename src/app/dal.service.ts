@@ -5,6 +5,7 @@ import { environment } from '../environments/environment';
 import { Database } from '../lib/database.types';
 import { Applicant, ApplicantData } from './applicant';
 import { Observable, Observer } from 'rxjs';
+import { ICustomFile } from 'file-input-accessor';
 
 type Filter = Pick<Applicant, 'full_name' | 'email' | 'phone_number'>;
 
@@ -46,22 +47,23 @@ export class DalService implements DataService<Applicant | ApplicantData, Filter
   }
 
   public async create(entity: ApplicantData): Promise<Applicant> {
-    const path = await this.#supabase.storage
-      .from('Avatars')
-      .upload(entity.email, entity.avatar)
-      .then(({ data }) => data?.fullPath);
+    const path = await this.uploadImage(entity.avatar, entity.email);
 
     return this.#supabase
       .from('applicants')
       .insert({ ...entity, avatar: path })
-      .then((response) => response.data!);
+      .then((response) =>
+        this.#supabase
+          .from('applicants_with_age')
+          .select('*')
+          .eq('email', entity.email)
+          .single()
+          .then((response) => response.data!),
+      );
   }
 
   public async update(entity: ApplicantData): Promise<Applicant> {
-    const path = await this.#supabase.storage
-      .from('Avatars')
-      .upload(entity.email, entity.avatar)
-      .then(({ data }) => data?.fullPath);
+    const path = await this.uploadImage(entity.avatar, entity.email);
 
     return this.#supabase
       .from('applicants')
@@ -83,5 +85,23 @@ export class DalService implements DataService<Applicant | ApplicantData, Filter
       .delete()
       .eq('id', entity.id)
       .then(() => {});
+  }
+
+  private async uploadImage(file: ICustomFile | undefined, userId: string): Promise<string | undefined> {
+    if (!file) return;
+
+    const fileExt = file.name.split('.').pop();
+    const filePath = `${userId}/avatar.${fileExt}`;
+
+    const { error } = await this.#supabase.storage.from('Avatars').upload(filePath, file, {
+      upsert: true,
+    });
+
+    if (error) {
+      console.error('Error uploading avatar:', error.message);
+      return;
+    }
+
+    return this.#supabase.storage.from('Avatars').getPublicUrl(filePath).data.publicUrl;
   }
 }

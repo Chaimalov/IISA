@@ -1,7 +1,18 @@
-<nav class="flex gap-4 p-4 justify-between items-center sticky top-0 z-10 w-full">
+<nav class="flex gap-4 p-4 items-center fixed top-0 z-10 w-full">
   <a routerLink="/" class="grid place-content-center">
     <mat-icon class="!size-12" svgIcon="IISA"></mat-icon>
   </a>
+
+  <span class="m-auto"></span>
+
+  <button (click)="colorScheme.toggle()" class="button">
+    @if (colorScheme.theme() === 'dark') {
+      <mat-icon class="align-middle">light_mode</mat-icon>
+    } @else {
+      <mat-icon class="align-middle">dark_mode</mat-icon>
+    }
+  </button>
+
   <a class="button button__light" routerLink="/dashboard">Dashboard</a>
 </nav>
 

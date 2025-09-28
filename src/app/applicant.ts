@@ -1,6 +1,6 @@
-import { ICustomFile } from 'file-input-accessor';
-import { Database, Tables } from '../lib/database.types';
 import { Prettify } from '@ngrx/signals';
+import { ICustomFile } from 'file-input-accessor';
+import { Tables } from '../lib/database.types';
 
 export type Applicant = Tables<'applicants_with_age'>;
 export type ApplicantData = Prettify<

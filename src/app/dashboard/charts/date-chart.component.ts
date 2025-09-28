@@ -1,75 +1,72 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { BarController, BarElement, CategoryScale, ChartConfiguration, LinearScale } from 'chart.js';
-import { BaseChartDirective, provideCharts } from 'ng2-charts';
+import { computed, Directive, inject } from '@angular/core';
+import { ChartConfiguration } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 import { ApplicantsStore } from '../../applicants.store';
-import { COLOR_2, COLOR_3 } from '../chart';
+import { BaseChart } from './base-chart';
 
-@Component({
-  selector: 'iisa-age-chart',
-  templateUrl: './age-chart.component.html',
-  imports: [BaseChartDirective],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-
-  providers: [
-    provideCharts({
-      registerables: [BarController, CategoryScale, LinearScale, BarElement],
-    }),
-  ],
+@Directive({
+  selector: '[iisaDateChart]',
+  hostDirectives: [BaseChartDirective],
 })
-export class AgeChartComponent {
+export class DateChartDirective extends BaseChart {
   private store = inject(ApplicantsStore);
 
   protected readonly chart = computed(() => {
+    const { backgroundColor, borderColor, textColor } = this.colors();
+
     const entries = this.store.applicants().reduce(
       (acc, applicant) => {
-        acc[applicant.age!] = (acc[applicant.age!] || 0) + 1;
+        const date = new Date(applicant.created_at!).toLocaleString('default', {
+          month: 'long',
+          year: 'numeric',
+        });
+        acc[date] = (acc[date] || 0) + 1;
         return acc;
       },
-      {} as Record<number, number>,
+      {} as Record<string, number>,
     );
 
     return {
-      type: 'bar',
+      type: 'line',
       data: {
         yLabels: Object.values(entries) as unknown as string[],
         xLabels: Object.keys(entries),
         datasets: [
           {
-            label: 'Applicants',
+            label: 'Registration Date Breakdown',
             data: Object.values(entries),
-            backgroundColor: COLOR_2,
-            borderColor: COLOR_3,
+            backgroundColor,
+            borderColor,
+            showLine: true,
             borderWidth: 1,
           },
         ],
       },
       options: {
-        font: {},
         responsive: true,
         maintainAspectRatio: false,
         scales: {
           x: {
             ticks: {
-              color: 'white',
+              color: textColor,
             },
             title: {
-              text: 'Age breakdown',
+              text: 'Registration Date breakdown',
               align: 'center',
               display: true,
-              color: 'white',
+              color: textColor,
             },
-            type: 'linear',
           },
           y: {
             ticks: {
-              color: 'white',
+              color: textColor,
               stepSize: 1,
             },
             title: {
               text: 'Amount',
               align: 'center',
               display: true,
-              color: 'white',
+              color: textColor,
             },
           },
         },

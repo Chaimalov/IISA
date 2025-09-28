@@ -1,0 +1,16 @@
+<main class="grid gap-2 p-2">
+  <h1 class="text-4xl font-bold">Houston, we have a problem…</h1>
+  <p>Page not found.</p>
+</main>
+
+<picture>
+  @if (colorScheme.theme() === 'dark') {
+    <source srcset="deserted-astronaut-dark.avif" type="image/avif" />
+    <source srcset="earth.webp" type="image/webp" />
+  } @else {
+    <source srcset="deserted-astronaut.avif" type="image/avif" />
+    <source srcset="earth-light.webp" type="image/webp" />
+  }
+
+  <img alt="" class="object-contain size-full mix-blend-darken dark:mix-blend-lighten dark:contrast-86 contrast-200" />
+</picture>

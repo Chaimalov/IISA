@@ -1,8 +1,12 @@
 <article
   class="grid auto-fill-100 auto-rows-[320px] gap-4 has-hover:*:not-hover:opacity-80 *:transition-opacity *:rounded *:overflow-auto p-4">
   <iisa-map></iisa-map>
-  <iisa-age-chart class="bg-surface-1 p-4 rounded"></iisa-age-chart>
-  <iisa-date-chart class="bg-surface-1 p-4 rounded"></iisa-date-chart>
+  <div>
+    <canvas class="bg-surface-1 p-4 rounded" iisaAgeChart></canvas>
+  </div>
+  <div>
+    <canvas class="bg-surface-1 p-4 rounded" iisaDateChart></canvas>
+  </div>
 
   <iisa-applicants-table class="w-full bg-surface-1 rounded overflow-auto grid col-span-full"></iisa-applicants-table>
 </article>
