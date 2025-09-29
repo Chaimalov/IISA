@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { RegistrationFormComponent } from '../registration-form/registration-form.component';
 import { ColorSchemeService } from '../color-scheme.service';
 
-const className = 'grid gap-4 place-items-center p-8 *:max-w-md place-self-center';
+const className = 'grid gap-4 place-items-center p-8 *:max-w-lg text-balance place-self-center';
 
 @Component({
   selector: 'iisa-home',

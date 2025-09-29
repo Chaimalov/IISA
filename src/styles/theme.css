@@ -3,8 +3,8 @@
 @theme {
   --default-font-family: 'Exo';
 
-  --color-surface-1: light-dark(#fbfbfb, #2b3340);
+  --color-surface-1: light-dark(#f2f2f3, #2b3340);
   --color-surface-2: light-dark(#47b5ff, #1363df);
   --color-surface-3: light-dark(#1363df, #47b5ff);
-  --color-surface-4: light-dark(#2b3340, #fbfbfb);
+  --color-surface-4: light-dark(#2b3340, #f2f2f3);
 }

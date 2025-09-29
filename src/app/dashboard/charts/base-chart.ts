@@ -2,7 +2,7 @@ import { computed, effect, inject, Signal } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { ColorSchemeService } from '../../color-scheme.service';
-import { COLOR_2, COLOR_3 } from '../chart';
+import { COLOR_2, COLOR_3 } from './chart';
 
 export abstract class BaseChart {
   private chartDirective = inject(BaseChartDirective);

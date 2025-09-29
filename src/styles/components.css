@@ -4,7 +4,7 @@
   }
 
   .button {
-    @apply rounded p-2 w-max cursor-pointer outline-surface-4 outline-offset-4 focus-visible:outline-offset-1 transition-all;
+    @apply rounded inline-block p-2 w-max cursor-pointer outline-surface-4 outline-offset-4 focus-visible:outline-offset-1 transition-all;
     text-box-trim: trim-both;
 
     &.button__light {
