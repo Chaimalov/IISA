@@ -9,10 +9,7 @@
 @import './styles/snackbar.css';
 
 :root {
-  color-scheme: dark light;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-  scroll-snap-stop: always;
+  @apply md:snap-mandatory snap-proximity snap-y scheme-light-dark scroll-smooth snap-always;
 
   padding-top: env(safe-area-inset-top);
   padding-left: env(safe-area-inset-left);

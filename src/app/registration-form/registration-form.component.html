@@ -96,8 +96,9 @@
     <fieldset class="flex gap-2 flex-wrap">
       <legend>Hobbies</legend>
       @for (hobby of hobbies; track hobby.value) {
-        <label class="button button__light has-checked:bg-surface-3/25 has-checked:text-surface-3">
-          <input hidden type="checkbox" [(ngModel)]="hobby.control" [ngModelOptions]="{ standalone: true }" />
+        <label
+          class="button button__light text-sm has-checked:bg-surface-2/25 has-checked:text-surface-3 flex items-center gap-2">
+          <input type="checkbox" [(ngModel)]="hobby.control" [ngModelOptions]="{ standalone: true }" />
           <span>{{ hobby.value }}</span>
         </label>
       }
