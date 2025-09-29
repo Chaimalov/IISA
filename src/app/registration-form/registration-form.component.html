@@ -7,13 +7,16 @@
         >Every explorer begins with a name. Record yours carefully — history will remember it among the stars.</span
       >
     </legend>
-    <label
-      class="place-self-center leading-0 w-min focus-within:outline-2 outline-offset-6 focus-within:outline-offset-1 input rounded-full outline-surface-4">
-      <mat-icon
-        class="!size-32 rounded-full cursor-pointer opacity-80 hover:opacity-100 transition-opacity"
-        svgIcon="Astronaut"></mat-icon>
 
-      <input type="file" hidden accept="image/*" [formControl]="form.controls.avatar" />
+    <label
+      class="place-self-center rounded-full cursor-pointer opacity-80 hover:opacity-100 transition-opacity leading-0 focus-within:outline-2 outline-offset-6 focus-within:outline-offset-1 input size-32 outline-surface-4">
+      @if (avatarUrl()) {
+        <img [src]="avatarUrl()" alt="" class="object-cover aspect-square rounded-full" />
+      } @else {
+        <mat-icon class="!size-full" svgIcon="Astronaut"></mat-icon>
+      }
+
+      <input type="file" hidden accept="image/*" [(ngModel)]="avatar" [ngModelOptions]="{ standalone: true }" />
     </label>
 
     <label class="group/field relative">

@@ -1,11 +1,39 @@
-@if (applicant(); as applicant) {
-  <h4>
-    {{ applicant.full_name }}
-  </h4>
+<aside class="grid gap-4 place-content-start">
+  @if (!applicant().avatar) {
+    <mat-icon class="!size-34" svgIcon="Astronaut"></mat-icon>
+  } @else {
+    <img [src]="applicant().avatar" alt="" class="size-34 border-8 border-current object-cover rounded-full" />
+  }
 
-  <span> {{ applicant.age }} years old, from {{ applicant.city_region }} </span>
-
-  <q class="block">
-    {{ applicant.personal_statement }}
+  <q class="block italic md:text-2xl">
+    {{ applicant().personal_statement }}
   </q>
-}
+  <span class="font-light italic">{{ applicant().full_name }}'s Personal Statement</span>
+</aside>
+
+<main class="grid gap-4 content-baseline">
+  <header>
+    <h1 class="text-3xl font-bold">
+      {{ applicant().full_name }}
+    </h1>
+    <p>{{ applicant().age }} years old, from {{ applicant().city_region }}.</p>
+  </header>
+
+  <hr class="border-canvas" />
+
+  <section>
+    <h2 class="text-xl font-bold">Hobbies</h2>
+    <ul class="list-inside">
+      @for (hobby of applicant().hobbies?.split(','); track hobby) {
+        <li>{{ hobby.trim() }}</li>
+      }
+    </ul>
+  </section>
+
+  <hr class="border-canvas" />
+
+  <address class="grid">
+    <a href="mailto:{{ applicant().email }}">{{ applicant().email }}</a>
+    <a href="tel:{{ applicant().phone_number }}">{{ applicant().phone_number }}</a>
+  </address>
+</main>

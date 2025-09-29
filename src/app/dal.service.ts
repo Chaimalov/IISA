@@ -1,18 +1,18 @@
-import { DataService } from '@angular-architects/ngrx-toolkit';
 import { Injectable } from '@angular/core';
 import { createClient } from '@supabase/supabase-js';
+import { ICustomFile } from 'file-input-accessor';
+import { Observable, Observer } from 'rxjs';
+import { v4 } from 'uuid';
 import { environment } from '../environments/environment';
 import { Database } from '../lib/database.types';
-import { Applicant, ApplicantData } from './applicant';
-import { Observable, Observer } from 'rxjs';
-import { ICustomFile } from 'file-input-accessor';
+import { Applicant, Application } from './applicant';
 
 type Filter = Pick<Applicant, 'full_name' | 'email' | 'phone_number'>;
 
 @Injectable({
   providedIn: 'root',
 })
-export class DalService implements DataService<Applicant | ApplicantData, Filter> {
+export class DalService {
   #supabase = createClient<Database>(environment.supabaseUrl, environment.supabaseKey);
 
   public listen(): Observable<Applicant> {
@@ -30,11 +30,21 @@ export class DalService implements DataService<Applicant | ApplicantData, Filter
     });
   }
 
-  public async load(filter: Filter): Promise<Applicant[]> {
-    return this.#supabase
-      .from('applicants_with_age')
-      .select('*')
-      .then((response) => response.data!);
+  public async load(filter?: Filter): Promise<Applicant[]> {
+    let query = this.#supabase.from('applicants_with_age').select('*');
+
+    if (filter) {
+      query = query
+        .filter('full_name', 'ilike', `%${filter.full_name}%`)
+        .filter('email', 'ilike', `%${filter.email}%`)
+        .filter('phone_number', 'ilike', `%${filter.phone_number}%`);
+    }
+
+    return query.overrideTypes<Applicant[]>().then(({ data, error }) => {
+      if (error) throw error;
+
+      return data;
+    });
   }
 
   public async loadById(id: string): Promise<Applicant> {
@@ -43,13 +53,16 @@ export class DalService implements DataService<Applicant | ApplicantData, Filter
       .select('*')
       .eq('id', id)
       .single()
-      .then((response) => response.data!);
+      .overrideTypes<Applicant>()
+      .then(({ data, error }) => {
+        if (error) throw error;
+
+        return data;
+      });
   }
 
-  public async create(entity: ApplicantData): Promise<Applicant> {
-    const path = await this.uploadImage(entity.avatar, entity.email);
-
-    const { error } = await this.#supabase.from('applicants').insert({ ...entity, avatar: path });
+  public async create(entity: Application): Promise<Applicant> {
+    const { error } = await this.#supabase.from('applicants').insert(entity);
 
     if (error) throw error;
 
@@ -58,6 +71,7 @@ export class DalService implements DataService<Applicant | ApplicantData, Filter
       .select('*')
       .eq('email', entity.email)
       .single()
+      .overrideTypes<Applicant>()
       .then(({ data, error }) => {
         if (error) throw error;
 
@@ -65,46 +79,38 @@ export class DalService implements DataService<Applicant | ApplicantData, Filter
       });
   }
 
-  public async update(entity: ApplicantData): Promise<Applicant> {
-    const path = await this.uploadImage(entity.avatar, entity.email);
+  public async update(entity: Application & Pick<Applicant, 'id'>): Promise<Applicant> {
+    const { error } = await this.#supabase.from('applicants').update(entity).eq('id', entity.id);
 
-    return this.#supabase
-      .from('applicants')
-      .update({ ...entity, avatar: path })
-      .eq('id', entity.id)
-      .then((response) => response.data!);
+    if (error) throw error;
+
+    return this.loadById(entity.id);
   }
 
-  public async updateAll(entity: any[]): Promise<Applicant[]> {
-    return this.#supabase
-      .from('applicants')
-      .upsert(entity)
-      .then((response) => response.data!);
+  public async updateAll(entity: Application[]): Promise<Applicant[]> {
+    const { error } = await this.#supabase.from('applicants').upsert(entity);
+    if (error) throw error;
+
+    return this.load();
   }
 
   public async delete(entity: Applicant): Promise<void> {
-    return this.#supabase
-      .from('applicants')
-      .delete()
-      .eq('id', entity.id)
-      .then(() => {});
+    return this.#supabase.from('applicants').delete().eq('id', entity.id).then();
   }
 
-  private async uploadImage(file: ICustomFile | undefined, userId: string): Promise<string | undefined> {
-    if (!file) return;
-
+  public async uploadImage(file: ICustomFile): Promise<string | null> {
     const fileExt = file.name.split('.').pop();
-    const filePath = `${userId}/avatar.${fileExt}`;
+    const filePath = `${v4()}/avatar.${fileExt}`;
 
-    const { error } = await this.#supabase.storage.from('Avatars').upload(filePath, file, {
+    const { error } = await this.#supabase.storage.from('avatars').upload(filePath, file, {
       upsert: true,
     });
 
     if (error) {
       console.error('Error uploading avatar:', error.message);
-      return;
+      return null;
     }
 
-    return this.#supabase.storage.from('Avatars').getPublicUrl(filePath).data.publicUrl;
+    return this.#supabase.storage.from('avatars').getPublicUrl(filePath).data.publicUrl;
   }
 }

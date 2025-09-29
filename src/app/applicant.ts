@@ -1,10 +1,13 @@
-import { Prettify } from '@ngrx/signals';
-import { ICustomFile } from 'file-input-accessor';
 import { Tables } from '../lib/database.types';
+import { RemoveNullExcept } from '../lib/helpers.types';
 
-export type Applicant = Tables<'applicants_with_age'>;
-export type ApplicantData = Prettify<
-  {
-    avatar: ICustomFile;
-  } & Omit<Tables<'applicants'>, keyof Pick<Tables<'applicants'>, 'created_at' | 'updated_at' | 'avatar'>>
+type Nullables<T> = {
+  [P in keyof T]: null extends T[P] ? P : never;
+}[keyof T];
+
+export type Applicant = RemoveNullExcept<Tables<'applicants_with_age'>, Nullables<Tables<'applicants'>>>;
+
+export type Application = Omit<
+  Tables<'applicants'>,
+  keyof Pick<Tables<'applicants'>, 'id' | 'created_at' | 'updated_at'>
 >;

@@ -9,3 +9,7 @@
   grid-template-columns: repeat(auto-fit, minmax(min(--value(--text-*), 100%), 1fr));
   grid-template-columns: repeat(auto-fit, minmax(min(var(--spacing) * --value(integer), 100%), 1fr));
 }
+
+@utility corner-* {
+  corner-shape: --value('round', 'sharp', 'coop', 'bevel', 'notch', 'square', 'squircle');
+}

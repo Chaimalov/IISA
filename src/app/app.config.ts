@@ -4,7 +4,13 @@ import {
   provideAppInitializer,
   provideExperimentalZonelessChangeDetection,
 } from '@angular/core';
-import { provideRouter, withComponentInputBinding, withInMemoryScrolling, withViewTransitions } from '@angular/router';
+import {
+  provideRouter,
+  withComponentInputBinding,
+  withInMemoryScrolling,
+  withRouterConfig,
+  withViewTransitions,
+} from '@angular/router';
 import { MatIconRegistry } from '@angular/material/icon';
 import { provideHttpClient } from '@angular/common/http';
 
@@ -21,6 +27,16 @@ export const appConfig: ApplicationConfig = {
       iconRegistry.addSvgIcon('Astronaut', sanitizer.bypassSecurityTrustResourceUrl('astronaut.svg'));
     }),
     provideExperimentalZonelessChangeDetection(),
-    provideRouter(routes, withComponentInputBinding(), withInMemoryScrolling({ anchorScrolling: 'enabled' })),
+    provideRouter(
+      routes,
+      withRouterConfig({
+        urlUpdateStrategy: 'eager',
+      }),
+      withComponentInputBinding(),
+      withInMemoryScrolling({
+        anchorScrolling: 'enabled',
+      }),
+      // withViewTransitions(),
+    ),
   ],
 };

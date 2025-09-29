@@ -36,6 +36,8 @@ export class ErrorMessageDirective {
         return `${fieldName} is required`;
       case 'email':
         return 'Invalid email address';
+      case 'pattern':
+        return 'Invalid phone number';
       default:
         return '';
     }

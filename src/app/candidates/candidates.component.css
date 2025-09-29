@@ -1,0 +1,28 @@
+:host {
+  article {
+    anchor-name: --candidates;
+
+    &::scroll-button(*) {
+      position: fixed;
+      position-anchor: --candidates;
+      padding: 1rem;
+      background-color: color-mix(in hsl, var(--color-surface-4), transparent 50%);
+      border: none;
+      cursor: pointer;
+    }
+
+    &::scroll-button(left) {
+      content: '\21E6';
+      position-area: center left;
+      transform: translateX(100%);
+      border-radius: 0 1rem 1rem 0;
+    }
+
+    &::scroll-button(right) {
+      content: '\21E8';
+      position-area: center right;
+      transform: translateX(-100%);
+      border-radius: 1rem 0 0 1rem;
+    }
+  }
+}

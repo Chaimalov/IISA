@@ -15,12 +15,7 @@ export const routes: Routes = [
   },
   {
     path: 'candidates',
-    children: [
-      {
-        path: ':id',
-        loadComponent: () => import('./applicant/applicant.component').then((m) => m.ApplicantComponent),
-      },
-    ],
+    loadComponent: () => import('./candidates/candidates.component').then((m) => m.CandidatesComponent),
   },
   {
     path: '**',

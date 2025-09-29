@@ -3,6 +3,7 @@
 @theme {
   --default-font-family: 'Exo';
 
+  --color-canvas: Canvas;
   --color-surface-1: light-dark(#f2f2f3, #2b3340);
   --color-surface-2: light-dark(#47b5ff, #1363df);
   --color-surface-3: light-dark(#1363df, #47b5ff);
