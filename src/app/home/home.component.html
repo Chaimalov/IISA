@@ -5,12 +5,12 @@
   </p>
 
   <div class="flex gap-2 text-xl place-self-center">
-    <a class="button button__bold" [routerLink]="[]" fragment="form">New Application</a>
+    <a class="button button__bold" [routerLink]="[]" fragment="astronaut-identity-file">New Application</a>
     <a class="button button__light" [routerLink]="['/edit']">Edit Application</a>
   </div>
 </header>
 
-<iisa-registration-form id="form" class="block"></iisa-registration-form>
+<iisa-registration-form id="astronaut-identity-file" class="block"></iisa-registration-form>
 
 <picture>
   @if (colorScheme.theme() === 'dark') {
@@ -24,5 +24,5 @@
   <img
     src="earth.webp"
     alt=""
-    class="fixed inset-0 h-lvh w-screen object-cover mask-b-from-25% mask-b-to-65% !max-w-none -z-10 scale-150 origin-top timeline-scroll animate-scale-in opacity-70 animation-reverse" />
+    class="fixed inset-0 h-screen w-screen object-cover mask-b-from-25% mask-b-to-65% !max-w-none -z-10 scale-150 origin-top timeline-scroll animate-scale-in opacity-70 animation-reverse" />
 </picture>

@@ -1,6 +1,6 @@
 <form class="contents" [formGroup]="form" (submit)="submit()">
   <fieldset
-    class="grid gap-6 h-dvh place-content-center snap-center timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
+    class="grid gap-6 h-dvh place-content-center snap-start timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
     <legend class="contents">
       <span class="text-2xl block">Astronaut Identity File</span>
       <span class="block"
@@ -37,12 +37,12 @@
         class="input" />
     </label>
 
-    <a [routerLink]="[]" fragment="info" class="button button__light justify-self-end">Continue</a>
+    <a [routerLink]="[]" fragment="communication-protocols" class="button button__light justify-self-end">Continue</a>
   </fieldset>
 
   <fieldset
-    id="info"
-    class="grid gap-6 h-dvh place-content-center snap-center timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
+    id="communication-protocols"
+    class="grid gap-6 h-dvh place-content-center snap-start timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
     <legend class="contents">
       <span class="block text-2xl">Communication Protocols</span>
       <span class="block"
@@ -80,36 +80,52 @@
         class="input" />
     </label>
 
-    <a [routerLink]="[]" fragment="personal" class="button button__light justify-self-end">Continue</a>
+    <a [routerLink]="[]" fragment="personal-orbit" class="button button__light justify-self-end">Continue</a>
   </fieldset>
 
   <fieldset
-    id="personal"
-    class="grid gap-6 h-dvh place-content-center snap-center timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
+    id="personal-orbit"
+    class="grid gap-6 h-dvh place-content-center snap-start timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
     <legend class="contents">
-      <span class="block text-2xl">Explorer Profile & Skills</span>
+      <span class="block text-2xl">Personal Orbit</span>
       <span class="block"
-        >Your mission profile is key. Share what drives you, your unique skills, and why you are destined for cosmic
-        greatness.</span
+        >What keeps you inspired on Earth? Share the passions that fuel your imagination and curiosity.</span
       >
     </legend>
     <fieldset class="flex gap-2 flex-wrap">
-      <legend>Hobbies</legend>
       @for (hobby of hobbies; track hobby.value) {
         <label
           class="button button__light text-sm has-checked:bg-surface-2/25 has-checked:text-surface-3 flex items-center gap-2">
-          <input type="checkbox" [(ngModel)]="hobby.control" [ngModelOptions]="{ standalone: true }" />
+          <input hidden type="checkbox" [(ngModel)]="hobby.control" [ngModelOptions]="{ standalone: true }" />
           <span>{{ hobby.value }}</span>
         </label>
       }
-      <textarea [formControl]="form.controls.hobbies" placeholder="other hobbies..." class="input"></textarea>
     </fieldset>
-    <label class="group/field relative">
-      <span class="group-has-required/field:after:content-['_*'] after:text-red-500"
-        >Why I am the perfect candidate</span
+
+    <textarea [formControl]="form.controls.hobbies" placeholder="other hobbies..." class="input"></textarea>
+
+    <a [routerLink]="[]" fragment="mission-suitability" class="button button__light justify-self-end">Continue</a>
+  </fieldset>
+
+  <fieldset
+    id="mission-suitability"
+    class="grid gap-6 h-dvh place-content-center snap-start timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
+    <legend class="contents">
+      <span class="block text-2xl">Mission Suitability</span>
+    </legend>
+
+    <label class="group/field relative" for="personal-statement">
+      <span
+        >Explain why you’re ready for the challenges of space. Convince Mission Control you belong on this historic
+        flight.</span
       >
-      <textarea [formControl]="form.controls.personal_statement" placeholder="I love space..." class="input"></textarea>
     </label>
+
+    <textarea
+      id="personal-statement"
+      [formControl]="form.controls.personal_statement"
+      placeholder="I love space..."
+      class="input"></textarea>
 
     <button type="submit" class="button button__bold place-self-center capitalize" [class.opacity-50]="form.invalid">
       Launch Application

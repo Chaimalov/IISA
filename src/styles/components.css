@@ -1,6 +1,7 @@
 @layer components {
   .input {
     @apply block p-2 w-full bg-surface-4/20 backdrop-blur-lg border border-surface-4/30 rounded outline-surface-4 outline-offset-4 focus-visible:outline-offset-1 transition-all;
+    appearance: none;
   }
 
   .button {
