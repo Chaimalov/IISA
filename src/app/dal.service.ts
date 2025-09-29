@@ -49,17 +49,20 @@ export class DalService implements DataService<Applicant | ApplicantData, Filter
   public async create(entity: ApplicantData): Promise<Applicant> {
     const path = await this.uploadImage(entity.avatar, entity.email);
 
+    const { error } = await this.#supabase.from('applicants').insert({ ...entity, avatar: path });
+
+    if (error) throw error;
+
     return this.#supabase
-      .from('applicants')
-      .insert({ ...entity, avatar: path })
-      .then((response) =>
-        this.#supabase
-          .from('applicants_with_age')
-          .select('*')
-          .eq('email', entity.email)
-          .single()
-          .then((response) => response.data!),
-      );
+      .from('applicants_with_age')
+      .select('*')
+      .eq('email', entity.email)
+      .single()
+      .then(({ data, error }) => {
+        if (error) throw error;
+
+        return data;
+      });
   }
 
   public async update(entity: ApplicantData): Promise<Applicant> {

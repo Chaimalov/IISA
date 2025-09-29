@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatStepperModule } from '@angular/material/stepper';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterLink } from '@angular/router';
 import { FileInputAccessorModule, ICustomFile } from 'file-input-accessor';
 import { ApplicantData } from '../applicant';
 import { ApplicantsStore } from '../applicants.store';
+import { ErrorMessageDirective } from './error-message.directive';
 import { RequiredInputDirective } from './required.directive';
+import { PostgrestError } from '@supabase/supabase-js';
 
 type ApplicantForm = {
   [K in keyof Omit<ApplicantData, 'id' | 'avatar'>]: AbstractControl<ApplicantData[K] | null>;
@@ -19,12 +19,11 @@ type ApplicantForm = {
   selector: 'iisa-registration-form',
   templateUrl: './registration-form.component.html',
   imports: [
+    ErrorMessageDirective,
+    FormsModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
     RequiredInputDirective,
     MatIcon,
-    MatInputModule,
-    MatStepperModule,
     RouterLink,
     FileInputAccessorModule,
   ],
@@ -33,6 +32,7 @@ type ApplicantForm = {
 export class RegistrationFormComponent {
   private store = inject(ApplicantsStore);
   private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
 
   protected form = new FormGroup({
     full_name: new FormControl('', { validators: [Validators.required] }),
@@ -47,23 +47,50 @@ export class RegistrationFormComponent {
     avatar: new FormControl<ICustomFile[] | null>(null),
   } satisfies ApplicantForm);
 
-  public constructor() {
-    const avatar = toSignal(this.form.controls.avatar.valueChanges);
-    effect(() => {
-      console.log(avatar()?.at(0));
-    });
-  }
+  protected hobbies = [
+    'Stargazing ✨',
+    'Photography 📷',
+    'Astronomy 🔭',
+    'Rocketry 🚀',
+    'Science 🧪',
+    'Robotics 🤖',
+    'Trekking 🥾',
+    'Programming 💻',
+    'Drone Flying 🛸',
+    'Martial Arts 🥋',
+    'Reading 📚',
+    'Strategy Games ♟️',
+    'Community Work 🤝',
+  ].map((hobby) => ({ control: signal(false), value: hobby }));
+
+  protected readonly selectedHobbies = computed(() =>
+    this.hobbies.filter((hobby) => hobby.control()).map((hobby) => hobby.value),
+  );
 
   protected async submit(): Promise<void> {
-    if (!this.form.valid) {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
       return;
     }
 
-    await this.store.create({
-      ...this.form.value,
-      avatar: this.form.controls.avatar.value?.at(0),
-    } as unknown as ApplicantData);
+    try {
+      await this.store.create({
+        ...this.form.value,
+        hobbies: this.selectedHobbies()
+          .concat(this.form.controls.hobbies.value ?? '')
+          .join(', '),
 
-    this.router.navigate(['success']);
+        avatar: this.form.controls.avatar.value?.at(0),
+      } as unknown as ApplicantData);
+
+      this.router.navigate(['success']);
+    } catch (error) {
+      if ((error as PostgrestError).code === '23505') {
+        this.snackBar.open('Applicant already exists', 'Close', {
+          verticalPosition: 'top',
+          horizontalPosition: 'end',
+        });
+      }
+    }
   }
 }

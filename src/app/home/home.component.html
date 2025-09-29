@@ -1,12 +1,13 @@
 <header class="h-dvh snap-center place-content-center gap-12 text-center grid">
-  <h1 class="place-self-center text-4xl sm:text-6xl">Join Israel’s First All-Israeli Space Flight</h1>
+  <h1 class="place-self-center text-4xl sm:text-6xl">Israel’s Next Giant Leap</h1>
   <p class="text-xl opacity-70">
-    Be part of history with the IISA. We’re opening public registration for pioneers ready to carry the Israeli spirit
-    beyond Earth. 🌍✨
+    The IISA is opening registration for pioneers who dare to take the Israeli spirit beyond Earth.
   </p>
 
-  <a class="place-self-center text-xl button button__bold" [routerLink]="[]" fragment="form">Register</a>
-  <a class="place-self-center text-xl button button__bold" [routerLink]="['/edit']">Edit</a>
+  <div class="flex gap-2 text-xl place-self-center">
+    <a class="button button__bold" [routerLink]="[]" fragment="form">New Application</a>
+    <a class="button button__light" [routerLink]="['/edit']">Edit Application</a>
+  </div>
 </header>
 
 <iisa-registration-form id="form" class="block"></iisa-registration-form>

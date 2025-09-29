@@ -1,0 +1,19 @@
+.mat-mdc-snack-bar-label {
+  @apply bg-surface-1 p-1;
+}
+
+.mat-mdc-snackbar-surface {
+  @apply !p-0 !rounded-lg !overflow-clip;
+}
+
+.mat-mdc-button .mat-mdc-button-persistent-ripple::before {
+  @apply !bg-transparent;
+}
+
+.mat-mdc-snack-bar-actions {
+  @apply p-1 text-red-500;
+}
+
+.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
+  @apply border border-current rounded;
+}

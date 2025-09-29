@@ -1,7 +1,12 @@
 <form class="contents" [formGroup]="form" (submit)="submit()">
   <fieldset
     class="grid gap-6 h-dvh place-content-center snap-center timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
-    <legend class="text-2xl contents">Every great journey starts with a name among the stars.</legend>
+    <legend class="contents">
+      <span class="text-2xl block">Astronaut Identity File</span>
+      <span class="block"
+        >Every explorer begins with a name. Record yours carefully — history will remember it among the stars.</span
+      >
+    </legend>
     <label
       class="place-self-center leading-0 w-min focus-within:outline-2 outline-offset-6 focus-within:outline-offset-1 input rounded-full outline-surface-4">
       <mat-icon
@@ -11,19 +16,25 @@
       <input type="file" hidden accept="image/*" [formControl]="form.controls.avatar" />
     </label>
 
-    <label class="group/field">
+    <label class="group/field relative">
       <span class="group-has-required/field:after:content-['_*'] after:text-red-500">Full Name</span>
       <input
         type="text"
+        [iisaErrorMessage]="error"
         inputmode="latin-name"
         [formControl]="form.controls.full_name"
         placeholder="Israel Israeli"
         class="input" />
     </label>
 
-    <label class="group/field">
+    <label class="group/field relative">
       <span class="group-has-required/field:after:content-['_*'] after:text-red-500">Date Of Birth</span>
-      <input type="date" inputmode="date" [formControl]="form.controls.date_of_birth" class="input" />
+      <input
+        type="date"
+        [iisaErrorMessage]="error"
+        inputmode="date"
+        [formControl]="form.controls.date_of_birth"
+        class="input" />
     </label>
 
     <a [routerLink]="[]" fragment="info" class="button button__light justify-self-end">Continue</a>
@@ -32,29 +43,41 @@
   <fieldset
     id="info"
     class="grid gap-6 h-dvh place-content-center snap-center timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
-    <legend class="text-2xl contents">Tell us where you’re from—every explorer brings a unique world with them.</legend>
-    <label class="group/field"
+    <legend class="contents">
+      <span class="block text-2xl">Communication Protocols</span>
+      <span class="block"
+        >Mission Control must maintain contact. Provide coordinates so we can reach you across Earth… and beyond.</span
+      >
+    </legend>
+    <label class="group/field relative"
       ><span class="group-has-required/field:after:content-['_*'] after:text-red-500">Email</span>
       <input
         type="email"
         inputmode="email"
+        [iisaErrorMessage]="error"
         [formControl]="form.controls.email"
         placeholder="israel.israeli@gmail.com"
         class="input" />
     </label>
-    <label class="group/field"
+    <label class="group/field relative"
       ><span class="group-has-required/field:after:content-['_*'] after:text-red-500">Phone</span>
       <input
         type="text"
         inputmode="tel"
+        [iisaErrorMessage]="error"
         [formControl]="form.controls.phone_number"
         placeholder="012-345-6789"
         class="input" />
     </label>
 
-    <label class="group/field"
+    <label class="group/field relative"
       ><span class="group-has-required/field:after:content-['_*'] after:text-red-500">City or Region</span>
-      <input type="text" [formControl]="form.controls.city_region" placeholder="Jerusalem" class="input" />
+      <input
+        type="text"
+        [iisaErrorMessage]="error"
+        [formControl]="form.controls.city_region"
+        placeholder="Jerusalem"
+        class="input" />
     </label>
 
     <a [routerLink]="[]" fragment="personal" class="button button__light justify-self-end">Continue</a>
@@ -63,19 +86,36 @@
   <fieldset
     id="personal"
     class="grid gap-6 h-dvh place-content-center snap-center timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
-    <legend class="contents text-2xl italic">
-      <span class="block">What lights you up? </span><span>Share the passion that makes you mission-ready.</span>
+    <legend class="contents">
+      <span class="block text-2xl">Explorer Profile & Skills</span>
+      <span class="block"
+        >Your mission profile is key. Share what drives you, your unique skills, and why you are destined for cosmic
+        greatness.</span
+      >
     </legend>
-    <label class="group/field"
-      ><span class="group-has-required/field:after:content-['_*'] after:text-red-500">Hobbies</span>
-      <input type="text" [formControl]="form.controls.hobbies" class="input" />
-    </label>
-    <label class="group/field">
+    <fieldset class="flex gap-2 flex-wrap">
+      <legend>Hobbies</legend>
+      @for (hobby of hobbies; track hobby.value) {
+        <label class="button button__light has-checked:bg-surface-3/25 has-checked:text-surface-3">
+          <input hidden type="checkbox" [(ngModel)]="hobby.control" [ngModelOptions]="{ standalone: true }" />
+          <span>{{ hobby.value }}</span>
+        </label>
+      }
+      <textarea [formControl]="form.controls.hobbies" placeholder="other hobbies..." class="input"></textarea>
+    </fieldset>
+    <label class="group/field relative">
       <span class="group-has-required/field:after:content-['_*'] after:text-red-500"
         >Why I am the perfect candidate</span
       >
       <textarea [formControl]="form.controls.personal_statement" placeholder="I love space..." class="input"></textarea>
     </label>
-    <button type="submit" class="button button__bold place-self-center capitalize">Send</button>
+
+    <button type="submit" class="button button__bold place-self-center capitalize" [class.opacity-50]="form.invalid">
+      Launch Application
+    </button>
   </fieldset>
 </form>
+
+<ng-template #error let-error>
+  <span class="text-red-500 text-sm italic absolute top-0 end-0">{{ error }}</span>
+</ng-template>
