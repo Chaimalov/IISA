@@ -1,7 +1,7 @@
 <article
-  class="grid auto-fill-100 auto-rows-[320px] *:last:col-span-full gap-4 has-hover:*:not-hover:opacity-80 *:transition-opacity *:rounded *:overflow-auto">
+  class="flex flex-wrap *:grow *:h-100 *:shrink-0 gap-4 has-hover:*:not-hover:opacity-80 *:transition-opacity *:duration-700 *:rounded *:overflow-auto">
   <section
-    class="bg-surface-1 p-8 relative isolate rounded supports-[corner-shape:squircle]:rounded-2xl corner-squircle grid">
+    class="basis-90 bg-surface-1 p-8 relative isolate rounded supports-[corner-shape:squircle]:rounded-2xl corner-squircle grid">
     <hgroup class="grid gap-4 place-content-center overflow-clip h-full max-w-60 self-start">
       <h2 class="text-3xl font-bold">Candidate Review Mode</h2>
       <p>Enter detailed review mode to inspect each applicant’s mission dossier one at a time.</p>
@@ -16,23 +16,30 @@
           alt="" />
       </picture>
 
-      <a routerLink="/candidates" class="button button__bold">Begin Review</a>
+      <a routerLink="/candidate-review" class="button button__bold">Begin Review</a>
     </figure>
   </section>
 
-  <iisa-map class="rounded supports-[corner-shape:squircle]:rounded-2xl corner-squircle"></iisa-map>
+  <iisa-map class="basis-90 rounded supports-[corner-shape:squircle]:rounded-2xl corner-squircle"></iisa-map>
 
-  <section>
+  <section class="basis-90">
     <canvas
       class="bg-surface-1 p-4 rounded supports-[corner-shape:squircle]:rounded-2xl corner-squircle"
       iisaAgeChart></canvas>
   </section>
 
-  <section>
+  <section class="basis-90">
     <canvas
       class="bg-surface-1 p-4 rounded supports-[corner-shape:squircle]:rounded-2xl corner-squircle"
       iisaDateChart></canvas>
   </section>
-</article>
 
-<iisa-applicants-table class="w-full bg-surface-1 h-100 rounded overflow-auto grid"></iisa-applicants-table>
+  <section class="basis-90">
+    <canvas
+      class="bg-surface-1 p-4 rounded supports-[corner-shape:squircle]:rounded-2xl corner-squircle"
+      iisaHobbyChart></canvas>
+  </section>
+
+  <iisa-applicants-table
+    class="bg-surface-1 basis-[min(500px,100%)] rounded overflow-auto grid"></iisa-applicants-table>
+</article>

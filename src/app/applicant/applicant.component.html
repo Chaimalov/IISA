@@ -11,29 +11,49 @@
   <span class="font-light italic">{{ applicant().full_name }}'s Personal Statement</span>
 </aside>
 
-<main class="grid gap-4 content-baseline">
-  <header>
+<main class="grid gap-4 auto-fill-[300px] auto-cols-fr content-baseline relative">
+  <header class="col-span-full">
     <h1 class="text-3xl font-bold">
       {{ applicant().full_name }}
     </h1>
     <p>{{ applicant().age }} years old, from {{ applicant().city_region }}.</p>
   </header>
 
-  <hr class="border-canvas" />
-
-  <section>
+  <section class="bg-surface-4/10 p-4 rounded">
     <h2 class="text-xl font-bold">Hobbies</h2>
-    <ul class="list-inside">
-      @for (hobby of applicant().hobbies?.split(','); track hobby) {
-        <li>{{ hobby.trim() }}</li>
+    <ul class="list-inside flex flex-wrap gap-2">
+      @for (hobby of applicant().hobbies; track hobby) {
+        <li class="px-2 py-1 rounded-xl border border-surface-4">{{ hobby.trim() }}</li>
+      } @empty {
+        <li class="italic opacity-50">No Hobbies Listed. A boring astronaut.</li>
       }
     </ul>
   </section>
 
-  <hr class="border-canvas" />
+  <section class="bg-surface-4/10 p-4 rounded">
+    <h2 class="text-xl font-bold">Contact</h2>
+    <address class="grid gap-2">
+      <dl>
+        <dd>Email:</dd>
+        <dt>
+          <a href="mailto:{{ applicant().email }}">{{ applicant().email }}</a>
+        </dt>
+      </dl>
+      <dl>
+        <dd>Phone:</dd>
+        <dt>
+          <a href="tel:{{ applicant().phone_number }}">{{ applicant().phone_number }}</a>
+        </dt>
+      </dl>
+    </address>
+  </section>
 
-  <address class="grid">
-    <a href="mailto:{{ applicant().email }}">{{ applicant().email }}</a>
-    <a href="tel:{{ applicant().phone_number }}">{{ applicant().phone_number }}</a>
-  </address>
+  <section>
+    <h2>Created At</h2>
+    <time [attr.datetime]="applicant().created_at">{{ applicant().created_at | date }}</time>
+  </section>
+
+  @if (applicant().updated_at) {
+    <span class="absolute top-4 end-4 italic opacity-50">(updated: {{ applicant().updated_at | date }})</span>
+  }
 </main>

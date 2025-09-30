@@ -6,15 +6,15 @@ export const routes: Routes = [
     loadComponent: () => import('./home/home.component').then((m) => m.HomeComponent),
   },
   {
-    path: 'success',
+    path: 'blast-off',
     loadComponent: () => import('./success/success.component').then((m) => m.SuccessComponent),
   },
   {
-    path: 'dashboard',
+    path: 'mission-control',
     loadComponent: () => import('./dashboard/dashboard.component').then((m) => m.DashboardComponent),
   },
   {
-    path: 'candidates',
+    path: 'candidate-review',
     loadComponent: () => import('./candidates/candidates.component').then((m) => m.CandidatesComponent),
   },
   {

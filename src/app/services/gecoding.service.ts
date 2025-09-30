@@ -3,7 +3,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { GOOGLE_API_KEY } from './environments/environment';
+import { GOOGLE_API_KEY } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',

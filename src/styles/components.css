@@ -1,6 +1,6 @@
 @layer components {
   .input {
-    @apply block p-2  w-full bg-surface-4/20 backdrop-blur-lg border border-surface-4/30 rounded outline-surface-4 outline-offset-4 focus-visible:outline-offset-1 transition-all;
+    @apply block p-2 w-full bg-surface-1/30 backdrop-blur-lg border-surface-4/60 border-2 rounded outline-surface-4 outline-offset-4 focus-visible:outline-offset-1 transition-all;
     appearance: none;
   }
 
@@ -12,8 +12,16 @@
       @apply border-current border-2;
     }
 
+    &:hover {
+      @apply bg-current/20;
+    }
+
     &.button__bold {
       @apply bg-surface-2 px-4 py-2;
+
+      &:hover {
+        @apply bg-surface-2/60;
+      }
     }
 
     &:disabled {

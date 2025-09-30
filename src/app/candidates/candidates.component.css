@@ -6,9 +6,13 @@
       position: fixed;
       position-anchor: --candidates;
       padding: 1rem;
-      background-color: color-mix(in hsl, var(--color-surface-4), transparent 50%);
+      background-color: color-mix(in hsl, var(--color-surface-4), transparent 75%);
       border: none;
       cursor: pointer;
+    }
+
+    &::scroll-button(*):disabled {
+      display: none;
     }
 
     &::scroll-button(left) {

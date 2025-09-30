@@ -38,7 +38,7 @@ module.exports = tseslint.config(
       '@angular-eslint/prefer-output-readonly': 'warn',
       '@angular-eslint/prefer-signals': 'warn',
 
-      '@typescript-eslint/array-type': ['warn'],
+      '@typescript-eslint/array-type': 'off',
       '@typescript-eslint/consistent-indexed-object-style': 'off',
       '@typescript-eslint/consistent-type-assertions': 'warn',
       '@typescript-eslint/consistent-type-definitions': ['warn', 'type'],

@@ -1,8 +1,8 @@
 import { computed, Directive, inject } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-import { ApplicantsStore } from '../../applicants.store';
 import { BaseChart } from './base-chart';
+import { ApplicantsStore } from '@IISA/services';
 
 @Directive({
   selector: '[iisaAgeChart]',
@@ -16,7 +16,7 @@ export class AgeChartDirective extends BaseChart {
 
     const entries = this.store.applicants().reduce(
       (acc, applicant) => {
-        acc[applicant.age!] = (acc[applicant.age!] || 0) + 1;
+        acc[applicant.age] = (acc[applicant.age] || 0) + 1;
         return acc;
       },
       {} as Record<number, number>,
@@ -33,6 +33,7 @@ export class AgeChartDirective extends BaseChart {
             data: Object.values(entries),
             backgroundColor,
             borderColor,
+            borderRadius: 4,
             borderWidth: 1,
           },
         ],
@@ -46,7 +47,7 @@ export class AgeChartDirective extends BaseChart {
               color: textColor,
             },
             title: {
-              text: 'Age breakdown',
+              text: 'Age',
               align: 'center',
               display: true,
               color: textColor,

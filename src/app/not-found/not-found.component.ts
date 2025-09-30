@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
-import { ColorSchemeService } from '../color-scheme.service';
+import { ColorSchemeService } from '../services/color-scheme.service';
 
 @Component({
   selector: 'iisa-not-found',

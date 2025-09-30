@@ -1,14 +1,14 @@
-<form class="place-self-center-safe max-w-md w-full px-4">
+<form class="place-self-center-safe max-w-md p-8 w-full fixed bottom-0">
   <input
     type="search"
-    class="input"
+    class="input px-4 rounded-4xl"
     placeholder="Search by name..."
     [(ngModel)]="searchQuery"
     [ngModelOptions]="{ standalone: true }" />
 </form>
 
 <article
-  class="grid md:grid-flow-col gap-4 md:auto-rows-fr auto-cols-auto md:p-8 p-4 w-screen scroll-smooth overflow-x-scroll md:snap-mandatory snap-both">
+  class="grid md:grid-flow-col gap-4 md:auto-rows-fr auto-cols-auto md:px-8 p-4 w-screen scroll-smooth overflow-x-scroll md:snap-mandatory snap-proximity snap-both">
   @for (applicant of candidates(); track applicant.id) {
     <iisa-applicant
       [applicant]="applicant"

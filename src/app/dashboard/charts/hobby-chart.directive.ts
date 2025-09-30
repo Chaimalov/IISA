@@ -5,46 +5,46 @@ import { BaseChart } from './base-chart';
 import { ApplicantsStore } from '@IISA/services';
 
 @Directive({
-  selector: '[iisaDateChart]',
+  selector: '[iisaHobbyChart]',
   hostDirectives: [BaseChartDirective],
 })
-export class DateChartDirective extends BaseChart {
+export class HobbyChartDirective extends BaseChart {
   private store = inject(ApplicantsStore);
 
   protected readonly chart = computed(() => {
     const { backgroundColor, borderColor, textColor } = this.colors();
 
-    const entries = this.store.applicants().reduce(
-      (acc, applicant) => {
-        const date = new Date(applicant.created_at).toLocaleString('default', {
-          month: 'long',
-          year: 'numeric',
-        });
-        acc[date] = (acc[date] || 0) + 1;
+    const allHobbies = this.store.applicants().flatMap((c) => c.hobbies);
+    const counts = allHobbies.reduce(
+      (acc, hobby) => {
+        if (hobby) {
+          acc[hobby] = (acc[hobby] || 0) + 1;
+        }
+
         return acc;
       },
       {} as Record<string, number>,
     );
 
+    const sortedHobbies = Object.entries(counts).sort(([, aCount], [, bCount]) => bCount - aCount);
+
     return {
-      type: 'line',
+      type: 'bar',
       data: {
-        yLabels: Object.values(entries) as unknown as string[],
-        xLabels: Object.keys(entries),
+        labels: sortedHobbies.map(([hobby]) => hobby),
         datasets: [
           {
-            label: 'Registration Date Breakdown',
-            data: Object.values(entries),
-            backgroundColor: backgroundColor + '50',
-            cubicInterpolationMode: 'monotone',
-            fill: true,
+            label: 'Hobby Popularity',
+            data: sortedHobbies.map(([, count]) => count),
+            backgroundColor,
             borderColor,
-            showLine: true,
+            borderRadius: 4,
             borderWidth: 1,
           },
         ],
       },
       options: {
+        indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -53,7 +53,7 @@ export class DateChartDirective extends BaseChart {
               color: textColor,
             },
             title: {
-              text: 'Date',
+              text: 'Popularity',
               align: 'center',
               display: true,
               color: textColor,
@@ -62,10 +62,9 @@ export class DateChartDirective extends BaseChart {
           y: {
             ticks: {
               color: textColor,
-              stepSize: 1,
             },
             title: {
-              text: 'Amount',
+              text: 'Hobby',
               align: 'center',
               display: true,
               color: textColor,

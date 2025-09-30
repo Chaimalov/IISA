@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatIcon } from '@angular/material/icon';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { ApplicantComponent } from '../applicant/applicant.component';
-import { ApplicantsStore } from '../applicants.store';
+import { ApplicantsStore } from '../services/applicants.store';
 
 @Component({
   selector: 'iisa-candidates',
@@ -12,7 +11,7 @@ import { ApplicantsStore } from '../applicants.store';
   styleUrl: './candidates.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class: 'pt-20 gap-4 min-h-dvh grid grid-rows-[auto_1fr]',
+    class: 'gap-2 grid grid-rows-[auto_1fr]',
   },
 })
 export class CandidatesComponent {

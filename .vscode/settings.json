@@ -1,4 +1,5 @@
 {
-  "cSpell.words": ["squircle", "supabase"],
-  "tailwindCSS.experimental.classRegex": ["host:[\\s\\S]+class:\\s+['\"`](.*)['\"`]"]
+  "cSpell.words": ["IISA", "squircle", "supabase"],
+  "tailwindCSS.experimental.classRegex": ["host:[\\s\\S]+class:\\s+['\"`](.*)['\"`]"],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

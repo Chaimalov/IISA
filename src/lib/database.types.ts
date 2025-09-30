@@ -22,24 +22,24 @@ export type Database = {
           date_of_birth: string
           email: string
           full_name: string
-          hobbies: string | null
+          hobbies: string[] | null
           id: string
           personal_statement: string | null
           phone_number: string
-          updated_at: string
+          updated_at: string | null
         }
         Insert: {
           avatar?: string | null
-          city_region: string
+          city_region?: string
           created_at?: string
-          date_of_birth: string
-          email: string
-          full_name: string
-          hobbies?: string | null
+          date_of_birth?: string
+          email?: string
+          full_name?: string
+          hobbies?: string[] | null
           id?: string
           personal_statement?: string | null
-          phone_number: string
-          updated_at?: string
+          phone_number?: string
+          updated_at?: string | null
         }
         Update: {
           avatar?: string | null
@@ -48,11 +48,11 @@ export type Database = {
           date_of_birth?: string
           email?: string
           full_name?: string
-          hobbies?: string | null
+          hobbies?: string[] | null
           id?: string
           personal_statement?: string | null
           phone_number?: string
-          updated_at?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -67,7 +67,7 @@ export type Database = {
           date_of_birth: string | null
           email: string | null
           full_name: string | null
-          hobbies: string | null
+          hobbies: string[] | null
           id: string | null
           personal_statement: string | null
           phone_number: string | null
@@ -81,7 +81,7 @@ export type Database = {
           date_of_birth?: string | null
           email?: string | null
           full_name?: string | null
-          hobbies?: string | null
+          hobbies?: string[] | null
           id?: string | null
           personal_statement?: string | null
           phone_number?: string | null
@@ -95,7 +95,7 @@ export type Database = {
           date_of_birth?: string | null
           email?: string | null
           full_name?: string | null
-          hobbies?: string | null
+          hobbies?: string[] | null
           id?: string | null
           personal_statement?: string | null
           phone_number?: string | null

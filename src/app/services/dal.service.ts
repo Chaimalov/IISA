@@ -3,9 +3,9 @@ import { createClient } from '@supabase/supabase-js';
 import { ICustomFile } from 'file-input-accessor';
 import { Observable, Observer } from 'rxjs';
 import { v4 } from 'uuid';
-import { environment } from '../environments/environment';
-import { Database } from '../lib/database.types';
-import { Applicant, Application } from './applicant';
+import { environment } from '../../environments/environment';
+import { Database } from '../../lib/database.types';
+import { Applicant, Application } from '../../lib/applicant.types';
 
 type Filter = Pick<Applicant, 'full_name' | 'email' | 'phone_number'>;
 
@@ -40,11 +40,14 @@ export class DalService {
         .filter('phone_number', 'ilike', `%${filter.phone_number}%`);
     }
 
-    return query.overrideTypes<Applicant[]>().then(({ data, error }) => {
-      if (error) throw error;
+    return query
+      .order('created_at')
+      .overrideTypes<Applicant[]>()
+      .then(({ data, error }) => {
+        if (error) throw error;
 
-      return data;
-    });
+        return data;
+      });
   }
 
   public async loadById(id: string): Promise<Applicant> {

@@ -1,5 +1,5 @@
-import { Tables } from '../lib/database.types';
-import { RemoveNullExcept } from '../lib/helpers.types';
+import { Tables } from './database.types';
+import { RemoveNullExcept } from './helpers.types';
 
 type Nullables<T> = {
   [P in keyof T]: null extends T[P] ? P : never;

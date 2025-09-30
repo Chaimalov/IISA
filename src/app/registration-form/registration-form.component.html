@@ -18,7 +18,12 @@
         <mat-icon class="!size-full" svgIcon="Astronaut"></mat-icon>
       }
 
-      <input type="file" hidden accept="image/*" [(ngModel)]="avatar.value" [ngModelOptions]="{ standalone: true }" />
+      <input
+        type="file"
+        class="sr-only"
+        accept="image/*"
+        [(ngModel)]="avatar.value"
+        [ngModelOptions]="{ standalone: true }" />
     </label>
 
     <label class="group/field relative">
@@ -42,7 +47,9 @@
         class="input" />
     </label>
 
-    <a [routerLink]="[]" fragment="communication-protocols" class="button button__light justify-self-end">Continue</a>
+    <a [routerLink]="[]" tabindex="1" fragment="communication-protocols" class="button button__light justify-self-end"
+      >Continue</a
+    >
   </fieldset>
 
   <fieldset
@@ -85,7 +92,9 @@
         class="input" />
     </label>
 
-    <a [routerLink]="[]" fragment="personal-orbit" class="button button__light justify-self-end">Continue</a>
+    <a [routerLink]="[]" tabindex="1" fragment="personal-orbit" class="button button__light justify-self-end"
+      >Continue</a
+    >
   </fieldset>
 
   <fieldset
@@ -97,19 +106,31 @@
         >What keeps you inspired on Earth? Share the passions that fuel your imagination and curiosity.</span
       >
     </legend>
-    <fieldset class="flex gap-2 flex-wrap">
-      @for (hobby of hobbies; track hobby.value) {
-        <label
-          class="button button__light text-sm has-checked:bg-surface-2/25 has-checked:text-surface-3 flex items-center gap-2">
-          <input hidden type="checkbox" [(ngModel)]="hobby.control" [ngModelOptions]="{ standalone: true }" />
-          <span>{{ hobby.value }}</span>
-        </label>
+
+    <ul
+      class="flex gap-2 flex-wrap"
+      cdkListbox
+      cdkListboxMultiple
+      cdkListboxOrientation="horizontal"
+      [formControl]="form.controls.hobbies">
+      @for (hobby of hobbies; track hobby) {
+        <li
+          [cdkOption]="hobby"
+          class="button button__light text-sm aria-selected:bg-surface-2/25 aria-selected:text-surface-3 flex items-center gap-2">
+          <span>{{ hobby }}</span>
+        </li>
       }
-    </fieldset>
+    </ul>
 
-    <textarea [formControl]="form.controls.hobbies" placeholder="other hobbies..." class="input"></textarea>
+    <textarea
+      [(ngModel)]="otherHobbies"
+      [ngModelOptions]="{ standalone: true }"
+      placeholder="Coding, Biking, Birdwatching, Music... (etc. comma separated)"
+      class="input"></textarea>
 
-    <a [routerLink]="[]" fragment="mission-suitability" class="button button__light justify-self-end">Continue</a>
+    <a [routerLink]="[]" tabindex="1" fragment="mission-suitability" class="button button__light justify-self-end"
+      >Continue</a
+    >
   </fieldset>
 
   <fieldset
@@ -129,7 +150,8 @@
     <textarea
       id="personal-statement"
       [formControl]="form.controls.personal_statement"
-      placeholder="I love space..."
+      placeholder="I excel at science, adventure, and pretending I know what I’m doing… perfect astronaut material!"
+      rows="6"
       class="input"></textarea>
 
     <button type="submit" class="button button__bold place-self-center capitalize" [class.opacity-50]="form.invalid">

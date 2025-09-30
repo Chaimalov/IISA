@@ -7,11 +7,11 @@ import { Router, RouterLink } from '@angular/router';
 import { PostgrestError } from '@supabase/supabase-js';
 import { FileInputAccessorModule, ICustomFile } from 'file-input-accessor';
 import { concatMap, filter, tap } from 'rxjs';
-import { Application } from '../applicant';
-import { ApplicantsStore } from '../applicants.store';
-import { DalService } from '../dal.service';
+import { Application } from '../../lib/applicant.types';
 import { ErrorMessageDirective } from './error-message.directive';
 import { RequiredInputDirective } from './required.directive';
+import { ApplicantsStore } from '../services/applicants.store';
+import { CdkListboxModule } from '@angular/cdk/listbox';
 
 type ApplicantForm = {
   [K in keyof Omit<Application, 'avatar'>]: AbstractControl<Application[K]>;
@@ -28,12 +28,12 @@ type ApplicantForm = {
     MatIcon,
     RouterLink,
     FileInputAccessorModule,
+    CdkListboxModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationFormComponent {
   private store = inject(ApplicantsStore);
-  private dal = inject(DalService);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
 
@@ -55,7 +55,7 @@ export class RegistrationFormComponent {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    hobbies: new FormControl(''),
+    hobbies: new FormControl<string[]>([]),
     personal_statement: new FormControl(''),
   } satisfies ApplicantForm);
 
@@ -98,11 +98,9 @@ export class RegistrationFormComponent {
     'Reading 📚',
     'Strategy Games ♟️',
     'Community Work 🤝',
-  ].map((hobby) => ({ control: signal(false), value: hobby }));
+  ];
 
-  protected readonly selectedHobbies = computed(() =>
-    this.hobbies.filter((hobby) => hobby.control()).map((hobby) => hobby.value),
-  );
+  protected readonly otherHobbies = signal('');
 
   protected async submit(): Promise<void> {
     if (this.form.invalid) {
@@ -114,16 +112,17 @@ export class RegistrationFormComponent {
       await this.store.create({
         ...this.form.getRawValue(),
         avatar: this.avatarUrl(),
-        hobbies: this.selectedHobbies()
-          .concat(this.form.controls.hobbies.value ?? '')
-          .filter(Boolean)
-          .join(', '),
+        hobbies: (this.form.controls.hobbies.value ?? []).concat(
+          this.otherHobbies()
+            .split(',')
+            .map((hobby) => hobby.trim()),
+        ),
       });
 
-      this.router.navigate(['success']);
+      this.router.navigate(['blast-off']);
     } catch (error) {
       if ((error as PostgrestError).code === '23505') {
-        this.snackBar.open('Applicant already exists', 'Close', {
+        this.snackBar.open('Application already exists', 'Close', {
           verticalPosition: 'top',
           horizontalPosition: 'end',
         });
