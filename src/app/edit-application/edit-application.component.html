@@ -1,0 +1,35 @@
+<form
+  class="grid gap-4 p-8 border bg-surface-1/50 border-surface-4/50 rounded-lg"
+  (submit)="search()"
+>
+  <h1 class="text-2xl font-bold">Confirm Your Identity</h1>
+
+  <p class="text-surface-4/75">
+    To continue editing your application, please enter the email address you used when you first signed up. <br />
+    This ensures Mission Control can find your file among the stars.
+  </p>
+
+  <p class="italic text-surface-4/75 text-sm">
+    <span class="font-bold">Mission Rule:</span> You can only edit your application within {{ days }} days of
+    submission.
+  </p>
+
+  <label class="grid gap-2">
+    <span>Registered Email Address</span>
+    <input
+      inputmode="email"
+      class="input"
+      type="email"
+      name="email"
+      [(ngModel)]="email"
+      placeholder="astronaut@galaxy.com"
+    />
+  </label>
+
+  <button
+    class="button button__bold justify-self-center"
+    [disabled]="!email()"
+  >
+    Find My Application
+  </button>
+</form>

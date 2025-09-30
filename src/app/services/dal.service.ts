@@ -50,15 +50,23 @@ export class DalService {
       });
   }
 
-  public async loadById(id: string): Promise<Applicant> {
+  public async loadByEmail(email: Applicant['email']): Promise<Applicant> {
     return this.#supabase
       .from('applicants_with_age')
       .select('*')
-      .eq('id', id)
+      .eq('email', email)
       .single()
       .overrideTypes<Applicant>()
       .then(({ data, error }) => {
-        if (error) throw error;
+        if (error) {
+          switch (error.code) {
+            case 'PGRST116':
+              throw new Error('No application found for this email.');
+
+            default:
+              throw new Error(error.message, error);
+          }
+        }
 
         return data;
       });
@@ -69,17 +77,7 @@ export class DalService {
 
     if (error) throw error;
 
-    return this.#supabase
-      .from('applicants_with_age')
-      .select('*')
-      .eq('email', entity.email)
-      .single()
-      .overrideTypes<Applicant>()
-      .then(({ data, error }) => {
-        if (error) throw error;
-
-        return data;
-      });
+    return this.loadByEmail(entity.email);
   }
 
   public async update(entity: Application & Pick<Applicant, 'id'>): Promise<Applicant> {
@@ -87,7 +85,7 @@ export class DalService {
 
     if (error) throw error;
 
-    return this.loadById(entity.id);
+    return this.loadByEmail(entity.email);
   }
 
   public async updateAll(entity: Application[]): Promise<Applicant[]> {

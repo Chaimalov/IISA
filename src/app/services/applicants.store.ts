@@ -24,6 +24,7 @@ export const ApplicantsStore = signalStore(
         const applicants = await dal.load();
         patchState(store, setAllEntities(applicants));
       },
+      search: (email: Applicant['email']): Promise<Applicant> => dal.loadByEmail(email),
       create: (entity: Application): Promise<Applicant> => dal.create(entity),
       update: (entity: Application & Pick<Applicant, 'id'>): Promise<Applicant> => dal.update(entity),
       delete: (entity: Applicant): Promise<void> => dal.delete(entity),

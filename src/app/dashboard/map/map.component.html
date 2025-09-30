@@ -4,7 +4,7 @@
   [zoom]="[6]"
   class="block h-full"
 >
-  @for (marker of markers.value(); track marker) {
+  @for (marker of markers.value(); track marker.applicant.id) {
     <mgl-marker
       #markerElement
       [lngLat]="[marker.location.lng, marker.location.lat]"
