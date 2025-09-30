@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 import { Database } from '../../lib/database.types';
 import { Applicant, Application } from '../../lib/applicant.types';
 
-type Filter = Pick<Applicant, 'full_name' | 'email' | 'phone_number'>;
+type Filter = Pick<Applicant, 'full_name' | 'email' | 'phone_number' | 'age'>;
 
 @Injectable({
   providedIn: 'root',
