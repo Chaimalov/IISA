@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterLink } from '@angular/router';
 import { PostgrestError } from '@supabase/supabase-js';
 import { FileInputAccessorModule, ICustomFile } from 'file-input-accessor';
-import { concatMap, filter } from 'rxjs';
+import { concatMap, filter, tap } from 'rxjs';
 import { Application } from '../applicant';
 import { ApplicantsStore } from '../applicants.store';
 import { DalService } from '../dal.service';
@@ -59,11 +59,27 @@ export class RegistrationFormComponent {
     personal_statement: new FormControl(''),
   } satisfies ApplicantForm);
 
-  protected readonly avatar = signal<ICustomFile[] | undefined>(undefined);
+  protected readonly avatar = {
+    value: signal<ICustomFile[] | undefined>(undefined),
+    loading: signal(false),
+    error: signal<string | undefined>(undefined),
+  };
 
-  protected avatarUrl$ = toObservable(this.avatar).pipe(
+  protected avatarUrl$ = toObservable(this.avatar.value).pipe(
     filter(Boolean),
+    tap(() => this.avatar.loading.set(true)),
     concatMap((file) => this.store.upload(file[0])),
+    tap({
+      error: () => {
+        this.avatar.error.set('Something went wrong');
+        this.avatar.loading.set(false);
+      },
+      next: (url) => {
+        this.avatar.error.set(undefined);
+        this.avatar.loading.set(false);
+        return url;
+      },
+    }),
   );
 
   protected readonly avatarUrl = toSignal(this.avatarUrl$, { initialValue: null });
