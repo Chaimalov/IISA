@@ -1,11 +1,11 @@
 import { EnvironmentProviders, importProvidersFrom, inject, provideAppInitializer } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { LucideAngularModule, Moon, Sun } from 'lucide-angular';
+import { LucideAngularModule, Moon, Plus, Sun } from 'lucide-angular';
 
 export function provideIcons(): EnvironmentProviders[] {
   return [
-    importProvidersFrom(LucideAngularModule.pick({ Moon, Sun })),
+    importProvidersFrom(LucideAngularModule.pick({ Moon, Sun, Plus })),
     provideAppInitializer(() => {
       const iconRegistry = inject(MatIconRegistry);
       const sanitizer = inject(DomSanitizer);

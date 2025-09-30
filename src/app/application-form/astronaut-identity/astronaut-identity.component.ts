@@ -1,0 +1,66 @@
+import { ApplicantsStore } from '@IISA/services';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { ControlContainer, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatIcon } from '@angular/material/icon';
+import { FileInputAccessorModule, ICustomFile } from 'file-input-accessor';
+import { concatMap, filter, tap } from 'rxjs';
+import { ApplicationFormControls } from '../application-form.types';
+import { ErrorMessageDirective } from '../directives/error-message.directive';
+import { RequiredInputDirective } from '../directives/required.directive';
+
+@Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'iisa-astronaut-identity',
+  templateUrl: './astronaut-identity.component.html',
+  imports: [
+    ErrorMessageDirective,
+    ReactiveFormsModule,
+    FormsModule,
+    MatIcon,
+    RequiredInputDirective,
+    FileInputAccessorModule,
+  ],
+  viewProviders: [
+    {
+      provide: ControlContainer,
+      useFactory: (): ControlContainer => inject(ControlContainer, { skipSelf: true }),
+    },
+  ],
+})
+export class AstronautIdentityComponent {
+  private store = inject(ApplicantsStore);
+  private parentContainer = inject(ControlContainer);
+
+  private get control(): FormGroup<Pick<ApplicationFormControls, 'avatar'>> {
+    return this.parentContainer.control as FormGroup;
+  }
+
+  protected readonly avatar = {
+    value: signal<ICustomFile[] | undefined>(undefined),
+    loading: signal(false),
+    error: signal<string | undefined>(undefined),
+  };
+
+  protected avatarUrl$ = toObservable(this.avatar.value).pipe(
+    filter(Boolean),
+    tap(() => this.avatar.loading.set(true)),
+    concatMap((file) => this.store.upload(file[0])),
+    tap({
+      error: () => {
+        this.avatar.error.set('Something went wrong');
+        this.avatar.loading.set(false);
+      },
+      next: (url) => {
+        this.avatar.error.set(undefined);
+        this.avatar.loading.set(false);
+
+        this.control.controls.avatar.setValue(url);
+
+        return url;
+      },
+    }),
+  );
+
+  protected readonly avatarUrl = toSignal(this.avatarUrl$, { initialValue: null });
+}

@@ -6,7 +6,8 @@ import { ColorSchemeService } from '../services/color-scheme.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './not-found.component.html',
   host: {
-    class: 'text-center grid items-center min-h-dvh h-dvh auto-fill-150 auto-cols-fr auto-rows-fr',
+    class:
+      'text-center grid place-items-center overflow-clip place-content-center auto-fill-150 auto-cols-fr auto-rows-auto',
   },
   imports: [],
 })

@@ -1,21 +1,13 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { ApplicantsStore, ColorSchemeService, GeocodingService } from '@IISA/services';
-import { MapComponent as MaplibreComponent, MarkerComponent } from '@maplibre/ngx-maplibre-gl';
+import { MapComponent as MaplibreComponent, MarkerComponent, PopupComponent } from '@maplibre/ngx-maplibre-gl';
 import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'iisa-map',
-  template: `<mgl-map
-    [style]="style()"
-    [center]="[34.80092882883532, 32.08485247343606]"
-    [zoom]="[6]"
-    class="block h-full">
-    @for (marker of markers.value(); track marker) {
-      <mgl-marker [lngLat]="[marker.lng, marker.lat]"> </mgl-marker>
-    }
-  </mgl-map>`,
-  imports: [MaplibreComponent, MarkerComponent],
+  templateUrl: './map.component.html',
+  imports: [MaplibreComponent, MarkerComponent, PopupComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent {
@@ -35,7 +27,10 @@ export class MapComponent {
       return forkJoin(
         request.map((applicant) => {
           return this.geocoder.getLocation(applicant.city_region).then((res) => {
-            return res.results[0].geometry.location as unknown as google.maps.LatLngLiteral;
+            return {
+              applicant,
+              location: res.results[0].geometry.location as unknown as google.maps.LatLngLiteral,
+            };
           });
         }),
       );

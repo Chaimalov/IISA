@@ -1,0 +1,25 @@
+@import 'maplibre-gl/dist/maplibre-gl.css';
+
+.maplibregl-popup-content {
+  background: Canvas;
+}
+
+.maplibregl-popup-anchor-top .maplibregl-popup-tip {
+  border-bottom-color: Canvas;
+}
+
+.maplibregl-popup-anchor-bottom .maplibregl-popup-tip {
+  border-top-color: Canvas;
+}
+
+.maplibregl-popup-anchor-left .maplibregl-popup-tip {
+  border-right-color: Canvas;
+}
+
+.maplibregl-popup-anchor-right .maplibregl-popup-tip {
+  border-left-color: Canvas;
+}
+
+.maplibregl-popup-close-button {
+  padding-inline: 0.35rem;
+}

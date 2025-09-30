@@ -1,0 +1,29 @@
+<ul
+  class="flex gap-2 flex-wrap"
+  cdkListbox
+  cdkListboxMultiple
+  cdkListboxOrientation="horizontal"
+  formControlName="hobbies"
+>
+  @for (hobby of hobbies(); track hobby) {
+    <li
+      [cdkOption]="hobby"
+      class="button button__light text-sm aria-selected:bg-surface-2/25 aria-selected:text-surface-3"
+    >
+      <span>{{ hobby }}</span>
+    </li>
+  }
+</ul>
+
+<form
+  #form
+  (submit)="addAnotherHobby(otherHobby.value); form.reset()"
+>
+  <input
+    class="input w-[20ch]"
+    type="text"
+    #otherHobby
+    placeholder="Other"
+  />
+  <button class="sr-only">Add</button>
+</form>
