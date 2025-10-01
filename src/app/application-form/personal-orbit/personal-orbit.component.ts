@@ -11,7 +11,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { ControlContainer, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ApplicationFormControls } from '../application-form.types';
+import { ApplicationFormControls } from '../application-form';
 
 export const WORD_START = /\b\w/g;
 
@@ -68,6 +68,7 @@ export class PersonalOrbitComponent implements OnInit {
       afterNextRender({
         write: () => {
           this.list().selectValue(hobby);
+          // formControl doesn't detect mutation; create new array to trigger update
           this.control.controls.hobbies.setValue([...this.list().value]);
         },
       });

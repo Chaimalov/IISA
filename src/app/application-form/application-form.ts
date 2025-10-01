@@ -1,6 +1,9 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ApplicationFormControls } from './application-form.types';
-import { Applicant, Application } from '@IISA/lib';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Application } from '@IISA/lib';
+
+export type ApplicationFormControls = {
+  [K in keyof Application]: AbstractControl<Application[K]>;
+};
 
 const defaultApplication: Application = {
   avatar: null,

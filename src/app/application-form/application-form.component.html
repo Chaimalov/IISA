@@ -1,6 +1,11 @@
-<form class="contents" [formGroup]="form" (submit)="submit()">
+<form
+  class="contents"
+  [formGroup]="form"
+  (submit)="submit()"
+>
   <fieldset
-    class="grid gap-6 h-dvh place-content-center snap-start timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
+    class="grid gap-6 h-dvh place-content-center snap-start timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale"
+  >
     <legend class="contents">
       <span class="text-2xl block">Astronaut Identity File</span>
       <span class="block"
@@ -10,14 +15,19 @@
 
     <iisa-astronaut-identity class="contents"></iisa-astronaut-identity>
 
-    <a [routerLink]="[]" tabindex="1" fragment="communication-protocols" class="button button__light justify-self-end"
+    <a
+      [routerLink]="[]"
+      tabindex="1"
+      fragment="communication-protocols"
+      class="button button__light justify-self-end"
       >Continue</a
     >
   </fieldset>
 
   <fieldset
     id="communication-protocols"
-    class="grid gap-6 h-dvh place-content-center snap-start timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
+    class="grid gap-6 h-dvh place-content-center snap-start timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale"
+  >
     <legend class="contents">
       <span class="block text-2xl">Communication Protocols</span>
       <span class="block"
@@ -27,38 +37,49 @@
 
     <iisa-communication-protocols class="contents"></iisa-communication-protocols>
 
-    <a [routerLink]="[]" tabindex="1" fragment="personal-orbit" class="button button__light justify-self-end"
+    <a
+      [routerLink]="[]"
+      tabindex="1"
+      fragment="personal-orbit"
+      class="button button__light justify-self-end"
       >Continue</a
     >
   </fieldset>
 
   <fieldset
     id="personal-orbit"
-    class="grid gap-6 h-dvh place-content-center snap-start timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
+    class="grid gap-6 h-dvh place-content-center snap-start timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale"
+  >
     <legend class="contents">
       <span class="block text-2xl">Personal Orbit</span>
-      <span class="block"
-        >What keeps you inspired on Earth? Share the passions that fuel your imagination and curiosity.</span
-      >
     </legend>
 
     <iisa-personal-orbit class="contents"></iisa-personal-orbit>
 
-    <a [routerLink]="[]" tabindex="1" fragment="mission-suitability" class="button button__light justify-self-end"
+    <a
+      [routerLink]="[]"
+      tabindex="1"
+      fragment="mission-suitability"
+      class="button button__light justify-self-end"
       >Continue</a
     >
   </fieldset>
 
   <fieldset
     id="mission-suitability"
-    class="grid gap-6 h-dvh place-content-center snap-start timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale">
+    class="grid gap-6 h-dvh place-content-center snap-start timeline-view animation-range-end-contain animation-range-start-0 animate-fade-in-scale"
+  >
     <legend class="contents">
       <span class="block text-2xl">Mission Suitability</span>
     </legend>
 
     <iisa-personal-statement class="contents"></iisa-personal-statement>
 
-    <button type="submit" class="button button__bold place-self-center capitalize" [class.opacity-50]="form.invalid">
+    <button
+      type="submit"
+      class="button button__bold place-self-center capitalize"
+      [class.opacity-50]="form.invalid"
+    >
       Launch Application
     </button>
   </fieldset>

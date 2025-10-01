@@ -6,7 +6,8 @@
     [iisaErrorMessage]="error"
     formControlName="email"
     placeholder="israel.israeli@gmail.com"
-    class="input" />
+    class="input"
+  />
 </label>
 <label class="group/field relative"
   ><span class="group-has-required/field:after:content-['_*'] after:text-red-500">Phone</span>
@@ -16,14 +17,24 @@
     [iisaErrorMessage]="error"
     formControlName="phone_number"
     placeholder="012-345-6789"
-    class="input" />
+    class="input"
+  />
 </label>
 
 <label class="group/field relative"
-  ><span class="group-has-required/field:after:content-['_*'] after:text-red-500">City or Region</span>
-  <input type="text" [iisaErrorMessage]="error" formControlName="city_region" placeholder="Jerusalem" class="input" />
+  ><span class="group-has-required/field:after:content-['_*'] after:text-red-500">City / Region</span>
+  <input
+    type="text"
+    [iisaErrorMessage]="error"
+    formControlName="city_region"
+    placeholder="Jerusalem"
+    class="input"
+  />
 </label>
 
-<ng-template #error let-error>
+<ng-template
+  #error
+  let-error
+>
   <span class="text-red-500 text-sm italic absolute top-0 end-0">{{ error }}</span>
 </ng-template>

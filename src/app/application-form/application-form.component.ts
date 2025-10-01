@@ -1,16 +1,15 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterLink } from '@angular/router';
 import { PostgrestError } from '@supabase/supabase-js';
 import { FileInputAccessorModule } from 'file-input-accessor';
 import { ApplicantStore } from '../services/applicants.store';
-import { ApplicationFormControls } from './application-form.types';
+import { ApplicationFormGroup } from './application-form';
 import { AstronautIdentityComponent } from './astronaut-identity/astronaut-identity.component';
 import { CommunicationProtocolsComponent } from './communication-protocols/communication-protocols.component';
 import { PersonalOrbitComponent } from './personal-orbit/personal-orbit.component';
 import { PersonalStatementComponent } from './personal-statement/personal-statement.component';
-import { ApplicationFormGroup } from './application-form';
 
 @Component({
   selector: 'iisa-application-form',
