@@ -4,12 +4,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterLink } from '@angular/router';
 import { PostgrestError } from '@supabase/supabase-js';
 import { FileInputAccessorModule } from 'file-input-accessor';
-import { ApplicantsStore } from '../services/applicants.store';
+import { ApplicantStore } from '../services/applicants.store';
 import { ApplicationFormControls } from './application-form.types';
 import { AstronautIdentityComponent } from './astronaut-identity/astronaut-identity.component';
 import { CommunicationProtocolsComponent } from './communication-protocols/communication-protocols.component';
 import { PersonalOrbitComponent } from './personal-orbit/personal-orbit.component';
 import { PersonalStatementComponent } from './personal-statement/personal-statement.component';
+import { ApplicationFormGroup } from './application-form';
 
 @Component({
   selector: 'iisa-application-form',
@@ -27,32 +28,11 @@ import { PersonalStatementComponent } from './personal-statement/personal-statem
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApplicationFormComponent {
-  private store = inject(ApplicantsStore);
+  private store = inject(ApplicantStore);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
 
-  protected form = new FormGroup({
-    avatar: new FormControl<string | null>(null, { nonNullable: true }),
-    full_name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
-    email: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.email],
-    }),
-    phone_number: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.pattern(/^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/)],
-    }),
-    date_of_birth: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    city_region: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    hobbies: new FormControl<string[]>([]),
-    personal_statement: new FormControl(''),
-  } satisfies ApplicationFormControls);
+  protected form = new ApplicationFormGroup();
 
   protected async submit(): Promise<void> {
     if (this.form.invalid) {

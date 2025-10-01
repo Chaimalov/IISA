@@ -5,15 +5,28 @@
 
 <picture>
   @if (colorScheme.theme() === 'dark') {
-    <source srcset="rocket-launch-dark.avif" type="image/avif" />
-    <source srcset="rocket-launch-dark.webp" type="image/webp" />
+    <source
+      srcset="rocket-launch-dark.avif"
+      type="image/avif"
+    />
+    <source
+      srcset="rocket-launch-dark.webp"
+      type="image/webp"
+    />
   } @else {
-    <source srcset="rocket-launch-light.avif" type="image/avif" />
-    <source srcset="rocket-launch-light.webp" type="image/webp" />
+    <source
+      srcset="rocket-launch-light.avif"
+      type="image/avif"
+    />
+    <source
+      srcset="rocket-launch-light.webp"
+      type="image/webp"
+    />
   }
 
   <img
-    src="rocket-launch-dark.png"
+    src="rocket-launch-dark.webp"
     alt=""
-    class="object-cover size-full mask-radial-at-center mask-radial-from-20% mask-radial-to-75%" />
+    class="object-cover size-full mask-radial-at-center mask-radial-from-20% mask-radial-to-75%"
+  />
 </picture>

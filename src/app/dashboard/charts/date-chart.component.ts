@@ -2,14 +2,14 @@ import { computed, Directive, inject } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { BaseChart } from './base-chart';
-import { ApplicantsStore } from '@IISA/services';
+import { ApplicantStore } from '@IISA/services';
 
 @Directive({
   selector: '[iisaDateChart]',
   hostDirectives: [BaseChartDirective],
 })
 export class DateChartDirective extends BaseChart {
-  private store = inject(ApplicantsStore);
+  private store = inject(ApplicantStore);
 
   protected readonly chart = computed(() => {
     const { backgroundColor, borderColor, textColor } = this.colors();

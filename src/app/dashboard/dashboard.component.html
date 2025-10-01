@@ -1,7 +1,9 @@
 <article
-  class="flex flex-wrap *:grow *:h-100 *:shrink-0 gap-4 has-hover:*:not-hover:opacity-80 *:transition-opacity *:duration-700 *:rounded *:overflow-auto">
+  class="flex flex-wrap *:grow *:shrink-0 gap-4 has-hover:*:not-hover:opacity-80 *:transition-opacity *:duration-700 *:rounded *:overflow-auto"
+>
   <section
-    class="basis-90 bg-surface-1 p-8 relative isolate rounded supports-[corner-shape:squircle]:rounded-2xl corner-squircle grid">
+    class="basis-90 bg-surface-1 p-8 relative isolate rounded supports-[corner-shape:squircle]:rounded-2xl corner-squircle grid"
+  >
     <hgroup class="grid gap-4 place-content-center overflow-clip h-full max-w-60 self-start">
       <h2 class="text-3xl font-bold">Candidate Review Mode</h2>
       <p>Enter detailed review mode to inspect each applicant’s mission dossier one at a time.</p>
@@ -9,14 +11,22 @@
 
     <figure class="place-self-end">
       <picture>
-        <source srcset="crew.avif" type="image/avif" />
+        <source
+          srcset="crew.avif"
+          type="image/avif"
+        />
         <img
           class="absolute top-0 end-0 mask-radial-at-top-right object-cover mask-radial-from-0% mask-radial-to-60% h-full -z-10"
           src="crew.webp"
-          alt="" />
+          alt=""
+        />
       </picture>
 
-      <a routerLink="/candidate-review" class="button button__bold">Begin Review</a>
+      <a
+        routerLink="/candidate-review"
+        class="button button__bold"
+        >Begin Review</a
+      >
     </figure>
   </section>
 
@@ -25,21 +35,25 @@
   <section class="basis-90">
     <canvas
       class="bg-surface-1 p-4 rounded supports-[corner-shape:squircle]:rounded-2xl corner-squircle"
-      iisaAgeChart></canvas>
+      iisaAgeChart
+    ></canvas>
   </section>
 
   <section class="basis-90">
     <canvas
       class="bg-surface-1 p-4 rounded supports-[corner-shape:squircle]:rounded-2xl corner-squircle"
-      iisaDateChart></canvas>
+      iisaDateChart
+    ></canvas>
   </section>
 
   <section class="basis-90 !h-150">
     <canvas
       class="bg-surface-1 p-4 rounded supports-[corner-shape:squircle]:rounded-2xl corner-squircle"
-      iisaHobbyChart></canvas>
+      iisaHobbyChart
+    ></canvas>
   </section>
 
   <iisa-applicants-table
-    class="bg-surface-1 basis-[min(500px,100%)] rounded overflow-auto grid"></iisa-applicants-table>
+    class="bg-surface-1 basis-[min(500px,100%)] h-100 rounded overflow-auto grid"
+  ></iisa-applicants-table>
 </article>

@@ -1,17 +1,36 @@
-<nav class="flex gap-4 p-4 items-center z-10 w-full snap-start">
-  <a routerLink="/" class="grid place-content-center">
-    <mat-icon class="!size-12" svgIcon="IISA"></mat-icon>
+<nav class="flex gap-4 p-4 items-center z-10 w-full">
+  <a
+    routerLink="/"
+    class="grid place-content-center"
+  >
+    <mat-icon
+      class="!size-12"
+      svgIcon="IISA"
+    ></mat-icon>
   </a>
 
   <span class="m-auto"></span>
 
-  <a class="button button__light" routerLink="/mission-control">Command Center</a>
+  <a
+    class="button button__light"
+    routerLink="/mission-control"
+    >Command Center</a
+  >
 
-  <button (click)="colorScheme.toggle()" class="button">
+  <button
+    (click)="colorScheme.toggle()"
+    class="button"
+  >
     @if (colorScheme.theme() === 'dark') {
-      <lucide-icon class="align-middle" name="sun"></lucide-icon>
+      <lucide-icon
+        class="align-middle"
+        name="sun"
+      ></lucide-icon>
     } @else {
-      <lucide-icon class="align-middle" name="moon"></lucide-icon>
+      <lucide-icon
+        class="align-middle"
+        name="moon"
+      ></lucide-icon>
     }
   </button>
 </nav>

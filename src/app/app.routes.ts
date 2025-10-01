@@ -11,14 +11,14 @@ export const routes: Routes = [
     path: 'edit-application',
     loadComponent: () =>
       import('./edit-application/edit-application.component').then((m) => m.EditApplicationComponent),
-    children: [
-      {
-        path: ':id',
-        loadComponent: () =>
-          import('./application-form/application-form.component').then((m) => m.ApplicationFormComponent),
-        canActivate: [editApplicationGuard],
-      },
-    ],
+  },
+  {
+    path: 'edit-application/:id',
+    loadComponent: () =>
+      import('./edit-application/application-form/application-form.component').then(
+        (m) => m.EditApplicationFormComponent,
+      ),
+    canActivate: [editApplicationGuard],
   },
   {
     path: 'blast-off',

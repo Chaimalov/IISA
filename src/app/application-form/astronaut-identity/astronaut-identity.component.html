@@ -1,11 +1,22 @@
 <label
-  class="place-self-center place-items-center place-content-center rounded-full cursor-pointer opacity-80 hover:opacity-100 transition-opacity leading-0 focus-within:outline-2 outline-offset-6 focus-within:outline-offset-1 input size-32 outline-surface-4">
+  class="place-self-center place-items-center place-content-center rounded-full cursor-pointer opacity-80 hover:opacity-100 transition-opacity leading-0 focus-within:outline-2 outline-offset-6 focus-within:outline-offset-1 input size-32 outline-surface-4"
+>
   @if (avatarUrl()) {
-    <img [src]="avatarUrl()" alt="" class="object-cover aspect-square rounded-full" />
+    <img
+      [src]="avatarUrl()"
+      alt=""
+      class="object-cover aspect-square rounded-full"
+    />
   } @else if (avatar.loading()) {
-    <mat-icon class="!block" svgIcon="spinner"></mat-icon>
+    <mat-icon
+      class="!block"
+      svgIcon="spinner"
+    ></mat-icon>
   } @else {
-    <mat-icon class="!size-full" svgIcon="Astronaut"></mat-icon>
+    <mat-icon
+      class="!size-full"
+      svgIcon="Astronaut"
+    ></mat-icon>
   }
 
   <input
@@ -13,7 +24,8 @@
     class="sr-only"
     accept="image/*"
     [(ngModel)]="avatar.value"
-    [ngModelOptions]="{ standalone: true }" />
+    [ngModelOptions]="{ standalone: true }"
+  />
 </label>
 
 <label class="group/field relative">
@@ -24,14 +36,25 @@
     inputmode="latin-name"
     formControlName="full_name"
     placeholder="Israel Israeli"
-    class="input" />
+    class="input"
+  />
 </label>
 
 <label class="group/field relative">
   <span class="group-has-required/field:after:content-['_*'] after:text-red-500">Date Of Birth</span>
-  <input type="date" [iisaErrorMessage]="error" inputmode="date" formControlName="date_of_birth" class="input" />
+  <input
+    type="date"
+    placeholder="01/10/2025"
+    [iisaErrorMessage]="error"
+    inputmode="date"
+    formControlName="date_of_birth"
+    class="input"
+  />
 </label>
 
-<ng-template #error let-error>
+<ng-template
+  #error
+  let-error
+>
   <span class="text-red-500 text-sm italic absolute top-0 end-0">{{ error }}</span>
 </ng-template>

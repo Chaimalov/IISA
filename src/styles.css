@@ -9,5 +9,5 @@
 @import './styles/snackbar.css';
 
 :root {
-  @apply md:snap-mandatory snap-proximity snap-y scheme-light-dark scroll-smooth snap-always data-theme=dark:scheme-dark data-theme=light:scheme-light min-h-dvh;
+  @apply snap-proximity snap-y scheme-light-dark scroll-smooth snap-always data-theme=dark:scheme-dark data-theme=light:scheme-light min-h-dvh;
 }

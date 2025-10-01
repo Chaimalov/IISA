@@ -7,7 +7,7 @@ import { startWith } from 'rxjs';
 import { Applicant, Application } from '@IISA/lib';
 import { DalService } from './dal.service';
 
-export const ApplicantsStore = signalStore(
+export const ApplicantStore = signalStore(
   { providedIn: 'root' },
   withEntities({
     entity: type<Applicant>(),

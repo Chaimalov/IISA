@@ -1,23 +1,27 @@
-<form class="place-self-center-safe max-w-md p-8 w-full fixed bottom-0">
+<article
+  class="grid md:grid-flow-col gap-4 md:auto-rows-fr auto-cols-auto md:px-8 p-4 w-screen scroll-smooth overflow-scroll md:snap-mandatory snap-proximity snap-both"
+>
+  @for (applicant of candidates(); track applicant.id) {
+    <iisa-applicant
+      [applicant]="applicant"
+      [id]="applicant.id"
+      class="md:snap-center snap-start min-w-[calc(100vw-4rem)] supports-[corner-shape:squircle]:rounded-4xl corner-squircle bg-surface-1 p-4 rounded-xl"
+    ></iisa-applicant>
+  } @empty {
+    <div
+      class="w-full grid place-content-center supports-[corner-shape:squircle]:rounded-4xl corner-squircle bg-surface-1/50 p-4 rounded-xl border border-surface-1 border-dashed"
+    >
+      <p>No Applicants Found</p>
+    </div>
+  }
+</article>
+
+<form class="place-self-center-safe max-w-md p-8 w-full">
   <input
     type="search"
     class="input px-4 rounded-4xl"
     placeholder="Search by name..."
     [(ngModel)]="searchQuery"
-    [ngModelOptions]="{ standalone: true }" />
+    [ngModelOptions]="{ standalone: true }"
+  />
 </form>
-
-<article
-  class="grid md:grid-flow-col gap-4 md:auto-rows-fr auto-cols-auto md:px-8 p-4 w-screen scroll-smooth overflow-x-scroll md:snap-mandatory snap-proximity snap-both">
-  @for (applicant of candidates(); track applicant.id) {
-    <iisa-applicant
-      [applicant]="applicant"
-      [id]="applicant.id"
-      class="md:snap-center snap-start min-w-[calc(100vw-4rem)] supports-[corner-shape:squircle]:rounded-4xl corner-squircle bg-surface-1 p-4 rounded-xl"></iisa-applicant>
-  } @empty {
-    <div
-      class="w-full grid place-content-center supports-[corner-shape:squircle]:rounded-4xl corner-squircle bg-surface-1/50 p-4 rounded-xl border border-surface-1 border-dashed">
-      <p>No Applicants Found</p>
-    </div>
-  }
-</article>

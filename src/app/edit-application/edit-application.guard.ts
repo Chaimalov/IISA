@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, RedirectCommand, Router } from '@angular/router';
 import { Applicant } from '@IISA/lib';
-import { ApplicantsStore } from '@IISA/services';
+import { ApplicantStore } from '@IISA/services';
 import { ErrorCode } from '../error/error.routes';
 
 export const DAYS = 3;
@@ -14,7 +14,7 @@ export function isEditAllowed(applicant: Applicant): boolean {
 
 export const editApplicationGuard: CanActivateFn = (route) => {
   const router = inject(Router);
-  const applicant = inject(ApplicantsStore).get(route.params['id']);
+  const applicant = inject(ApplicantStore).get(route.params['id']);
 
   if (!applicant) {
     return new RedirectCommand(router.parseUrl(`/error/${ErrorCode['No application found for this email.']}`));

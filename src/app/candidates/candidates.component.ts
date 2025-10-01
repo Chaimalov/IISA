@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApplicantComponent } from '../applicant/applicant.component';
-import { ApplicantsStore } from '../services/applicants.store';
+import { ApplicantStore } from '../services/applicants.store';
 
 @Component({
   selector: 'iisa-candidates',
@@ -11,11 +11,11 @@ import { ApplicantsStore } from '../services/applicants.store';
   styleUrl: './candidates.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class: 'gap-2 grid grid-rows-[auto_1fr]',
+    class: 'gap-2 grid grid-rows-[1fr_auto] h-[calc(100dvh-5rem)]',
   },
 })
 export class CandidatesComponent {
-  protected readonly store = inject(ApplicantsStore);
+  protected readonly store = inject(ApplicantStore);
   protected readonly router = inject(Router);
 
   protected readonly searchQuery = signal('');

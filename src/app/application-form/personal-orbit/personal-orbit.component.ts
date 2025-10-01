@@ -54,7 +54,7 @@ export class PersonalOrbitComponent implements OnInit {
   ]);
 
   public ngOnInit(): void {
-    this.hobbies.update((hobbies) => [...hobbies, ...(this.control.controls.hobbies.value ?? [])]);
+    this.hobbies.update((hobbies) => [...new Set([...hobbies, ...(this.control.controls.hobbies.value ?? [])])]);
   }
 
   protected addAnotherHobby(otherHobby: string): void {

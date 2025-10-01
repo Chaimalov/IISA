@@ -1,0 +1,17 @@
+<form
+  [formGroup]="form()"
+  class="grid gap-4"
+  (submit)="submit()"
+>
+  <iisa-astronaut-identity class="contents"></iisa-astronaut-identity>
+  <iisa-communication-protocols class="contents"></iisa-communication-protocols>
+  <iisa-personal-orbit class="contents"></iisa-personal-orbit>
+  <iisa-personal-statement class="contents"></iisa-personal-statement>
+  <button
+    type="submit"
+    class="button button__bold place-self-center capitalize"
+    [class.opacity-50]="form().invalid"
+  >
+    Save Changes
+  </button>
+</form>

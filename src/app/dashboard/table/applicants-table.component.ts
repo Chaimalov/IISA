@@ -12,7 +12,7 @@ import {
 } from 'ag-grid-community';
 import { Applicant } from '../../../lib/applicant.types';
 import { ColorSchemeService } from '../../services/color-scheme.service';
-import { ApplicantsStore } from '../../services/applicants.store';
+import { ApplicantStore } from '../../services/applicants.store';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -23,7 +23,7 @@ ModuleRegistry.registerModules([AllCommunityModule]);
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApplicantsTableComponent {
-  public applicants = inject(ApplicantsStore).applicants;
+  public applicants = inject(ApplicantStore).applicants;
   public colorScheme = inject(ColorSchemeService);
   protected dataSource = new MatTableDataSource();
 

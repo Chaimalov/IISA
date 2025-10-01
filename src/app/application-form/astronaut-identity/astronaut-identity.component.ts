@@ -1,13 +1,14 @@
-import { ApplicantsStore } from '@IISA/services';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ApplicantStore } from '@IISA/services';
+import { afterNextRender, ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlContainer, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { FileInputAccessorModule, ICustomFile } from 'file-input-accessor';
-import { concatMap, filter, tap } from 'rxjs';
+import { concatMap, defer, delayWhen, filter, merge, Subject, tap } from 'rxjs';
 import { ApplicationFormControls } from '../application-form.types';
 import { ErrorMessageDirective } from '../directives/error-message.directive';
 import { RequiredInputDirective } from '../directives/required.directive';
+import { Application } from '@IISA/lib';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,8 +29,8 @@ import { RequiredInputDirective } from '../directives/required.directive';
     },
   ],
 })
-export class AstronautIdentityComponent {
-  private store = inject(ApplicantsStore);
+export class AstronautIdentityComponent implements OnInit {
+  private store = inject(ApplicantStore);
   private parentContainer = inject(ControlContainer);
 
   private get control(): FormGroup<Pick<ApplicationFormControls, 'avatar'>> {
@@ -42,25 +43,36 @@ export class AstronautIdentityComponent {
     error: signal<string | undefined>(undefined),
   };
 
-  protected avatarUrl$ = toObservable(this.avatar.value).pipe(
-    filter(Boolean),
-    tap(() => this.avatar.loading.set(true)),
-    concatMap((file) => this.store.upload(file[0])),
-    tap({
-      error: () => {
-        this.avatar.error.set('Something went wrong');
-        this.avatar.loading.set(false);
-      },
-      next: (url) => {
-        this.avatar.error.set(undefined);
-        this.avatar.loading.set(false);
+  private initialAvatarUrl$ = new Subject<Application['avatar']>();
 
-        this.control.controls.avatar.setValue(url);
+  protected avatarUrl$ = merge(
+    this.initialAvatarUrl$,
+    toObservable(this.avatar.value).pipe(
+      filter(Boolean),
+      tap(() => this.avatar.loading.set(true)),
+      concatMap((file) => this.store.upload(file[0])),
+      tap({
+        error: () => {
+          this.avatar.error.set('Something went wrong');
+          this.avatar.loading.set(false);
+        },
+        next: (url) => {
+          this.avatar.error.set(undefined);
+          this.avatar.loading.set(false);
 
-        return url;
-      },
-    }),
+          this.control.controls.avatar.setValue(url);
+
+          return url;
+        },
+      }),
+    ),
   );
 
-  protected readonly avatarUrl = toSignal(this.avatarUrl$, { initialValue: null });
+  protected readonly avatarUrl = toSignal(this.avatarUrl$, {
+    initialValue: null,
+  });
+
+  public ngOnInit(): void {
+    this.initialAvatarUrl$.next(this.control.controls.avatar.value);
+  }
 }

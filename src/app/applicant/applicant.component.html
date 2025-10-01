@@ -1,12 +1,19 @@
 <aside class="grid gap-4 place-content-start">
   @if (!applicant().avatar) {
-    <mat-icon class="!size-34" svgIcon="Astronaut"></mat-icon>
+    <mat-icon
+      class="!size-34"
+      svgIcon="Astronaut"
+    ></mat-icon>
   } @else {
-    <img [src]="applicant().avatar" alt="" class="size-34 border-8 border-current object-cover rounded-full" />
+    <img
+      [src]="applicant().avatar"
+      alt=""
+      class="size-34 border-8 border-current object-cover rounded-full"
+    />
   }
 
   <q class="block italic md:text-2xl">
-    {{ applicant().personal_statement }}
+    {{ applicant().personal_statement || 'Reason for joining: classified… or just forgotten.' }}
   </q>
   <span class="font-light italic">{{ applicant().full_name }}'s Personal Statement</span>
 </aside>
@@ -17,9 +24,12 @@
       {{ applicant().full_name }}
     </h1>
     <p>{{ applicant().age }} years old, from {{ applicant().city_region }}.</p>
+    @if (applicant().updated_at) {
+      <span class="italic opacity-50">(updated: {{ applicant().updated_at | date }})</span>
+    }
   </header>
 
-  <section class="bg-surface-4/10 p-4 rounded">
+  <section>
     <h2 class="text-xl font-bold">Hobbies</h2>
     <ul class="list-inside flex flex-wrap gap-2">
       @for (hobby of applicant().hobbies; track hobby) {
@@ -30,7 +40,7 @@
     </ul>
   </section>
 
-  <section class="bg-surface-4/10 p-4 rounded">
+  <section>
     <h2 class="text-xl font-bold">Contact</h2>
     <address class="grid gap-2">
       <dl>
@@ -52,8 +62,4 @@
     <h2>Created At</h2>
     <time [attr.datetime]="applicant().created_at">{{ applicant().created_at | date }}</time>
   </section>
-
-  @if (applicant().updated_at) {
-    <span class="absolute top-4 end-4 italic opacity-50">(updated: {{ applicant().updated_at | date }})</span>
-  }
 </main>

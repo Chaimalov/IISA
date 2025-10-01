@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApplicantsStore } from '@IISA/services';
+import { ApplicantStore } from '@IISA/services';
 import { ErrorCode } from '../error/error.routes';
 import { DAYS } from './edit-application.guard';
 
@@ -15,7 +15,7 @@ import { DAYS } from './edit-application.guard';
   },
 })
 export class EditApplicationComponent {
-  private store = inject(ApplicantsStore);
+  private store = inject(ApplicantStore);
   private router = inject(Router);
 
   protected readonly days = DAYS;

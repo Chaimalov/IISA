@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { ApplicantsStore, ColorSchemeService, GeocodingService } from '@IISA/services';
+import { ApplicantStore, ColorSchemeService, GeocodingService } from '@IISA/services';
 import { MapComponent as MaplibreComponent, MarkerComponent, PopupComponent } from '@maplibre/ngx-maplibre-gl';
 import { forkJoin } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { forkJoin } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent {
-  private applicants = inject(ApplicantsStore).entities;
+  private applicants = inject(ApplicantStore).entities;
   private geocoder = inject(GeocodingService);
   private colorScheme = inject(ColorSchemeService);
 
