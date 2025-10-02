@@ -75,6 +75,22 @@
 
     <iisa-personal-statement class="contents"></iisa-personal-statement>
 
+    <label class="flex items-baseline gap-2">
+      <input
+        type="checkbox"
+        checked
+      />
+      <span class="text-sm"
+        >I have read and accept the Mission Control
+        <button
+          (click)="dialog.showModal()"
+          class="underline cursor-pointer hover:brightness-110 text-surface-3"
+        >
+          Terms of Service</button
+        ><br />(and understand this is all imaginary).</span
+      >
+    </label>
+
     <button
       type="submit"
       class="button button__bold place-self-center capitalize"
@@ -84,3 +100,29 @@
     </button>
   </fieldset>
 </form>
+
+<dialog
+  #dialog
+  closedby="any"
+  class="place-self-center open:grid grid-rows-[auto_1fr] not-open:backdrop:opacity-0 backdrop:transition-opacity open:scale-100 open:opacity-100 starting:open:scale-80 scale-80 starting:open:opacity-0 opacity-0 transition-all transition-discrete bg-canvas border-surface-1 border max-w-md max-h-[80vh] backdrop:bg-canvas/50 p-8 rounded-xl shadow-xl"
+>
+  <header class="py-4">
+    <h1 class="text-xl font-bold">Mission Control Terms of Service</h1>
+  </header>
+
+  <main
+    markdown
+    src="terms-of-service.md"
+    class="grid gap-4 overflow-auto *:[ol]:grid *:[ol]:gap-4"
+  ></main>
+
+  <footer class="flex justify-end pt-4">
+    <button
+      (click)="dialog.close()"
+      class="button button__bold"
+      autofocus
+    >
+      understood
+    </button>
+  </footer>
+</dialog>

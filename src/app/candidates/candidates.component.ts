@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApplicantComponent } from '../applicant/applicant.component';
 import { ApplicantStore } from '../services/applicants.store';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'iisa-candidates',
@@ -19,13 +21,17 @@ export class CandidatesComponent {
   protected readonly router = inject(Router);
 
   protected readonly searchQuery = signal('');
-  protected readonly candidates = computed(() => {
-    if (!this.searchQuery()) {
+  private readonly debouncedSearchQuery = toSignal(toObservable(this.searchQuery).pipe(debounceTime(200)));
+
+  protected readonly filteredApplicants = computed(() => {
+    const query = this.debouncedSearchQuery();
+
+    if (!query) {
       return this.store.applicants();
     }
 
     return this.store
       .applicants()
-      .filter((applicant) => applicant.full_name.toLowerCase().includes(this.searchQuery().toLowerCase().trim()));
+      .filter((applicant) => applicant.full_name.toLowerCase().includes(query.toLowerCase().trim()));
   });
 }

@@ -33,7 +33,7 @@ export class EditApplicationComponent {
     } catch (error) {
       console.error(error);
 
-      this.router.navigate(['/error', ErrorCode['No application found for this email.']]);
+      this.router.navigate(['/error', ErrorCode.noApplicationFoundForThisEmail]);
     }
   }
 }

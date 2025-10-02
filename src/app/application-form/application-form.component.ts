@@ -10,6 +10,7 @@ import { AstronautIdentityComponent } from './astronaut-identity/astronaut-ident
 import { CommunicationProtocolsComponent } from './communication-protocols/communication-protocols.component';
 import { PersonalOrbitComponent } from './personal-orbit/personal-orbit.component';
 import { PersonalStatementComponent } from './personal-statement/personal-statement.component';
+import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
   selector: 'iisa-application-form',
@@ -23,6 +24,7 @@ import { PersonalStatementComponent } from './personal-statement/personal-statem
     CommunicationProtocolsComponent,
     PersonalOrbitComponent,
     PersonalStatementComponent,
+    MarkdownComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

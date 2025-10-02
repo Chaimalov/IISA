@@ -1,11 +1,12 @@
 import { Routes } from '@angular/router';
 import { editApplicationGuard } from './edit-application/edit-application.guard';
 import { ERROR_ROUTES } from './error/error.routes';
+import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./home/home.component').then((m) => m.HomeComponent),
+    component: HomeComponent,
   },
   {
     path: 'edit-application',

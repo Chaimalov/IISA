@@ -24,9 +24,6 @@
       {{ applicant().full_name }}
     </h1>
     <p>{{ applicant().age }} years old, from {{ applicant().city_region }}.</p>
-    @if (applicant().updated_at) {
-      <span class="italic opacity-50">(updated: {{ applicant().updated_at | date }})</span>
-    }
   </header>
 
   <section>
@@ -61,5 +58,9 @@
   <section>
     <h2>Created At</h2>
     <time [attr.datetime]="applicant().created_at">{{ applicant().created_at | date }}</time>
+
+    @if (applicant().updated_at) {
+      <p class="italic opacity-50">(updated: {{ applicant().updated_at | date }})</p>
+    }
   </section>
 </main>

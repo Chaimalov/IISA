@@ -1,6 +1,7 @@
 import { Type } from '@angular/core';
 import { Routes } from '@angular/router';
 import { NOT_ALLOWED_ERROR } from '../edit-application/edit-application.guard';
+import { CamelCase } from 'src/lib/helpers.types';
 
 const loadComponent = (): Promise<Type<unknown>> => import('./error.component').then((m) => m.ErrorComponent);
 
@@ -9,7 +10,7 @@ export const ERROR_ROUTES = [
     path: 'IS-404',
     loadComponent,
     data: {
-      error: 'No application found for this email.',
+      error: 'No application found for this email',
       message: 'Please check your entry or start a new mission dossier.',
     },
   },
@@ -25,7 +26,7 @@ export const ERROR_ROUTES = [
     path: '**',
     loadComponent,
     data: {
-      error: 'Something went wrong.',
+      error: 'Something went wrong',
       message: 'Please try again later.',
     },
   },
@@ -33,7 +34,7 @@ export const ERROR_ROUTES = [
 
 export type ErrorCode = (typeof ERROR_ROUTES)[number]['path'];
 export const ErrorCode = {
-  'Application cannot be edited after 3 days.': 'IS-401',
-  'No application found for this email.': 'IS-404',
-  'Something went wrong.': '**',
-} as const satisfies Record<(typeof ERROR_ROUTES)[number]['data']['error'], ErrorCode>;
+  applicationCannotBeEditedAfter3Days: 'IS-401',
+  noApplicationFoundForThisEmail: 'IS-404',
+  somethingWentWrong: '**',
+} as const satisfies Record<CamelCase<(typeof ERROR_ROUTES)[number]['data']['error']>, ErrorCode>;

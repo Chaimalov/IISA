@@ -5,19 +5,21 @@ export type ApplicationFormControls = {
   [K in keyof Application]: AbstractControl<Application[K]>;
 };
 
-const defaultApplication: Application = {
-  avatar: null,
-  city_region: '',
-  date_of_birth: '',
-  email: '',
-  full_name: '',
-  hobbies: [],
-  personal_statement: '',
-  phone_number: '',
-};
+function getDefaultApplication(): Application {
+  return {
+    avatar: null,
+    city_region: '',
+    date_of_birth: '',
+    email: '',
+    full_name: '',
+    hobbies: [],
+    personal_statement: '',
+    phone_number: '',
+  };
+}
 
 export class ApplicationFormGroup extends FormGroup {
-  public constructor(initial = defaultApplication) {
+  public constructor(initial = getDefaultApplication()) {
     super({
       avatar: new FormControl<string | null>(initial.avatar, { nonNullable: true }),
       full_name: new FormControl(initial.full_name, { nonNullable: true, validators: [Validators.required] }),

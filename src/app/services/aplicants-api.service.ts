@@ -12,7 +12,7 @@ type Filter = Pick<Applicant, 'full_name' | 'email' | 'phone_number' | 'age'>;
 @Injectable({
   providedIn: 'root',
 })
-export class DalService {
+export class ApplicantsApiService {
   #supabase = createClient<Database>(environment.supabaseUrl, environment.supabaseKey);
 
   public listen(): Observable<Applicant> {
@@ -99,7 +99,7 @@ export class DalService {
     return this.#supabase.from('applicants').delete().eq('id', entity.id).then();
   }
 
-  public async uploadImage(file: ICustomFile): Promise<string | null> {
+  public async upload(file: ICustomFile): Promise<string | null> {
     const fileExt = file.name.split('.').pop();
     const filePath = `${v4()}/avatar.${fileExt}`;
 
