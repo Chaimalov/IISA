@@ -1,0 +1,7 @@
+.mat-mdc-tooltip-surface {
+  @apply !bg-surface-1 !rounded !text-center shadow;
+}
+
+.mat-mdc-tooltip {
+  @apply text-sm text-balance w-fit;
+}

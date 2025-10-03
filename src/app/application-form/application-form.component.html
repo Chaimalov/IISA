@@ -86,13 +86,14 @@
           (click)="dialog.showModal()"
           class="underline cursor-pointer hover:brightness-110 text-surface-3"
         >
-          Terms of Service</button
-        ><br />(and understand this is all imaginary).</span
+          Terms of Service
+        </button></span
       >
     </label>
 
     <button
       type="submit"
+      [matTooltip]="form.invalid ? 'Complete form to launch' : ''"
       class="button button__bold place-self-center capitalize"
       [class.opacity-50]="form.invalid"
     >

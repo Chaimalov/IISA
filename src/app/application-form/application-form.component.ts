@@ -11,6 +11,8 @@ import { CommunicationProtocolsComponent } from './communication-protocols/commu
 import { PersonalOrbitComponent } from './personal-orbit/personal-orbit.component';
 import { PersonalStatementComponent } from './personal-statement/personal-statement.component';
 import { MarkdownComponent } from 'ngx-markdown';
+import { MatTooltip} from '@angular/material/tooltip';
+
 
 @Component({
   selector: 'iisa-application-form',
@@ -25,6 +27,7 @@ import { MarkdownComponent } from 'ngx-markdown';
     PersonalOrbitComponent,
     PersonalStatementComponent,
     MarkdownComponent,
+    MatTooltip
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

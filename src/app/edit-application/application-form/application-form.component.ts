@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, input, computed, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ApplicantStore } from '@IISA/services';
 import { PostgrestError } from '@supabase/supabase-js';
 import { ApplicationFormGroup } from 'src/app/application-form/application-form';
@@ -19,6 +19,7 @@ import { PersonalStatementComponent } from 'src/app/application-form/personal-st
     CommunicationProtocolsComponent,
     PersonalOrbitComponent,
     PersonalStatementComponent,
+    RouterLink,
   ],
   templateUrl: './application-form.component.html',
   host: {

@@ -1,5 +1,9 @@
+@utility view-* {
+  --tw-animation-timeline-direction: --value('block', 'inline', 'x', 'y');
+}
+
 @utility timeline-view {
-  animation-timeline: view();
+  animation-timeline: view(var(--tw-animation-timeline-direction, block));
 }
 
 @utility timeline-scroll {

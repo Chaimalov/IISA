@@ -6,7 +6,8 @@
 @import './styles/components.css';
 @import './styles/animation-timeline.css';
 @import './styles/snackbar.css';
+@import './styles/tooltip.css';
 
 :root {
-  @apply snap-proximity snap-y scheme-light-dark scroll-smooth snap-always data-theme=dark:scheme-dark data-theme=light:scheme-light min-h-dvh;
+  @apply snap-proximity snap-y scheme-light-dark scroll-smooth snap-always data-theme=dark:scheme-dark data-theme=light:scheme-light min-h-dvh accent-surface-3;
 }

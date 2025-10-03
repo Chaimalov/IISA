@@ -19,18 +19,24 @@
 
   <button
     (click)="colorScheme.toggle()"
+    (dblclick)="colorScheme.mode.set('system')"
     class="button"
     name="toggle-color-scheme"
   >
-    @if (colorScheme.theme() === 'dark') {
+    @if (colorScheme.mode() === 'dark') {
       <lucide-icon
         class="align-middle"
         name="sun"
       ></lucide-icon>
-    } @else {
+    } @else if (colorScheme.mode() === 'light') {
       <lucide-icon
         class="align-middle"
         name="moon"
+      ></lucide-icon>
+    } @else {
+      <lucide-icon
+        class="align-middle"
+        name="sun-moon"
       ></lucide-icon>
     }
   </button>
