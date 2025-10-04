@@ -21,7 +21,8 @@
     "module": "ES2022",
     "paths": {
       "@IISA/services": ["src/app/services/index.ts"],
-      "@IISA/lib": ["src/lib/index.ts"]
+      "@IISA/lib": ["src/lib/index.ts"],
+      "@IISA/pages": ["src/app/pages/index.ts"]
     }
   },
   "angularCompilerOptions": {

@@ -1,36 +1,41 @@
 import { computed, Directive, inject } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-import { BaseChart } from './base-chart';
+import { Chart } from './chart';
 import { ApplicantStore } from '@IISA/services';
 
 @Directive({
-  selector: '[iisaAgeChart]',
+  selector: '[iisaHobbyChart]',
   hostDirectives: [BaseChartDirective],
 })
-export class AgeChartDirective extends BaseChart {
+export class HobbyChartDirective extends Chart {
   private store = inject(ApplicantStore);
 
   protected readonly chart = computed(() => {
     const { backgroundColor, borderColor, textColor } = this.colors();
 
-    const entries = this.store.applicants().reduce(
-      (acc, applicant) => {
-        acc[applicant.age] = (acc[applicant.age] || 0) + 1;
+    const allHobbies = this.store.applicants().flatMap((c) => c.hobbies);
+    const counts = allHobbies.reduce(
+      (acc, hobby) => {
+        if (hobby) {
+          acc[hobby] = (acc[hobby] || 0) + 1;
+        }
+
         return acc;
       },
-      {} as Record<number, number>,
+      {} as Record<string, number>,
     );
+
+    const sortedHobbies = Object.entries(counts).sort(([, aCount], [, bCount]) => bCount - aCount);
 
     return {
       type: 'bar',
       data: {
-        yLabels: Object.values(entries) as unknown as string[],
-        xLabels: Object.keys(entries),
+        labels: sortedHobbies.map(([hobby]) => hobby),
         datasets: [
           {
-            label: 'Applicants',
-            data: Object.values(entries),
+            label: 'Hobby Popularity',
+            data: sortedHobbies.map(([, count]) => count),
             backgroundColor,
             borderColor,
             borderRadius: 4,
@@ -39,6 +44,7 @@ export class AgeChartDirective extends BaseChart {
         ],
       },
       options: {
+        indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -47,20 +53,18 @@ export class AgeChartDirective extends BaseChart {
               color: textColor,
             },
             title: {
-              text: 'Age',
+              text: 'Popularity',
               align: 'center',
               display: true,
               color: textColor,
             },
-            type: 'linear',
           },
           y: {
             ticks: {
               color: textColor,
-              stepSize: 1,
             },
             title: {
-              text: 'Amount',
+              text: 'Hobby',
               align: 'center',
               display: true,
               color: textColor,

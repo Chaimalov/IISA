@@ -4,11 +4,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterLink } from '@angular/router';
 import { ApplicantStore } from '@IISA/services';
 import { PostgrestError } from '@supabase/supabase-js';
-import { ApplicationFormGroup } from 'src/app/application-form/application-form';
-import { AstronautIdentityComponent } from 'src/app/application-form/astronaut-identity/astronaut-identity.component';
-import { CommunicationProtocolsComponent } from 'src/app/application-form/communication-protocols/communication-protocols.component';
-import { PersonalOrbitComponent } from 'src/app/application-form/personal-orbit/personal-orbit.component';
-import { PersonalStatementComponent } from 'src/app/application-form/personal-statement/personal-statement.component';
+import { ApplicationFormGroup } from 'src/app/components/application-form/application-form';
+import { AstronautIdentityComponent } from 'src/app/components/application-form/astronaut-identity/astronaut-identity.component';
+import { CommunicationProtocolsComponent } from 'src/app/components/application-form/communication-protocols/communication-protocols.component';
+import { PersonalOrbitComponent } from 'src/app/components/application-form/personal-orbit/personal-orbit.component';
+import { PersonalStatementComponent } from 'src/app/components/application-form/personal-statement/personal-statement.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { CanActivateFn, RedirectCommand, Router } from '@angular/router';
 import { Applicant } from '@IISA/lib';
 import { ApplicantStore } from '@IISA/services';
-import { ErrorCode } from '../error/error.routes';
+import { ErrorCode } from '../../error.routes';
 
 export const DAYS = 3;
 

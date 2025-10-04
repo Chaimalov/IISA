@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApplicantStore } from '@IISA/services';
-import { ErrorCode } from '../error/error.routes';
+import { ErrorCode } from '../../error.routes';
 import { DAYS } from './edit-application.guard';
 
 @Component({

@@ -4,15 +4,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterLink } from '@angular/router';
 import { PostgrestError } from '@supabase/supabase-js';
 import { FileInputAccessorModule } from 'file-input-accessor';
-import { ApplicantStore } from '../services/applicants.store';
+import { ApplicantStore } from '../../services/applicants.store';
 import { ApplicationFormGroup } from './application-form';
 import { AstronautIdentityComponent } from './astronaut-identity/astronaut-identity.component';
 import { CommunicationProtocolsComponent } from './communication-protocols/communication-protocols.component';
 import { PersonalOrbitComponent } from './personal-orbit/personal-orbit.component';
 import { PersonalStatementComponent } from './personal-statement/personal-statement.component';
 import { MarkdownComponent } from 'ngx-markdown';
-import { MatTooltip} from '@angular/material/tooltip';
-
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'iisa-application-form',
@@ -27,7 +26,7 @@ import { MatTooltip} from '@angular/material/tooltip';
     PersonalOrbitComponent,
     PersonalStatementComponent,
     MarkdownComponent,
-    MatTooltip
+    MatTooltip,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

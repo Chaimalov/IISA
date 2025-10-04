@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { rxResource } from '@angular/core/rxjs-interop';
 import { ApplicantStore, ColorSchemeService, GeocodingService } from '@IISA/services';
 import { MapComponent as MaplibreComponent, MarkerComponent, PopupComponent } from '@maplibre/ngx-maplibre-gl';
-import { forkJoin } from 'rxjs';
+import { forkJoin, map } from 'rxjs';
 
 @Component({
   selector: 'iisa-map',
@@ -26,14 +26,15 @@ export class MapComponent {
     loader: ({ request }) => {
       return forkJoin(
         request.map((applicant) => {
-          return this.geocoder.getLocation(applicant.city_region).then((res) => {
-            return {
-              applicant,
-              location: res.results[0].geometry.location as unknown as google.maps.LatLngLiteral,
-            };
-          });
+          return this.geocoder
+            .getLocation(applicant.city_region)
+            .then((marker) => marker?.toPoint(applicant))
+            .catch((error) => {
+              console.error(error);
+              return null;
+            });
         }),
-      );
+      ).pipe(map((markers) => markers.filter((marker) => !!marker)));
     },
   });
 }

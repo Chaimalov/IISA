@@ -10,9 +10,9 @@ import {
   colorSchemeLight,
   themeQuartz,
 } from 'ag-grid-community';
-import { Applicant } from '../../../lib/applicant.types';
-import { ColorSchemeService } from '../../services/color-scheme.service';
-import { ApplicantStore } from '../../services/applicants.store';
+import { Applicant } from '../../../../lib/applicant.types';
+import { ColorSchemeService } from '../../../services/color-scheme.service';
+import { ApplicantStore } from '../../../services/applicants.store';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 

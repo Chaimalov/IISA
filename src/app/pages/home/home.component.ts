@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ApplicationFormComponent } from '../application-form/application-form.component';
-import { ColorSchemeService } from '../services/color-scheme.service';
+import { ApplicationFormComponent } from '../../components/application-form/application-form.component';
+import { ColorSchemeService } from '../../services/color-scheme.service';
 
 const className = 'grid gap-4 place-items-center p-8 *:max-w-lg text-balance place-self-center';
 

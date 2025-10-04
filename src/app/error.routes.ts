@@ -1,9 +1,10 @@
 import { Type } from '@angular/core';
 import { Routes } from '@angular/router';
-import { NOT_ALLOWED_ERROR } from '../edit-application/edit-application.guard';
+import { NOT_ALLOWED_ERROR } from './pages/edit-application/edit-application.guard';
 import { CamelCase } from 'src/lib/helpers.types';
 
-const loadComponent = (): Promise<Type<unknown>> => import('./error.component').then((m) => m.ErrorComponent);
+const loadComponent = (): Promise<Type<unknown>> =>
+  import('./pages/error/error.component').then((m) => m.ErrorComponent);
 
 export const ERROR_ROUTES = [
   {

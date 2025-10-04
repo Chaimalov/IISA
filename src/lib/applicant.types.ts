@@ -1,3 +1,4 @@
+import { Prettify } from '@ngrx/signals';
 import { Tables } from './database.types';
 import { RemoveNullExcept } from './helpers.types';
 
@@ -5,7 +6,7 @@ type Nullables<T> = {
   [P in keyof T]: null extends T[P] ? P : never;
 }[keyof T];
 
-export type Applicant = RemoveNullExcept<Tables<'applicants_with_age'>, Nullables<Tables<'applicants'>>>;
+export type Applicant = Prettify<RemoveNullExcept<Tables<'applicants_with_age'>, Nullables<Tables<'applicants'>>>>;
 
 export type Application = Omit<
   Tables<'applicants'>,

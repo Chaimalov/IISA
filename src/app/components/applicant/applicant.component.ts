@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { Applicant } from '../../lib/applicant.types';
+import { Applicant } from '../../../lib/applicant.types';
 import { MatIcon } from '@angular/material/icon';
 import { DatePipe } from '@angular/common';
 

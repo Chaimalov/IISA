@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApplicantComponent } from '../applicant/applicant.component';
-import { ApplicantStore } from '../services/applicants.store';
+import { ApplicantComponent } from '../../components/applicant/applicant.component';
+import { ApplicantStore } from '../../services/applicants.store';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs';
 

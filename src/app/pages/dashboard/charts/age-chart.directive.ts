@@ -1,41 +1,36 @@
 import { computed, Directive, inject } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-import { BaseChart } from './base-chart';
+import { Chart } from './chart';
 import { ApplicantStore } from '@IISA/services';
 
 @Directive({
-  selector: '[iisaHobbyChart]',
+  selector: '[iisaAgeChart]',
   hostDirectives: [BaseChartDirective],
 })
-export class HobbyChartDirective extends BaseChart {
+export class AgeChartDirective extends Chart {
   private store = inject(ApplicantStore);
 
   protected readonly chart = computed(() => {
     const { backgroundColor, borderColor, textColor } = this.colors();
 
-    const allHobbies = this.store.applicants().flatMap((c) => c.hobbies);
-    const counts = allHobbies.reduce(
-      (acc, hobby) => {
-        if (hobby) {
-          acc[hobby] = (acc[hobby] || 0) + 1;
-        }
-
+    const entries = this.store.applicants().reduce(
+      (acc, applicant) => {
+        acc[applicant.age] = (acc[applicant.age] || 0) + 1;
         return acc;
       },
-      {} as Record<string, number>,
+      {} as Record<number, number>,
     );
-
-    const sortedHobbies = Object.entries(counts).sort(([, aCount], [, bCount]) => bCount - aCount);
 
     return {
       type: 'bar',
       data: {
-        labels: sortedHobbies.map(([hobby]) => hobby),
+        yLabels: Object.values(entries) as unknown as string[],
+        xLabels: Object.keys(entries),
         datasets: [
           {
-            label: 'Hobby Popularity',
-            data: sortedHobbies.map(([, count]) => count),
+            label: 'Applicants',
+            data: Object.values(entries),
             backgroundColor,
             borderColor,
             borderRadius: 4,
@@ -44,7 +39,6 @@ export class HobbyChartDirective extends BaseChart {
         ],
       },
       options: {
-        indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -53,18 +47,20 @@ export class HobbyChartDirective extends BaseChart {
               color: textColor,
             },
             title: {
-              text: 'Popularity',
+              text: 'Age',
               align: 'center',
               display: true,
               color: textColor,
             },
+            type: 'linear',
           },
           y: {
             ticks: {
               color: textColor,
+              stepSize: 1,
             },
             title: {
-              text: 'Hobby',
+              text: 'Amount',
               align: 'center',
               display: true,
               color: textColor,

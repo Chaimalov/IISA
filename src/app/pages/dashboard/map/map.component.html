@@ -4,17 +4,17 @@
   [zoom]="[6]"
   class="block h-full"
 >
-  @for (marker of markers.value(); track marker.applicant.id) {
+  @for (marker of markers.value(); track marker.properties.id) {
     <mgl-marker
       #markerElement
-      [lngLat]="[marker.location.lng, marker.location.lat]"
+      [feature]="marker"
     >
     </mgl-marker>
     <mgl-popup
       [marker]="markerElement"
       [closeButton]="false"
     >
-      {{ marker.applicant.full_name }}
+      {{ marker.properties.full_name }}
     </mgl-popup>
   }
 </mgl-map>
