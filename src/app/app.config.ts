@@ -17,6 +17,7 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding(),
       withInMemoryScrolling({
         anchorScrolling: 'enabled',
+        scrollPositionRestoration: 'top',
       }),
     ),
   ],

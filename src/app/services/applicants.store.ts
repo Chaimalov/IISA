@@ -27,7 +27,7 @@ export const ApplicantStore = signalStore(
       search: (email: Applicant['email']): Promise<Applicant> => api.loadByEmail(email),
       create: (application: Application): Promise<Applicant> => api.create(application),
       update: (application: Application & Pick<Applicant, 'id'>): Promise<Applicant> => api.update(application),
-      delete: (application: Applicant): Promise<void> => api.delete(application),
+      delete: (id: Applicant['id']): Promise<void> => api.delete(id),
       get: (id: Applicant['id']): Applicant | undefined => store.entityMap()[id],
     };
   }),

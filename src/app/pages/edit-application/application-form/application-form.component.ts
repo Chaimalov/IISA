@@ -58,4 +58,9 @@ export class EditApplicationFormComponent {
       }
     }
   }
+
+  protected async delete(): Promise<void> {
+    this.store.delete(this.id());
+    this.router.navigate(['']);
+  }
 }

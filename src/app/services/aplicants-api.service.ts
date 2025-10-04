@@ -95,8 +95,8 @@ export class ApplicantsApiService {
     return this.load();
   }
 
-  public async delete(entity: Applicant): Promise<void> {
-    return this.#supabase.from('applicants').delete().eq('id', entity.id).then();
+  public async delete(id: Applicant['id']): Promise<void> {
+    return this.#supabase.from('applicants').delete().eq('id', id).then();
   }
 
   public async upload(file: ICustomFile): Promise<string | null> {

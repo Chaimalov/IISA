@@ -10,11 +10,11 @@
 
   <section class="flex gap-2">
     <button
-      type="submit"
-      class="button button__bold place-self-center capitalize"
-      [class.opacity-50]="form().invalid"
+      type="button"
+      class="button button__bold bg-red-400 place-self-center capitalize me-auto"
+      (click)="dialog.showModal()"
     >
-      Save Changes
+      Delete Application
     </button>
 
     <a
@@ -23,5 +23,41 @@
     >
       Cancel
     </a>
+
+    <button
+      type="submit"
+      class="button button__bold place-self-center capitalize"
+      [class.opacity-50]="form().invalid"
+    >
+      Save Changes
+    </button>
   </section>
 </form>
+
+<dialog
+  #dialog
+  closedby="any"
+  class="place-self-center m-4 open:grid grid-rows-[auto_1fr] not-open:backdrop:opacity-0 backdrop:transition-opacity open:scale-100 open:opacity-100 starting:open:scale-80 scale-80 starting:open:opacity-0 opacity-0 transition-all transition-discrete bg-canvas border-surface-1 border max-w-md max-h-[80vh] backdrop:bg-canvas/50 p-8 rounded-xl shadow-xl"
+>
+  <header class="py-4">
+    <h1 class="text-xl font-bold">Are you sure you want to abort this mission?</h1>
+  </header>
+
+  <p>Once deleted, your application will be lost in the void of space and cannot be recovered.</p>
+
+  <footer class="flex gap-2 justify-end pt-4">
+    <button
+      (click)="dialog.close()"
+      class="button button__light"
+      autofocus
+    >
+      Return to Safety
+    </button>
+    <button
+      (click)="delete()"
+      class="button button__bold bg-red-400"
+    >
+      Delete Application
+    </button>
+  </footer>
+</dialog>
