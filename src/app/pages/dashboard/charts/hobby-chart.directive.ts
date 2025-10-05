@@ -14,7 +14,7 @@ export class HobbyChartDirective extends Chart {
   protected readonly chart = computed(() => {
     const { backgroundColor, borderColor, textColor } = this.colors();
 
-    const allHobbies = this.store.applicants().flatMap((c) => c.hobbies);
+    const allHobbies = this.store.applicants.value().flatMap((c) => c.hobbies);
     const counts = allHobbies.reduce(
       (acc, hobby) => {
         if (hobby) {

@@ -27,11 +27,11 @@ export class CandidatesComponent {
     const query = this.debouncedSearchQuery();
 
     if (!query) {
-      return this.store.applicants();
+      return this.store.applicants.value();
     }
 
-    return this.store
-      .applicants()
+    return this.store.applicants
+      .value()
       .filter((applicant) => applicant.full_name.toLowerCase().includes(query.toLowerCase().trim()));
   });
 }

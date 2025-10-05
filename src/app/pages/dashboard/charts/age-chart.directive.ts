@@ -14,7 +14,7 @@ export class AgeChartDirective extends Chart {
   protected readonly chart = computed(() => {
     const { backgroundColor, borderColor, textColor } = this.colors();
 
-    const entries = this.store.applicants().reduce(
+    const entries = this.store.applicants.value().reduce(
       (acc, applicant) => {
         acc[applicant.age] = (acc[applicant.age] || 0) + 1;
         return acc;

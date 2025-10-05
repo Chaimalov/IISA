@@ -33,7 +33,7 @@ export class EditApplicationFormComponent {
 
   public readonly id = input.required<string>();
 
-  private readonly applicant = computed(() => this.store.get(this.id()));
+  private readonly applicant = computed(() => this.store.applicants.value().find(({ id }) => id === this.id()));
   protected readonly form = computed(() => new ApplicationFormGroup(this.applicant()));
 
   protected async submit(): Promise<void> {
