@@ -2,7 +2,7 @@
 
 import { Injectable } from '@angular/core';
 import { importLibrary, setOptions } from '@googlemaps/js-api-loader';
-import { GOOGLE_API_KEY } from '../../environments/environment';
+import { GOOGLE_API_KEY } from '../../environment';
 import { point } from '@turf/helpers';
 import { Feature, Point, Position } from 'geojson';
 

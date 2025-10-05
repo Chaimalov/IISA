@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import { ICustomFile } from 'file-input-accessor';
 import { Observable, Observer } from 'rxjs';
 import { v4 } from 'uuid';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environment';
 import { Database } from '../../lib/database.types';
 import { Applicant, Application } from '../../lib/applicant.types';
 
