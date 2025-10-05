@@ -22,7 +22,8 @@
     "paths": {
       "@IISA/services": ["src/app/services/index.ts"],
       "@IISA/lib": ["src/lib/index.ts"],
-      "@IISA/pages": ["src/app/pages/index.ts"]
+      "@IISA/pages": ["src/app/pages/index.ts"],
+      "@IISA/components": ["src/app/components/index.ts"]
     }
   },
   "angularCompilerOptions": {

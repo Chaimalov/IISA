@@ -14,14 +14,14 @@ const openFreeMapUrl = 'https://tiles.openfreemap.org/styles/';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent {
-  private applicants = inject(ApplicantStore).applicants.value;
+  private store = inject(ApplicantStore);
   private geocoder = inject(GeocodingService);
   private colorScheme = inject(ColorSchemeService);
 
   protected readonly style = computed(() => openFreeMapUrl + (this.colorScheme.isDark() ? 'fiord' : 'liberty'));
 
   protected markers = rxResource({
-    request: this.applicants,
+    request: this.store.applicants.value,
     loader: ({ request }) => {
       return forkJoin(
         request.map((applicant) => {
