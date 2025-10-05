@@ -24,14 +24,12 @@ export class CandidatesComponent {
   private readonly debouncedSearchQuery = toSignal(toObservable(this.searchQuery).pipe(debounceTime(200)));
 
   protected readonly filteredApplicants = computed(() => {
-    const query = this.debouncedSearchQuery();
+    const query = this.debouncedSearchQuery()?.toLowerCase().trim();
 
     if (!query) {
       return this.store.applicants.value();
     }
 
-    return this.store.applicants
-      .value()
-      .filter((applicant) => applicant.full_name.toLowerCase().includes(query.toLowerCase().trim()));
+    return this.store.applicants.value().filter((applicant) => applicant.full_name.toLowerCase().includes(query));
   });
 }
