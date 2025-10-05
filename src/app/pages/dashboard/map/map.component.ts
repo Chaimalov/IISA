@@ -17,7 +17,7 @@ export class MapComponent {
   private geocoder = inject(GeocodingService);
   private colorScheme = inject(ColorSchemeService);
 
-  protected readonly style = computed(() => (openFreeMapUrl + this.colorScheme.isDark() ? 'fiord' : 'liberty'));
+  protected readonly style = computed(() => openFreeMapUrl + (this.colorScheme.isDark() ? 'fiord' : 'liberty'));
 
   protected markers = rxResource({
     request: this.applicants,
