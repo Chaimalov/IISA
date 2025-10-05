@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { rxResource } from '@angular/core/rxjs-interop';
 import { ApplicantStore, ColorSchemeService, GeocodingService } from '@IISA/services';
 import { MapComponent as MaplibreComponent, MarkerComponent, PopupComponent } from '@maplibre/ngx-maplibre-gl';
+import { point } from '@turf/helpers';
 import { forkJoin, map } from 'rxjs';
 
 const openFreeMapUrl = 'https://tiles.openfreemap.org/styles/';
@@ -26,7 +27,7 @@ export class MapComponent {
         request.map((applicant) => {
           return this.geocoder
             .getLocation(applicant.city_region)
-            .then((marker) => marker?.toPoint(applicant))
+            .then((position) => (position ? point(position, applicant) : null))
             .catch((error) => {
               console.error(error);
               return null;
