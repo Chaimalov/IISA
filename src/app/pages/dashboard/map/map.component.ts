@@ -11,7 +11,7 @@ import { forkJoin, map } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent {
-  private applicants = inject(ApplicantStore).entities;
+  private applicants = inject(ApplicantStore).applicants.value;
   private geocoder = inject(GeocodingService);
   private colorScheme = inject(ColorSchemeService);
 

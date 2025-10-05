@@ -23,7 +23,7 @@ ModuleRegistry.registerModules([AllCommunityModule]);
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApplicantsTableComponent {
-  public applicants = inject(ApplicantStore).applicants;
+  public applicants = inject(ApplicantStore).applicants.value;
   public colorScheme = inject(ColorSchemeService);
   protected dataSource = new MatTableDataSource();
 

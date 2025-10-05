@@ -1,6 +1,6 @@
 import { Type } from '@angular/core';
 import { Routes } from '@angular/router';
-import { NOT_ALLOWED_ERROR } from './pages/edit-application/edit-application.guard';
+import { EDIT_NOT_ALLOWED_ERROR } from './pages/edit-application/edit-application.guard';
 import { CamelCase } from 'src/lib/helpers.types';
 
 const loadComponent = (): Promise<Type<unknown>> =>
@@ -19,7 +19,7 @@ export const ERROR_ROUTES = [
     path: 'IS-401',
     loadComponent,
     data: {
-      error: NOT_ALLOWED_ERROR,
+      error: EDIT_NOT_ALLOWED_ERROR,
       message: '',
     },
   },

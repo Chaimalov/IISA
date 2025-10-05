@@ -14,7 +14,7 @@ export class DateChartDirective extends Chart {
   protected readonly chart = computed(() => {
     const { backgroundColor, borderColor, textColor } = this.colors();
 
-    const entries = this.store.applicants().reduce(
+    const entries = this.store.applicants.value().reduce(
       (acc, applicant) => {
         const date = new Date(applicant.created_at).toLocaleString('default', {
           month: 'long',

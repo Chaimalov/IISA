@@ -15,12 +15,12 @@ type Filter = Pick<Applicant, 'full_name' | 'email' | 'phone_number' | 'age'>;
 export class ApplicantsApiService {
   #supabase = createClient<Database>(environment.supabaseUrl, environment.supabaseKey);
 
-  public listen(): Observable<Applicant> {
-    return new Observable((observer: Observer<Applicant>) => {
+  public listen(): Observable<void> {
+    return new Observable((observer: Observer<void>) => {
       this.#supabase
         .channel('public')
-        .on('postgres_changes', { event: '*', schema: 'public', table: 'applicants' }, (payload) => {
-          observer.next(payload.new as Applicant);
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'applicants' }, () => {
+          observer.next();
         })
         .subscribe();
 
