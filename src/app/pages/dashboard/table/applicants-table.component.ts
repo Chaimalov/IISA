@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { Applicant } from '@IISA/lib';
+import { ApplicantStore, ColorSchemeService } from '@IISA/services';
 import { AgGridAngular } from 'ag-grid-angular';
 import {
   AllCommunityModule,
@@ -10,9 +12,6 @@ import {
   colorSchemeLight,
   themeQuartz,
 } from 'ag-grid-community';
-import { Applicant } from '../../../../lib/applicant.types';
-import { ApplicantStore } from '../../../services/applicants.store';
-import { ColorSchemeService } from '../../../services/color-scheme.service';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -27,7 +26,7 @@ export class ApplicantsTableComponent {
   public colorScheme = inject(ColorSchemeService);
 
   protected readonly theme = computed(() =>
-    themeQuartz.withPart(this.colorScheme.theme() === 'dark' ? colorSchemeDarkBlue : colorSchemeLight),
+    themeQuartz.withPart(this.colorScheme.isDark() ? colorSchemeDarkBlue : colorSchemeLight),
   );
 
   protected options = {

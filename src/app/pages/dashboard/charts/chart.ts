@@ -13,11 +13,17 @@ export abstract class Chart {
   protected abstract chart: Signal<ChartConfiguration>;
 
   protected readonly colors = computed(() => {
-    return {
-      textColor: this.colorScheme.theme() === 'dark' ? 'white' : 'black',
-      backgroundColor: this.colorScheme.theme() === 'dark' ? COLOR_3 : COLOR_2,
-      borderColor: this.colorScheme.theme() === 'dark' ? COLOR_2 : COLOR_3,
-    };
+    return this.colorScheme.isDark()
+      ? {
+          textColor: 'white',
+          backgroundColor: COLOR_3,
+          borderColor: COLOR_2,
+        }
+      : {
+          textColor: 'black',
+          backgroundColor: COLOR_2,
+          borderColor: COLOR_3,
+        };
   });
 
   public constructor() {

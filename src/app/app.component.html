@@ -23,21 +23,25 @@
     class="button"
     name="toggle-color-scheme"
   >
-    @if (colorScheme.mode() === 'dark') {
-      <lucide-icon
-        class="align-middle"
-        name="sun"
-      ></lucide-icon>
-    } @else if (colorScheme.mode() === 'light') {
-      <lucide-icon
-        class="align-middle"
-        name="moon"
-      ></lucide-icon>
-    } @else {
-      <lucide-icon
-        class="align-middle"
-        name="sun-moon"
-      ></lucide-icon>
+    @switch (colorScheme.mode()) {
+      @case ('dark') {
+        <lucide-icon
+          class="align-middle"
+          name="sun"
+        ></lucide-icon>
+      }
+      @case ('light') {
+        <lucide-icon
+          class="align-middle"
+          name="moon"
+        ></lucide-icon>
+      }
+      @case ('system') {
+        <lucide-icon
+          class="align-middle"
+          name="sun-moon"
+        ></lucide-icon>
+      }
     }
   </button>
 </nav>

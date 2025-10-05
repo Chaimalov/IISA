@@ -4,6 +4,8 @@ import { ApplicantStore, ColorSchemeService, GeocodingService } from '@IISA/serv
 import { MapComponent as MaplibreComponent, MarkerComponent, PopupComponent } from '@maplibre/ngx-maplibre-gl';
 import { forkJoin, map } from 'rxjs';
 
+const openFreeMapUrl = 'https://tiles.openfreemap.org/styles/';
+
 @Component({
   selector: 'iisa-map',
   templateUrl: './map.component.html',
@@ -15,11 +17,7 @@ export class MapComponent {
   private geocoder = inject(GeocodingService);
   private colorScheme = inject(ColorSchemeService);
 
-  protected readonly style = computed(() =>
-    this.colorScheme.theme() === 'dark'
-      ? 'https://tiles.openfreemap.org/styles/fiord'
-      : 'https://tiles.openfreemap.org/styles/liberty',
-  );
+  protected readonly style = computed(() => (openFreeMapUrl + this.colorScheme.isDark() ? 'fiord' : 'liberty'));
 
   protected markers = rxResource({
     request: this.applicants,

@@ -36,14 +36,15 @@ export class ColorSchemeService {
     return mode;
   });
 
+  public readonly isDark = computed(() => this.theme() === 'dark');
+  public readonly isLight = computed(() => this.theme() === 'light');
+
   public constructor() {
     effect(() => {
       document.documentElement.dataset['theme'] = this.theme();
     });
 
-    effect(() => {
-      this.setTheme();
-    });
+    effect(() => this.setTheme());
   }
 
   private getTheme(): ColorMode {
