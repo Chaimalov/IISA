@@ -16,12 +16,17 @@
   }
 </article>
 
-<form class="place-self-center-safe max-w-md p-8 w-full">
+<form class="place-self-center-safe max-w-md p-8 relative w-full">
   <input
+    #searchInput
     type="search"
-    class="input px-4 rounded-4xl"
+    class="input px-4 rounded-4xl [&::-webkit-search-cancel-button]:!opacity-0 md:[&+*]:after:content-['⌘K'] md:focus:[&+*]:after:content-['Esc']"
     placeholder="Search by name..."
+    (window:keydown.meta.k)="searchInput.focus()"
     [(ngModel)]="searchQuery"
     [ngModelOptions]="{ standalone: true }"
   />
+  <kbd
+    class="hidden md:block text-xs/4 pointer-events-none font-mono text-surface-4/50 absolute inset-12 start-auto after:border after:border-current after:rounded after:px-1 after:py-0.5"
+  ></kbd>
 </form>

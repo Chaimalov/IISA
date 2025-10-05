@@ -9,6 +9,7 @@
       background-color: color-mix(in hsl, var(--color-surface-4), transparent 75%);
       border: none;
       cursor: pointer;
+      z-index: 10;
     }
 
     &::scroll-button(*):disabled {
