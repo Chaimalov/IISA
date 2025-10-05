@@ -4,11 +4,13 @@ import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@ang
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ControlContainer, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
 import { FileInputAccessorModule, ICustomFile } from 'file-input-accessor';
-import { concatMap, filter, merge, Subject, tap } from 'rxjs';
+import { LucideAngularModule } from 'lucide-angular';
+import { catchError, EMPTY, filter, finalize, from, merge, Subject, switchMap, tap } from 'rxjs';
+import { ApplicationFormControls } from '../application-form';
 import { ErrorMessageDirective } from '../directives/error-message.directive';
 import { RequiredInputDirective } from '../directives/required.directive';
-import { ApplicationFormControls } from '../application-form';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,6 +23,8 @@ import { ApplicationFormControls } from '../application-form';
     MatIcon,
     RequiredInputDirective,
     FileInputAccessorModule,
+    LucideAngularModule,
+    MatTooltip,
   ],
   viewProviders: [
     {
@@ -50,21 +54,22 @@ export class AstronautIdentityComponent implements OnInit {
     toObservable(this.avatar.value).pipe(
       filter(Boolean),
       tap(() => this.avatar.loading.set(true)),
-      concatMap((file) => this.store.upload(file[0])),
-      tap({
-        error: () => {
-          this.avatar.error.set('Something went wrong');
-          this.avatar.loading.set(false);
-        },
-        next: (url) => {
-          this.avatar.error.set(undefined);
-          this.avatar.loading.set(false);
+      switchMap((file) =>
+        from(this.store.upload(file[0])).pipe(
+          tap({
+            error: () => {
+              this.avatar.error.set('Something went wrong');
+            },
+            next: (url) => {
+              this.avatar.error.set(undefined);
 
-          this.control.controls.avatar.setValue(url);
-
-          return url;
-        },
-      }),
+              this.control.controls.avatar.setValue(url);
+            },
+          }),
+          catchError(() => EMPTY),
+          finalize(() => this.avatar.loading.set(false)),
+        ),
+      ),
     ),
   );
 

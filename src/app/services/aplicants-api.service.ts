@@ -108,8 +108,7 @@ export class ApplicantsApiService {
     });
 
     if (error) {
-      console.error('Error uploading avatar:', error.message);
-      return null;
+      throw new Error('Error uploading avatar:' + error.message, error);
     }
 
     return this.#supabase.storage.from('avatars').getPublicUrl(filePath).data.publicUrl;
