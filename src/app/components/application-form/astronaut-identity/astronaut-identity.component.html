@@ -12,6 +12,12 @@
       class="!block"
       svgIcon="spinner"
     ></mat-icon>
+  } @else if (avatar.error()) {
+    <lucide-icon
+      name="triangle-alert"
+      class="block text-red-400 size-8"
+      [matTooltip]="avatar.error()"
+    ></lucide-icon>
   } @else {
     <mat-icon
       class="!size-full"
