@@ -6,11 +6,10 @@ import { ControlContainer, FormGroup, FormsModule, ReactiveFormsModule } from '@
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 import { FileInputAccessorModule, ICustomFile } from 'file-input-accessor';
-import { LucideAngularModule } from 'lucide-angular';
-import { catchError, EMPTY, filter, finalize, from, merge, Subject, switchMap, tap } from 'rxjs';
-import { ApplicationFormControls } from '../application-form';
+import { concatMap, filter, merge, Subject, tap } from 'rxjs';
 import { ErrorMessageDirective } from '../directives/error-message.directive';
 import { RequiredInputDirective } from '../directives/required.directive';
+import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -54,14 +53,15 @@ export class AstronautIdentityComponent implements OnInit {
     toObservable(this.avatar.value).pipe(
       filter(Boolean),
       tap(() => this.avatar.loading.set(true)),
-      switchMap((file) =>
-        from(this.store.upload(file[0])).pipe(
-          tap({
-            error: () => {
-              this.avatar.error.set('Something went wrong');
-            },
-            next: (url) => {
-              this.avatar.error.set(undefined);
+      concatMap((file) => this.store.upload(file[0])),
+      tap({
+        error: () => {
+          this.avatar.error.set('Something went wrong');
+          this.avatar.loading.set(false);
+        },
+        next: (url) => {
+          this.avatar.error.set(undefined);
+          this.avatar.loading.set(false);
 
               this.control.controls.avatar.setValue(url);
             },
