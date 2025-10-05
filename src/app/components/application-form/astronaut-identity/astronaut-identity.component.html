@@ -1,13 +1,7 @@
 <label
   class="place-self-center place-items-center place-content-center rounded-full cursor-pointer opacity-80 hover:opacity-100 transition-opacity leading-0 focus-within:outline-2 outline-offset-6 focus-within:outline-offset-1 input size-32 outline-surface-4"
 >
-  @if (avatarUrl()) {
-    <img
-      [src]="avatarUrl()"
-      alt=""
-      class="object-cover aspect-square rounded-full"
-    />
-  } @else if (avatar.loading()) {
+  @if (avatar.loading()) {
     <mat-icon
       class="!block"
       svgIcon="spinner"
@@ -18,6 +12,12 @@
       class="block text-red-400 size-8"
       [matTooltip]="avatar.error()"
     ></lucide-icon>
+  } @else if (avatarUrl()) {
+    <img
+      [src]="avatarUrl()"
+      alt=""
+      class="object-cover aspect-square rounded-full"
+    />
   } @else {
     <mat-icon
       class="!size-full"
